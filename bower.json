@@ -20,7 +20,6 @@
   ],
   "license": "MIT",
   "homepage": "saml-ecp-js.weedon.org.au",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
