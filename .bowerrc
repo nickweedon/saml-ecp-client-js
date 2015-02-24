@@ -1,0 +1,9 @@
+{ 
+  "registry" : {
+    "search" : [ "http://wyvern.weedon.int:8080", "https://bower.herokuapp.com"],
+    "register" : "http://wyvern.weedon.int:8080"
+  },
+  "scripts": {
+    "postinstall": "bower-requirejs -c test/js/require-deps.js"
+  }
+} 

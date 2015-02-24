@@ -1,0 +1,33 @@
+{
+  "name": "saml-ecp-js",
+  "version": "0.0.1",
+  "description": "Javascript XHR based client library for authentication using the SAML ECP profile.",
+  "main": "saml-ecp-js.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.weedon.org.au:red-wyvern/saml-ecp-js.git"
+  },
+  "keywords": [
+    "saml",
+    "ecp",
+    "sso",
+    "xhr",
+    "ajax",
+    "js",
+    "javascript"
+  ],
+  "author": "Nick Weedon",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "^0.8.0"
+  }
+}
