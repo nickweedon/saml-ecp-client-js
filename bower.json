@@ -28,9 +28,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": ">=1.9"
+    "jquery.soap": "doedje/jquery.soap#~1.6.0"
   },
   "devDependencies": {
     "requirejs": "~2.1.15"
-  }  
+  }
 }

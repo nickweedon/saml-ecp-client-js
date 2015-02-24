@@ -8,7 +8,10 @@
 <script type="text/javascript">
 
 	require(["saml-ecp-js"], function(samlEcpJs) {
-	    samlEcpJs.client.doStuff();
+		
+		var client = new samlEcpJs.client();
+		
+		client.doStuff();
 	});
 
 </script>
