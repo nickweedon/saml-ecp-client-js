@@ -34,28 +34,8 @@ samlEcpJs.client = function() {
 			spUrl : null,
 			username : null,
 			password : null,
-			relayState : null,
+			responseConsumerURL : null,
 			
-			// Methods
-			serializeNodeChildren : function(node) {
-				
-		    	var serializer = new XMLSerializer();
-		    	var targetChildren = node.children; 
-		    	var targetBody = "";
-		    	for(var i = 0; i < targetChildren.length; i++) {
-		    		targetBody += serializer.serializeToString(targetChildren[i]);
-		    	}
-		    	return targetBody;
-			},
-			// Extract a node and its children from an XML document and return as text
-			serializeElementChildren : function(xmlDoc, namespaceString, elementName) {
-				
-		    	var targetNode = xmlDoc.getElementsByTagNameNS(namespaceString, elementName);
-		    	if(targetNode.length === 0)
-		    		return null;
-		    	
-		    	return this.serializeNodeChildren(targetNode[0]);
-			},
 			// Serialize the document and remove the XML header in a browser safe way
 			serializeDocument : function(xmlDoc) {
 				
@@ -65,12 +45,6 @@ samlEcpJs.client = function() {
 				} else {
 					return serializer.serializeToString(xmlDoc);
 				}
-			},
-			// Serialize the document
-			rawSerializeDocument : function(xmlDoc) {
-				
-		    	var serializer = new XMLSerializer();
-				return serializer.serializeToString(xmlDoc);
 			},
 			createBasicAuthString : function(user, pass) {
 				var tok = user + ':' + pass;
@@ -119,14 +93,6 @@ samlEcpJs.client = function() {
 		    		return found;
 		    	}
 			},
-			extractXMLXPathText : function(xmlDoc, xpath) {
-				
-				var targetNode = this.xpathQuery(xmlDoc, xpath);
-				if(targetNode.length === 0)
-					return null;
-				
-				return this.serializeNodeChildren(targetNode[0]);
-			},
 			/**
 			 * Step 1 - Initiate the initial resource request to the SP 
 			 */
@@ -168,39 +134,16 @@ samlEcpJs.client = function() {
 		    	parser = new DOMParser();
 		    	var xmlDoc = parser.parseFromString(response,"text/xml");
 		    	
-		    	// Retrieve the optional 'RelayState'
-		    	//var relayState = serializeElementChildren(xmlDoc, NS.ECP, "RelayState");
-		    	var relayStateElements = xmlDoc.getElementsByTagNameNS(this.NS.ECP, "RelayState");
-		    	
-		    	this.relayState = relayStateElements.length > 0 ? relayStateElements[0] : null; 
-		    	
-		    	//console.debug("RelayState: ", relayState);
-		    	
 		    	var paosRequestNode = this.xpathQuery(	xmlDoc, 
 			    										"//SOAP_ENV:Envelope/SOAP_ENV:Header/PAOS:Request", 
 			    										this.NS);
 		    	
-		    	var responseConsumerURL = paosRequestNode[0].getAttribute("responseConsumerURL");
+		    	this.responseConsumerURL = paosRequestNode[0].getAttribute("responseConsumerURL");
 		    	
-		    	//console.debug("responseConsumerURL: ", responseConsumerURL);
-		    	
-		    	//var msgBody = serializeElementChildren(xmlDoc, NS.SOAP_ENV, "Envelope");
-		    	this.deleteElement(xmlDoc, this.NS.SOAP_ENV, "Header");
-		    	
-		    	var msgBody = this.serializeDocument(xmlDoc);
-		    	
-		    	
-		    	//console.debug(msgBody);
-		    	
-		    	
-		    	
-		    	//console.debug("msgBody: ", msgBody);
 		    	var xmlHttp = new XMLHttpRequest();
 				var me = this;
 		    	
 				var authString = this.createBasicAuthString(this.username, this.password);
-				
-				console.debug("authString", authString);
 				
 		    	// Post the data to the IdP
 		    	xmlHttp.open("POST", this.idpEndpointUrl, true);
@@ -213,10 +156,7 @@ samlEcpJs.client = function() {
 		    				me.onIdPAuthRequestRespone(xmlHttp.responseText);
 		    	    }
 		    	};
-		    	//xmlHttp.send(msgBody);
 		    	xmlHttp.send(response);
-		    	
-		    	
 			},
 			/**
 			 * Step 3 - Return the IdP's response back to the SP
@@ -225,12 +165,7 @@ samlEcpJs.client = function() {
 			 */
 			onIdPAuthRequestRespone : function(response) {
 		    	
-		    	//console.debug(response);
-		    	
 		    	var xmlDoc = parser.parseFromString(response,"text/xml");
-		    	
-		    	//console.debug("Orig response", response);
-		    	//console.debug("Parsed response", this.rawSerializeDocument(xmlDoc));
 		    	
 		    	var ecpResponseNode = this.xpathQuery(	xmlDoc, 
 														"//SOAP_ENV:Envelope/SOAP_ENV:Header/ECP:Response", 
@@ -240,29 +175,8 @@ samlEcpJs.client = function() {
 		    	
 		    	//TODO: Compare responseConsumerURL to assertionConsumerServiceURL and send SOAP fault if <>
 		    	
-		    	console.debug("relayState", this.relayState);
-		    	
-		    	//this.deleteElement(xmlDoc, this.NS.SOAP_ENV, "Header");
-		    	
-		    	var headerElements = xmlDoc.getElementsByTagNameNS(this.NS.SOAP_ENV, "Header");
-		    	var headerElement = headerElements[0];
-		    	var headerChildren = headerElement.childNodes;
-		    	console.debug("Children:", headerChildren);
-		    	var childCount = headerChildren.length;
-		    	for(var i = 0; i < childCount; i++) {
-		    		headerElement.removeChild(headerChildren[0]);
-		    	}
-		    	
-		    		
-		    	
-		    	if(this.relayState !== null)
-		    		headerElement.appendChild(this.relayState);
-		    	
-		    	//var msgBody = this.serializeDocument(xmlDoc);
 		    	var serializer = new XMLSerializer();
 		    	var msgBody = serializer.serializeToString(xmlDoc);
-		    	
-		    	//console.debug("Final:", msgBody);
 		    	
 				var me = this;
 		    	
@@ -277,7 +191,6 @@ samlEcpJs.client = function() {
 		    				me.onRelayIdpResponseToSPResponse(xmlHttp.responseText);
 		    	    }
 		    	};
-		    	//xmlHttp.send(msgBody);
 		    	xmlHttp.send(response);
 			},
 			/**
