@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 				separator: ';',
 			},
 			dist: {
-				src: ['src/client.js', 'src/amd.js'],
+				src: ['src/base64.js', 'src/client.js', 'src/amd.js'],
 				dest: 'dist/<%= pkg.name %>.js',
 			}
 		},
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 	    	server: {
 	    	      options: {
 	    	    	keepalive: true,
-	    	        port: 8080
+	    	        port: 8020
 	    	      }
 	    	}	    	
 	    }
