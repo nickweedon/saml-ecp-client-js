@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 				separator: ';',
 			},
 			dist: {
-				src: ['src/base64.js', 'src/client.js', 'src/amd.js'],
+				src: ['src/base64.js', 'src/constant.js', 'src/client.js', 'src/amd.js'],
 				dest: 'dist/<%= pkg.name %>.js',
 			}
 		},

@@ -5,16 +5,58 @@
 </head>
 <body>
 
+<table>
+<tr><td>Username: </td><td><input id="username" type="text"></input></td></tr>
+<tr><td>Password: </td><td><input id="password" type="password"></input></td></tr>
+<tr><td>Do Auth: </td><td><input id="doAuth" type="checkbox"></input></td></tr>
+</table>
+
+<input type="button" name="login" value="Login" onclick="doLogin()"></input>
+
+
+<div id="output"></div>
+
 <script type="text/javascript">
 
-	require(["saml-ecp-js"], function(samlEcpJs) {
-		
-		var client = new samlEcpJs.client();
-		
-		client.get("http://wyvern.weedon.int:8030/idp/profile/SAML2/SOAP/ECP", 
-			     "http://10.50.1.200:8080/spring-security-saml2-sample/", "nickw", "m00nlight");
-	});
+	function doLogin() {
 
+		require(["saml-ecp-js", "jquery"], function(samlEcpJs) {
+
+			var username = $("#username").val();
+			var password = $("#password").val();
+            var doAuth = $("#doAuth").is(':checked');
+			
+			console.debug("Username:", username);
+            console.debug("Password:", password);
+            console.debug("Do Auth:", doAuth);
+			
+			var client = new samlEcpJs.client({
+				idpEndpointUrl : "http://wyvern.weedon.int:8030/idp/profile/SAML2/SOAP/ECP" 
+			});
+			
+			var url = "http://10.50.1.200:8080/spring-security-saml2-sample/";
+	
+			client.get(url, {
+					username : username,
+					password : password,
+					doAuth : doAuth,
+					success : function(data, status) {
+						console.debug("Status: ", status);
+						$("#output").html(data);
+					},
+					ecpError : function(ecpErrorObj) {
+						
+						console.debug("Got error");
+						if(ecpErrorObj.errorCode == samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR)
+							console.debug("IdP Error:", ecpErrorObj.idpStatus);
+					},
+					error : function(xmlHttp, msg) {
+						console.error(msg);
+					}
+				}
+			);
+		});
+	}
 </script>
 
     
