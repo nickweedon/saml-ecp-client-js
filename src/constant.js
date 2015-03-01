@@ -4,7 +4,8 @@ var samlEcpJs = samlEcpJs || {};
 
 samlEcpJs.ECP_ERROR = {
 	IDP_RESPONSE_ERROR : 0,
-	CONSUMER_URL_MISMATCH : 1
+	CONSUMER_URL_MISMATCH : 1,
+	CLIENT_CONFIG_ERROR : 2
 };
 
 // SAML 2 status codes (see https://msdn.microsoft.com/en-us/library/hh269642.aspx)
