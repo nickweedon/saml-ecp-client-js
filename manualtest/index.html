@@ -7,10 +7,10 @@
 <body>
 
 <table>
-<tr><td>Username: </td><td><input id="username" type="text"></input></td></tr>
+<tr><td>Username: </td><td><input id="username" type="text" title="User Name"></td></tr>
 </table>
 
-<input type="button" name="login" value="Login" onclick="doLogin()"></input>
+<input type="button" name="login" value="Login" onclick="doLogin()">
 
 
 <div id="output"></div>
@@ -28,7 +28,9 @@
 				idpEndpointUrl : "http://wyvern.weedon.int:8030/idp/profile/SAML2/SOAP/ECP" 
 			});
 
-			var url = "http://10.50.1.200:8080/spring-security-saml2-sample/";
+			// Not that this URL MUST match exactly the url in the metadata or else
+			// the correct cookie will not be used during the first half of authentication
+			var url = "http://media-center.weedon.int:8080/spring-security-saml2-sample/";
 	
 			client.get(url, {
 					username : username,
@@ -50,9 +52,9 @@
 			            $.colorbox({
 			                html: "\
 			                    <table>\
-			                    <tr><td>Password: </td><td><input id='password' type='password'></input></td></tr>\
+			                    <tr><td>Password: </td><td><input id='password' type='password'></td></tr>\
 			                    </table>\
-			                    <input type='button' name='continue' value='continue' onclick='$.colorbox.close()'></input>\
+			                    <input type='button' name='continue' value='continue' onclick='$.colorbox.close()'>\
 			                ",
 			                onCleanup : function() {
 			                    var password = $("#password").val();

@@ -5,11 +5,11 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		concat: {
 			options: {
-				separator: ';',
+				separator: ';'
 			},
 			dist: {
 				src: ['src/base64.js', 'src/constant.js', 'src/client.js', 'src/amd.js'],
-				dest: 'dist/<%= pkg.name %>.js',
+				dest: 'dist/<%= pkg.name %>.js'
 			}
 		},
 		uglify: {
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 		},
 		"bower-install-simple": {
 	        options: {
-	            color: true,
+	            color: true
 	        },
 	        "prod": {
 	            options: {
