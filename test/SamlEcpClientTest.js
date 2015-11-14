@@ -1,3 +1,25 @@
+function ConditionPoller() {
+    this.finished = false;
+    this.timerInterval = 20;
+}
+
+ConditionPoller.prototype.constructor = ConditionPoller;
+ConditionPoller.prototype.signal = function() {
+    this.finished = true;
+};
+ConditionPoller.prototype.wait = function(pollFunction, finishFunction) {
+    var me = this;
+    var repeatTimer = function() {
+        pollFunction();
+        if(me.finished) {
+            finishFunction();
+            return;
+        }
+        setTimeout(repeatTimer, me.timerInterval);
+    };
+    setTimeout(repeatTimer, this.timerInterval);
+};
+
 describe('Saml ECP Client', function() {
 
     var client = null;
@@ -315,28 +337,6 @@ describe('Saml ECP Client', function() {
     afterEach(function () {
         server.restore();
     });
-
-    function ConditionPoller() {
-        this.finished = false;
-    }
-
-    ConditionPoller.prototype.constructor = ConditionPoller;
-    ConditionPoller.prototype.signal = function() {
-        this.finished = true;
-    };
-    ConditionPoller.prototype.wait = function(pollFunction, finishFunction) {
-        var me = this;
-        var repeatTimer = function() {
-            pollFunction();
-            if(me.finished) {
-                finishFunction();
-                return;
-            }
-            setTimeout(repeatTimer, 200);
-        };
-        setTimeout(repeatTimer, 200);
-    };
-
 
     it("makes SP request with PAOS headers", function (done) {
 
