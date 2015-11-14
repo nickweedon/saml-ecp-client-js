@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b1e5d3e-6ab5-4859-afe7-7bc808f6181d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/SamlEcpClientTest.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/test-require-deps.js" />
-      <change type="DELETED" beforePath="C:\dev\RedWyvern\saml-ecp-js\test\nodeTest.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\dev\RedWyvern\saml-ecp-js\test\package.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/SamlEcpClientTest.js" afterPath="$PROJECT_DIR$/test/SamlEcpClientTest.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/amd.js" afterPath="$PROJECT_DIR$/src/amd.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client.js" afterPath="$PROJECT_DIR$/src/client.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manualtest/index.html" afterPath="$PROJECT_DIR$/manualtest/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
@@ -20,6 +18,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/saml-ecp-js.iml" afterPath="$PROJECT_DIR$/.idea/saml-ecp-js.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/saml_ecp_js_node_modules.xml" afterPath="$PROJECT_DIR$/.idea/libraries/saml_ecp_js_node_modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test-require-deps.js" afterPath="$PROJECT_DIR$/test/test-require-deps.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -45,75 +44,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Gruntfile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gruntfile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="549" max-vertical-offset="1156">
-              <caret line="52" column="47" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SamlEcpClientTest.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SamlEcpClientTest.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2873">
-              <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.513468" vertical-offset="10439" max-vertical-offset="11390">
+              <caret line="632" column="18" selection-start-line="632" selection-start-column="18" selection-end-line="632" selection-end-column="18" />
               <folding>
-                <marker date="1447477157698" expanded="true" signature="844:1013" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="1116:1237" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="1199:1237" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="1662:4217" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="1687:2346" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="1926:2320" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="1951:2145" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="2375:2759" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="2781:4192" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="2804:4169" placeholder="..." />
-                <marker date="1447477157698" expanded="true" signature="2834:4145" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3459553" vertical-offset="0" max-vertical-offset="986">
-              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="saml-ecp-js.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6301" max-vertical-offset="9622">
-              <caret line="381" column="0" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2144" max-vertical-offset="6460">
-              <caret line="141" column="50" selection-start-line="141" selection-start-column="50" selection-end-line="141" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manualtest/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.73077" vertical-offset="660" max-vertical-offset="1445">
-              <caret line="69" column="11" selection-start-line="35" selection-start-column="8" selection-end-line="69" selection-end-column="11" />
-              <folding>
-                <marker date="1447461556677" expanded="true" signature="1633:1765" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="905:1074" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="1177:1298" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="1260:1298" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="1723:4278" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="1748:2407" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="1987:2381" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="2012:2206" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="2436:2820" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="2842:4253" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="2865:4230" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="2895:4206" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="4871:4934" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5019:5141" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5182:5218" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5526:5597" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5663:8150" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5684:6325" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5920:6303" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="5941:6123" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="6350:6750" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="6768:8129" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="6787:8110" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="6813:8090" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="8171:8270" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="8354:8801" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="8419:8801" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="8609:8662" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="8726:8801" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="14351:14414" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="14499:14621" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="14662:14698" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="14662:17971" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="14771:17951" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="15006:15077" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="15143:17630" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="15164:15805" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="15400:15783" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="15421:15603" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="15830:16230" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="16248:17609" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="16267:17590" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="16293:17570" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="17651:17927" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="17729:17836" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="18032:18168" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="18048:18100" placeholder="..." />
+                <marker date="1447499639133" expanded="true" signature="18116:18151" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -122,8 +105,8 @@
       <file leaf-file-name="karma.conf.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/karma.conf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1207">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="617" max-vertical-offset="1326">
+              <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -131,11 +114,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test-require-deps.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test-require-deps.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manualtest/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="748">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="609" max-vertical-offset="1445">
+              <caret line="59" column="52" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="986">
+              <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="saml-ecp-js.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6688" max-vertical-offset="9673">
+              <caret line="404" column="0" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3315" max-vertical-offset="6511">
+              <caret line="208" column="54" selection-start-line="208" selection-start-column="46" selection-end-line="208" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sinon.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/sinon/lib/sinon.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="901">
+              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sinon.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/sinon/pkg/sinon.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="10568" max-vertical-offset="108664">
+              <caret line="633" column="0" selection-start-line="633" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -150,7 +183,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test/manual/js/require-deps.js" />
-        <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/test/manual/index.html" />
         <option value="$PROJECT_DIR$/src/amd.js" />
         <option value="$PROJECT_DIR$/test/js_/require-deps.js" />
@@ -162,11 +194,15 @@
         <option value="$PROJECT_DIR$/test/test-require-deps.js" />
         <option value="$PROJECT_DIR$/manualtest/index.html" />
         <option value="$PROJECT_DIR$/test/blah.xml" />
-        <option value="$PROJECT_DIR$/dist/saml-ecp-js.js" />
         <option value="$PROJECT_DIR$/test/mochaTest.js" />
-        <option value="$PROJECT_DIR$/test/SamlEcpClientTest.js" />
-        <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/test/crap.xml" />
+        <option value="$PROJECT_DIR$/test/crap2.xml" />
+        <option value="$PROJECT_DIR$/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/src/client.js" />
+        <option value="$PROJECT_DIR$/dist/saml-ecp-js.js" />
+        <option value="$PROJECT_DIR$/karma.conf.js" />
+        <option value="$PROJECT_DIR$/test/SamlEcpClientTest.js" />
       </list>
     </option>
   </component>
@@ -432,7 +468,9 @@
       <RunnerSettings RunnerId="KarmaJavaScriptTestRunnerRun" />
       <ConfigurationWrapper RunnerId="KarmaJavaScriptTestRunnerDebug" />
       <ConfigurationWrapper RunnerId="KarmaJavaScriptTestRunnerRun" />
-      <method />
+      <method>
+        <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_Grunt Compile" />
+      </method>
     </configuration>
     <configuration default="false" name="Mocha Tests" type="mocha-javascript-test-runner" factoryName="Mocha">
       <node-options />
@@ -468,7 +506,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -479,7 +517,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -510,11 +548,20 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="22" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/client.js</url>
+          <line>207</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="54" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavaScriptTestRunnerKarma">
-        <watch expression="fakeRequest" language="JavaScript" />
+        <watch expression="xmlHttp.status" language="JavaScript" />
+        <watch expression="assertionConsumerServiceURL" language="JavaScript" />
+        <watch expression="finished" language="JavaScript" />
       </configuration>
       <configuration name="mocha-javascript-test-runner">
         <watch expression="page" language="JavaScript" />
@@ -526,11 +573,238 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10914">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1447499639133" expanded="true" signature="905:1074" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1177:1298" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1260:1298" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1723:4278" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1748:2407" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1987:2381" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2012:2206" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2436:2820" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2842:4253" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2865:4230" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2895:4206" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="4871:4934" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5019:5141" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5182:5218" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5526:5597" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5663:8150" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5684:6325" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5920:6303" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5941:6123" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6350:6750" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6768:8129" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6787:8110" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6813:8090" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8171:8270" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8354:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8419:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8609:8662" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8726:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14351:14414" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14499:14621" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14662:14698" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14662:17971" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14771:17951" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15006:15077" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15143:17630" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15164:15805" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15400:15783" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15421:15603" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15830:16230" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16248:17609" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16267:17590" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16293:17570" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="17651:17927" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="17729:17836" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18032:18168" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18048:18100" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18116:18151" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1207">
+          <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manualtest/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="609" max-vertical-offset="1445">
+          <caret line="59" column="52" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="986">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6756" max-vertical-offset="9673">
+          <caret line="417" column="0" selection-start-line="417" selection-start-column="0" selection-end-line="417" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3315" max-vertical-offset="6511">
+          <caret line="208" column="54" selection-start-line="208" selection-start-column="46" selection-end-line="208" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sinon/lib/sinon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="901">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sinon/pkg/sinon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10568" max-vertical-offset="108664">
+          <caret line="633" column="0" selection-start-line="633" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10914">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1447499639133" expanded="true" signature="905:1074" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1177:1298" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1260:1298" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1723:4278" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1748:2407" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1987:2381" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2012:2206" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2436:2820" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2842:4253" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2865:4230" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2895:4206" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="4871:4934" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5019:5141" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5182:5218" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5526:5597" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5663:8150" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5684:6325" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5920:6303" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5941:6123" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6350:6750" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6768:8129" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6787:8110" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6813:8090" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8171:8270" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8354:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8419:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8609:8662" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8726:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14351:14414" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14499:14621" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14662:14698" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14662:17971" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14771:17951" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15006:15077" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15143:17630" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15164:15805" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15400:15783" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15421:15603" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15830:16230" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16248:17609" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16267:17590" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16293:17570" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="17651:17927" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="17729:17836" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18032:18168" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18048:18100" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18116:18151" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1207">
+          <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manualtest/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="609" max-vertical-offset="1445">
+          <caret line="59" column="52" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="986">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5294" max-vertical-offset="9673">
+          <caret line="335" column="21" selection-start-line="335" selection-start-column="20" selection-end-line="335" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4082" max-vertical-offset="6511">
+          <caret line="259" column="33" selection-start-line="259" selection-start-column="33" selection-end-line="259" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sinon/lib/sinon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="901">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sinon/pkg/sinon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10568" max-vertical-offset="108664">
+          <caret line="633" column="0" selection-start-line="633" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Gruntfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="1156">
           <caret line="44" column="36" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -556,7 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="425">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -579,7 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -595,7 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -603,7 +874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="425">
           <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -626,7 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -642,7 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1156">
           <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -650,9 +918,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1428">
           <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
-          <folding>
-            <marker date="1447461556677" expanded="true" signature="1633:1765" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -660,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="425">
           <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -675,7 +940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,87 +947,134 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
           <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manualtest/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.73077" vertical-offset="660" max-vertical-offset="1445">
-          <caret line="69" column="11" selection-start-line="35" selection-start-column="8" selection-end-line="69" selection-end-column="11" />
-          <folding>
-            <marker date="1447461556677" expanded="true" signature="1633:1765" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6301" max-vertical-offset="9622">
-          <caret line="381" column="0" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test-require-deps.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="748">
+        <state vertical-scroll-proportion="0.112026356" vertical-offset="136" max-vertical-offset="748">
           <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2873">
-          <caret line="53" column="42" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
-          <folding>
-            <marker date="1447477157698" expanded="true" signature="844:1013" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="1116:1237" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="1199:1237" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="1662:4217" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="1687:2346" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="1926:2320" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="1951:2145" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="2375:2759" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="2781:4192" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="2804:4169" placeholder="..." />
-            <marker date="1447477157698" expanded="true" signature="2834:4145" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2144" max-vertical-offset="6460">
-          <caret line="141" column="50" selection-start-line="141" selection-start-column="50" selection-end-line="141" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/karma.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1207">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gruntfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="549" max-vertical-offset="1156">
-          <caret line="52" column="47" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.8978583" vertical-offset="50" max-vertical-offset="1173">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manualtest/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="609" max-vertical-offset="1445">
+          <caret line="59" column="52" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sinon/lib/sinon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="901">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sinon/pkg/sinon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10568" max-vertical-offset="108664">
+          <caret line="633" column="0" selection-start-line="633" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3459553" vertical-offset="0" max-vertical-offset="986">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="986">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3315" max-vertical-offset="6511">
+          <caret line="208" column="54" selection-start-line="208" selection-start-column="46" selection-end-line="208" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="617" max-vertical-offset="1326">
+          <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6688" max-vertical-offset="9673">
+          <caret line="404" column="0" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.513468" vertical-offset="10439" max-vertical-offset="11390">
+          <caret line="632" column="18" selection-start-line="632" selection-start-column="18" selection-end-line="632" selection-end-column="18" />
+          <folding>
+            <marker date="1447499639133" expanded="true" signature="905:1074" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1177:1298" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1260:1298" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1723:4278" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1748:2407" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="1987:2381" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2012:2206" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2436:2820" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2842:4253" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2865:4230" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="2895:4206" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="4871:4934" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5019:5141" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5182:5218" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5526:5597" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5663:8150" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5684:6325" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5920:6303" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="5941:6123" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6350:6750" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6768:8129" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6787:8110" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="6813:8090" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8171:8270" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8354:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8419:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8609:8662" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="8726:8801" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14351:14414" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14499:14621" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14662:14698" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14662:17971" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="14771:17951" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15006:15077" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15143:17630" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15164:15805" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15400:15783" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15421:15603" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="15830:16230" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16248:17609" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16267:17590" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="16293:17570" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="17651:17927" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="17729:17836" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18032:18168" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18048:18100" placeholder="..." />
+            <marker date="1447499639133" expanded="true" signature="18116:18151" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

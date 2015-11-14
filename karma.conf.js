@@ -44,12 +44,19 @@ module.exports = function(config) {
     // enable / disable colors in the output (reporters and logs)
     colors: true,
 
+    client: {
+      mocha: {
+        //reporter: 'html', // change Karma's debug.html to the mocha web reporter
+        //ui: 'tdd',
+        timeout: 2000
+      }
+    },
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-    //browserNoActivityTimeout: 500,
+    browserNoActivityTimeout: 3000,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
@@ -62,4 +69,4 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true
   })
-}
+};

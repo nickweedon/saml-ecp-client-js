@@ -87,6 +87,8 @@ samlEcpJs.client = function(config) {
 							statusObj.statusCode.push(child.getAttribute("Value"));
 							if(child.childNodes.length > 0) {
 								for(var j = 0; j < child.childNodes.length; j++) {
+									if(child.childNodes[j] instanceof Text)
+										continue;
 									statusObj.statusCode.push(child.childNodes[j].getAttribute("Value"));
 								}
 							}
@@ -146,7 +148,7 @@ samlEcpJs.client = function(config) {
 				
 		    	// Send the PAOS request to the SP
 		    	var xmlHttp = new XMLHttpRequest();
-		    	xmlHttp.open("GET", url, true);
+		    	xmlHttp.open("GET", url);
 		    	xmlHttp.setRequestHeader(this.HEADER.ACCEPT.KEY, this.HEADER.ACCEPT.PAOS);
 		    	xmlHttp.setRequestHeader(this.HEADER.PAOS.KEY, this.HEADER.PAOS.SAML2_ECP);
 		    	xmlHttp.withCredentials = true;
@@ -157,7 +159,8 @@ samlEcpJs.client = function(config) {
 		    				me.onSPResourceRequestRespone(callCtx, xmlHttp);
 		    	    }
 		    	};
-		    	xmlHttp.send();
+
+				xmlHttp.send();
 		    },	
 			/**
 			 * Step 2 - Forward the SP response to the IdP
@@ -167,10 +170,10 @@ samlEcpJs.client = function(config) {
 			 * basic auth (if required).
 			 */
 			onSPResourceRequestRespone : function(callCtx, reqXmlHttp) {
-				
+
 				var response = reqXmlHttp.responseText;
-				
-		    	// Extract the SOAP message from the SOAP envelope 
+
+		    	// Extract the SOAP message from the SOAP envelope
 		    	// (we do not send the SOAP envelope to the IdP
 		    	parser = new DOMParser();
 		    	var xmlDoc = parser.parseFromString(response,"text/xml");
@@ -181,8 +184,7 @@ samlEcpJs.client = function(config) {
 		    	var paosRequestNode = this.xpathQuery(	xmlDoc, 
 			    										"//SOAP_ENV:Envelope/SOAP_ENV:Header/PAOS:Request", 
 			    										this.NS);
-		    	
-		    	
+
 		    	// The most reliable method of determining if this is a PAOS request or not to simply
 		    	// check if the PAOS:Request xpath expression was able to evaluate properly.
 		    	// We cannot rely on content-type headers or other such things as the actual resource
@@ -194,8 +196,7 @@ samlEcpJs.client = function(config) {
 		    	}
 
 		    	callCtx.responseConsumerURL = paosRequestNode[0].getAttribute("responseConsumerURL");
-		    		
-				
+
 				// First, attempt to have the IdP authenticate the request with credentials
 				// (i.e. see if we are 'signed on' to the IdP already)
 		    	// Post the data to the IdP
@@ -205,13 +206,14 @@ samlEcpJs.client = function(config) {
 		    	xmlHttp.setRequestHeader(this.HEADER.CONTENT_TYPE.KEY, this.HEADER.CONTENT_TYPE.XML);
 		    	xmlHttp.withCredentials = true;
 		    	if(callCtx.password !== undefined) {
-			    	xmlHttp.setRequestHeader("Authorization", 
+			    	xmlHttp.setRequestHeader("Authorization",
 			    			this.createBasicAuthString(callCtx.username, callCtx.password));
 		    	}
 		    	xmlHttp.onreadystatechange = function() {
 		    		if (xmlHttp.readyState == 4) {
-		    			if(xmlHttp.status == 200) 
-		    				me.onIdPUnauthRequestRespone(callCtx, xmlHttp.responseText);
+		    			if(xmlHttp.status == 200) {
+							me.onIdPUnauthRequestRespone(callCtx, xmlHttp.responseText);
+						}
 		    	    }
 		    	};
 		    	xmlHttp.send(response);
@@ -238,21 +240,22 @@ samlEcpJs.client = function(config) {
 		    		this.onIdPAuthRequestRespone(callCtx, response);
 		    		return;
 		    	}
-		    	
 		    	// Authentication failed so we can assume we are not 'signed on'
 		    	// Retry the same request but this time provide authentication
 		    	
 		    	// Ensure that the ecpAuth callback exists
 		    	if(callCtx.ecpAuth === undefined) {
-		    		if(callCtx.ecpError === undefined)
-		    			return;
+		    		if(callCtx.ecpError === undefined) {
+						return;
+					}
 		    		callCtx.ecpError({
 		    			errorCode: samlEcpJs.ECP_ERROR.CLIENT_CONFIG_ERROR,
 		    			errorMsg: "Authentication is requried and a ecpAuth callback was not provided."
 		    		});
-		    	}
-		    	
-		    	// Invoke the ecpAuth callback and allow the caller to set the password and 
+					return;
+				}
+
+				// Invoke the ecpAuth callback and allow the caller to set the password and
 		    	// retry/continue the authentication process.
 		    	callCtx.ecpAuth({
 		    		setPassword : function(password) {
