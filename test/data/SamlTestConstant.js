@@ -7,6 +7,15 @@
     SamlTestConstant.SP_NAME = "my-sp.fakedomain.int";
     SamlTestConstant.USERNAME = "bob";
 
+    SamlTestConstant.PAOS_SOAP_ACTION = "http://www.oasis-open.org/committees/security";
+
+    SamlTestConstant.PAOS_ATTRIBUTE = 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"';
+    SamlTestConstant.PAOS_ACCEPT_ATTRIBUTE = 'text/html; application/vnd.paos+xml';
+    SamlTestConstant.PAOS_HTTP_HEADER = {
+        PAOS: SamlTestConstant.PAOS_ATTRIBUTE,
+        Accept: SamlTestConstant.PAOS_ACCEPT_ATTRIBUTE
+    };
+
     SamlTestConstant.PAOS_REQUEST =
         '<?xml version="1.0" encoding="UTF-8"?>\
         <soap11:Envelope xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/">\

@@ -58,10 +58,7 @@ describe('Saml ECP Client', function() {
 
         serverResponder.waitUntilDone(function() {
             sinon.assert.calledOnce(requestCallback);
-            sinon.assert.calledWith(requestCallback, sinon.match({
-                PAOS: 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"',
-                Accept: 'text/html; application/vnd.paos+xml'
-            }));
+            sinon.assert.calledWith(requestCallback, sinon.match(Constant.PAOS_HTTP_HEADER));
             clientConfig.assertNoErrors();
             clientConfig.assertSuccessNotCalled();
         });
@@ -74,7 +71,7 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("GET", Constant.SP_RESOURCE_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_REQUEST
         ]);
@@ -93,10 +90,10 @@ describe('Saml ECP Client', function() {
 
             // Ensure that we don't pass the PAOS HTTP headers to the IDP
             sinon.assert.neverCalledWith(requestCallback, sinon.match({
-                PAOS: 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"'
+                PAOS: Constant.PAOS_ATTRIBUTE
             }));
             sinon.assert.neverCalledWith(requestCallback, sinon.match({
-                Accept: 'text/html; application/vnd.paos+xml'
+                Accept: Constant.PAOS_ACCEPT_ATTRIBUTE
             }));
             sinon.assert.neverCalledWith(requestCallback, sinon.match.has("Authorization"));
             clientConfig.assertNoErrors();
@@ -112,7 +109,7 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("GET", Constant.SP_RESOURCE_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.SP_RESOURCE
         ]);
@@ -133,14 +130,14 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("GET", Constant.SP_RESOURCE_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_REQUEST
         ]);
 
         server.respondWith("POST", Constant.IDP_ENDPOINT_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_AUTH_FAILED
         ]);
@@ -163,14 +160,14 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("GET", Constant.SP_RESOURCE_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
      Constant.PAOS_REQUEST
         ]);
 
         server.respondWith("POST", Constant.IDP_ENDPOINT_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_AUTH_SUCCESS
         ]);
@@ -207,7 +204,7 @@ describe('Saml ECP Client', function() {
             requestCallback(fakeRequest.requestHeaders);
             fakeRequest.respond(
                 200, {
-                    "SOAPAction": "http://www.oasis-open.org/committees/security"
+                    "SOAPAction": Constant.PAOS_SOAP_ACTION
                 },
                 Constant.PAOS_REQUEST);
             if(++count > 1) {
@@ -217,7 +214,7 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("POST", Constant.IDP_ENDPOINT_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_AUTH_FAILED
         ]);
@@ -230,10 +227,7 @@ describe('Saml ECP Client', function() {
 
         serverResponder.waitUntilDone(function() {
             sinon.assert.calledTwice(requestCallback);
-            sinon.assert.alwaysCalledWith(requestCallback, sinon.match({
-                PAOS: 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"',
-                Accept: 'text/html; application/vnd.paos+xml'
-            }));
+            sinon.assert.alwaysCalledWith(requestCallback, sinon.match(Constant.PAOS_HTTP_HEADER));
             clientConfig.assertNoErrors();
             clientConfig.assertSuccessNotCalled();
         });
@@ -247,7 +241,7 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("GET", Constant.SP_RESOURCE_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_REQUEST
         ]);
@@ -258,7 +252,7 @@ describe('Saml ECP Client', function() {
 
             fakeRequest.respond(
                 200, {
-                    "SOAPAction": "http://www.oasis-open.org/committees/security"
+                    "SOAPAction": Constant.PAOS_SOAP_ACTION
                 },
                 responseData);
             if(callCount > 1) {
@@ -268,7 +262,7 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("GET", Constant.SP_RESOURCE_URL, [
             200, {
-                "SOAPAction": "http://www.oasis-open.org/committees/security"
+                "SOAPAction": Constant.PAOS_SOAP_ACTION
             },
             Constant.PAOS_REQUEST
         ]);
