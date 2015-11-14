@@ -20,9 +20,39 @@ ConditionPoller.prototype.wait = function(pollFunction, finishFunction) {
     setTimeout(repeatTimer, this.timerInterval);
 };
 
+var SinonTestExt = SinonTestExt || {};
+
+SinonTestExt.AsyncServerResponder = function(serverObj, doneCallback) {
+    this.serverObj = serverObj;
+    this.doneCallback = doneCallback || null;
+    this.conditionPoller = new ConditionPoller();
+};
+
+SinonTestExt.AsyncServerResponder.prototype = {
+    done : function() {
+        this.conditionPoller.signal();
+    },
+    setDoneCallback : function(doneCallback) {
+        this.doneCallback = doneCallback;
+    },
+    waitUntilDone : function(finishCallback) {
+
+        var me = this;
+
+        this.conditionPoller.wait(function() {
+            me.serverObj.respond();
+        }, function() {
+            if(finishCallback !== undefined) finishCallback();
+            if(me.doneCallback != null) me.doneCallback();
+        });
+    }
+};
+
+
 describe('Saml ECP Client', function() {
 
     var client = null;
+    var clientConfig = null;
     var server = null;
 
     var IDP_ENDPOINT_URL = "http://my-idp.fakedomain.int/idp/profile/SAML2/SOAP/ECP";
@@ -321,10 +351,34 @@ describe('Saml ECP Client', function() {
         </BODY>\
         </HTML>';
 
+    function ClientConfig(username){
+        this.username = username;
+        this.success = sinon.spy();
+        this.ecpError = sinon.spy();
+        this.error = sinon.spy();
+        this.ecpAuth = sinon.spy();
+    }
+
+    ClientConfig.prototype = {
+        setEcpAuth : function(ecpAuth) {
+            this.ecpAuth = sinon.spy(ecpAuth);
+        },
+        assertNoErrors : function() {
+            sinon.assert.notCalled(this.error);
+            sinon.assert.notCalled(this.ecpError);
+        },
+        assertSuccessNotCalled : function() {
+            sinon.assert.notCalled(this.success);
+        }
+    };
+
+
     beforeEach(function(done) {
 
         server = sinon.fakeServer.create();
         server.autoRespondAfter = 50;
+
+        clientConfig = new ClientConfig(USERNAME);
 
         require(["saml-ecp-js"], function(samlEcpJs) {
             client = new samlEcpJs.client({
@@ -341,44 +395,30 @@ describe('Saml ECP Client', function() {
     it("makes SP request with PAOS headers", function (done) {
 
         var requestCallback = sinon.spy();
-        var finished = new ConditionPoller();
+        var serverResponder = new SinonTestExt.AsyncServerResponder(server, done);
 
         server.respondWith("GET", SP_RESOURCE_URL, function(fakeRequest) {
             requestCallback(fakeRequest.requestHeaders);
-            finished.signal();
+            serverResponder.done();
         });
 
-        client.get(SP_RESOURCE_URL, {
-                username : USERNAME,
-                success : function(data, status) {
-                    sinon.assert.fail("Did not expect 'success' with status: " + status);
-                },
-                ecpError : function(ecpErrorObj) {
-                    sinon.assert.fail("Did not expect 'ecpError' with error code: " + ecpErrorObj.errorCode);
-                },
-                error : function(xmlHttp, msg) {
-                    sinon.assert.fail("Did not expect 'error' with message: " + msg);
-                }
-            }
-        );
+        client.get(SP_RESOURCE_URL, clientConfig);
 
-        finished.wait(function() {
-            server.respond();
-        }, function() {
+        serverResponder.waitUntilDone(function() {
             sinon.assert.calledOnce(requestCallback);
             sinon.assert.calledWith(requestCallback, sinon.match({
                 PAOS: 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"',
                 Accept: 'text/html; application/vnd.paos+xml'
             }));
-
-            done();
+            clientConfig.assertNoErrors();
+            clientConfig.assertSuccessNotCalled();
         });
     });
 
     it("forwards SP PAOS auth request to IDP", function (done) {
 
         var requestCallback = sinon.spy();
-        var finished = new ConditionPoller();
+        var serverResponder = new SinonTestExt.AsyncServerResponder(server, done);
 
         server.respondWith("GET", SP_RESOURCE_URL, [
             200, {
@@ -390,30 +430,16 @@ describe('Saml ECP Client', function() {
 
         server.respondWith("POST", IDP_ENDPOINT_URL, function(fakeRequest) {
             requestCallback(fakeRequest.requestHeaders, fakeRequest.requestBody);
-            finished.signal();
+            serverResponder.done();
         });
 
-        client.get(SP_RESOURCE_URL, {
-                username : USERNAME,
-                success : function(data, status) {
-                    sinon.assert.fail("Did not expect 'success' with status: " + status);
-                },
-                ecpError : function(ecpErrorObj) {
-                    sinon.assert.fail("Did not expect 'ecpError' with error code: " + ecpErrorObj.errorCode);
-                },
-                error : function(xmlHttp, msg) {
-                    sinon.assert.fail("Did not expect 'error' with message: " + msg);
-                }
-            }
-        );
+        client.get(SP_RESOURCE_URL, clientConfig);
 
-        finished.wait(function() {
-            server.respond();
-        }, function() {
+        serverResponder.waitUntilDone(function() {
             sinon.assert.calledOnce(requestCallback);
             sinon.assert.calledWith(requestCallback, sinon.match.any, PAOS_REQUEST);
-            // Ensure that we don't pass the PAOS HTTP headers to the IDP
 
+            // Ensure that we don't pass the PAOS HTTP headers to the IDP
             sinon.assert.neverCalledWith(requestCallback, sinon.match({
                 PAOS: 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"'
             }));
@@ -421,8 +447,8 @@ describe('Saml ECP Client', function() {
                 Accept: 'text/html; application/vnd.paos+xml'
             }));
             sinon.assert.neverCalledWith(requestCallback, sinon.match.has("Authorization"));
-
-            done();
+            clientConfig.assertNoErrors();
+            clientConfig.assertSuccessNotCalled();
         });
 
     });
@@ -444,27 +470,14 @@ describe('Saml ECP Client', function() {
             requestCallback(fakeRequest);
         });
 
-        client.get(SP_RESOURCE_URL, {
-                username : USERNAME,
-                success : function(data, status) {
-                    sinon.assert.fail("Did not expect 'success' with status: " + status);
-                },
-                ecpError : function(ecpErrorObj) {
-                    sinon.assert.fail("Did not expect 'ecpError' with error code: " + ecpErrorObj.errorCode);
-                },
-                error : function(xmlHttp, msg) {
-                    sinon.assert.fail("Did not expect 'error' with message: " + msg);
-                }
-            }
-        );
+        client.get(SP_RESOURCE_URL, clientConfig);
 
         sinon.assert.notCalled(requestCallback);
     });
 
     it("invokes password callback when IDP PAOS response returns auth failed and no password set", function (done) {
 
-        var passwordCallback = sinon.spy();
-        var finished = new ConditionPoller();
+        var serverResponder = new SinonTestExt.AsyncServerResponder(server, done);
 
         server.respondWith("GET", SP_RESOURCE_URL, [
             200, {
@@ -480,29 +493,14 @@ describe('Saml ECP Client', function() {
             PAOS_AUTH_FAILED
         ]);
 
-        client.get(SP_RESOURCE_URL, {
-                username : USERNAME,
-                success : function(data, status) {
-                    sinon.assert.fail("Did not expect 'success' with status: " + status);
-                },
-                ecpError : function(ecpErrorObj) {
-                    sinon.assert.fail("Did not expect 'ecpError' with error code: " + ecpErrorObj.errorCode);
-                },
-                error : function(xmlHttp, msg) {
-                    sinon.assert.fail("Did not expect 'error' with message: " + msg);
-                },
-                ecpAuth : function() {
-                    passwordCallback();
-                    finished.signal();
-                }
-            }
-        );
+        clientConfig.setEcpAuth(function() {
+            serverResponder.done();
+        });
+        client.get(SP_RESOURCE_URL, clientConfig);
 
-        finished.wait(function() {
-            server.respond();
-        }, function() {
-            sinon.assert.calledOnce(passwordCallback);
-            done();
+        serverResponder.waitUntilDone(function() {
+            clientConfig.assertNoErrors();
+            clientConfig.assertSuccessNotCalled();
         });
     });
 
@@ -551,7 +549,7 @@ describe('Saml ECP Client', function() {
 
         var requestCallback = sinon.spy();
         var count = 0;
-        var finished = new ConditionPoller();
+        var serverResponder = new SinonTestExt.AsyncServerResponder(server, done);
 
         server.respondWith("GET", SP_RESOURCE_URL, function(fakeRequest) {
             requestCallback(fakeRequest.requestHeaders);
@@ -561,7 +559,7 @@ describe('Saml ECP Client', function() {
                 },
                 PAOS_REQUEST);
             if(++count > 1) {
-                finished.signal();
+                serverResponder.done();
             }
         });
 
@@ -572,33 +570,20 @@ describe('Saml ECP Client', function() {
             PAOS_AUTH_FAILED
         ]);
 
-        client.get(SP_RESOURCE_URL, {
-                username : USERNAME,
-                success : function(data, status) {
-                    sinon.assert.fail("Did not expect 'success' with status: " + status);
-                },
-                ecpError : function(ecpErrorObj) {
-                    sinon.assert.fail("Did not expect 'ecpError' with error code: " + ecpErrorObj.errorCode);
-                },
-                error : function(xmlHttp, msg) {
-                    sinon.assert.fail("Did not expect 'error' with message: " + msg);
-                },
-                ecpAuth : function(authCtx) {
-                    authCtx.setPassword('bob');
-                    authCtx.retryAuth();
-                }
-            }
-        );
+        clientConfig.setEcpAuth(function(authCtx) {
+            authCtx.setPassword('bob');
+            authCtx.retryAuth();
+        });
+        client.get(SP_RESOURCE_URL, clientConfig);
 
-        finished.wait(function() {
-            server.respond(); // Process SP request
-        }, function() {
+        serverResponder.waitUntilDone(function() {
             sinon.assert.calledTwice(requestCallback);
             sinon.assert.alwaysCalledWith(requestCallback, sinon.match({
                 PAOS: 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"',
                 Accept: 'text/html; application/vnd.paos+xml'
             }));
-            done();
+            clientConfig.assertNoErrors();
+            clientConfig.assertSuccessNotCalled();
         });
     });
 
@@ -606,7 +591,7 @@ describe('Saml ECP Client', function() {
 
         var requestCallback = sinon.spy();
         var callCount = 0;
-        var finished = new ConditionPoller();
+        var serverResponder = new SinonTestExt.AsyncServerResponder(server, done);
 
         server.respondWith("GET", SP_RESOURCE_URL, [
             200, {
@@ -625,7 +610,7 @@ describe('Saml ECP Client', function() {
                 },
                 responseData);
             if(callCount > 1) {
-                finished.signal();
+                serverResponder.done();
             }
         });
 
@@ -636,30 +621,17 @@ describe('Saml ECP Client', function() {
             PAOS_REQUEST
         ]);
 
-        client.get(SP_RESOURCE_URL, {
-                username : USERNAME,
-                success : function(data, status) {
-                    console.error("Did not expect 'success' with status: " + status);
-                },
-                ecpError : function(ecpErrorObj) {
-                    console.error("Did not expect 'ecpError' with error code: " + ecpErrorObj.errorCode);
-                },
-                error : function(xmlHttp, msg) {
-                    console.error("Did not expect 'error' with message: " + msg);
-                },
-                ecpAuth : function(authCtx) {
-                    authCtx.setPassword('bob');
-                    authCtx.retryAuth();
-                }
-            }
-        );
+        clientConfig.setEcpAuth(function(authCtx) {
+            authCtx.setPassword('bob');
+            authCtx.retryAuth();
+        });
+        client.get(SP_RESOURCE_URL, clientConfig);
 
-        finished.wait(function() {
-            server.respond();
-        }, function() {
+        serverResponder.waitUntilDone(function() {
             sinon.assert.calledTwice(requestCallback);
             sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization"));
-            done();
+            clientConfig.assertNoErrors();
+            clientConfig.assertSuccessNotCalled();
         });
     });
 });
