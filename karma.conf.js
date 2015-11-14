@@ -17,6 +17,8 @@ module.exports = function(config) {
       {pattern: 'src/**/*.js', included: false},
       {pattern: 'test/*Test.js', included: false},
       {pattern: 'test/test-require-deps.js', included: true},
+      {pattern: 'test/util/*.js', included: false},
+      {pattern: 'test/data/*.js', included: false},
       {pattern: 'bower_components/**/*.js', included: false},
       {pattern: 'dist/**/*.js', included: false}
     ],
