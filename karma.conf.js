@@ -10,32 +10,20 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    //frameworks: [ 'mocha', 'chai' ],
-    frameworks: [ 'jasmine' ],
-    //frameworks: [ 'qunit' ],
-
-    plugins: [
-        'karma-jasmine',
-        'karma-nodewebkit-launcher'
-    ],
+    frameworks: [ 'requirejs', 'mocha', 'chai', 'sinon', 'sinon-expect' ],
 
     // list of files / patterns to load in the browser
     files: [
       {pattern: 'src/**/*.js', included: false},
-      {pattern: 'test/*Test.js', included: true}
+      {pattern: 'test/*Test.js', included: false},
+      {pattern: 'test/test-require-deps.js', included: true},
+      {pattern: 'bower_components/**/*.js', included: false},
+      {pattern: 'dist/**/*.js', included: false}
     ],
-
-    /*
-    proxies: {
-      "/data/": "/base/test/data/"
-    },
-    */
-
 
     // list of files to exclude
     exclude: [
     ],
-
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -66,12 +54,9 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    //browsers: ['PhantomJS'],
-    browsers: ['NodeWebkit'],
-
+    browsers: ['PhantomJS'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
