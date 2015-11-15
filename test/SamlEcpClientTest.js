@@ -1,4 +1,5 @@
 describe('Saml ECP Client', function() {
+    var samlEcpJs = null;
     var client = null;
     var clientConfig = null;
     var server = null;
@@ -27,10 +28,11 @@ describe('Saml ECP Client', function() {
     };
 
     beforeEach(function(done) {
-        require(["saml-ecp-js", "SinonTestExt", "SamlTestData"], function(samlEcpJs, sinonTestExt, SamlTestData) {
+        require(["saml-ecp-js", "SinonTestExt", "SamlTestData"], function(samlEcpJsNS, sinonTestExt, SamlTestData) {
             TestData = SamlTestData;
             server = sinon.fakeServer.create();
             server.autoRespondAfter = 50;
+            samlEcpJs = samlEcpJsNS;
             client = new samlEcpJs.client({
                 idpEndpointUrl: TestData.IDP_ENDPOINT_URL
             });
@@ -262,9 +264,9 @@ describe('Saml ECP Client', function() {
                 sinon.assert.notCalled(requestCallback);
                 sinon.assert.calledTwice(clientConfig.ecpError);
                 sinon.assert.alwaysCalledWith(clientConfig.ecpError, sinon.match({
-                    errorCode: -1,
+                    errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
                     idpStatus: {
-                        statusCode: ["urn:oasis:names:tc:SAML:2.0:status:Requester", "urn:oasis:names:tc:SAML:2.0:status:AuthnFailed"],
+                        statusCode: [ samlEcpJs.SAML2_STATUS.REQUESTER, samlEcpJs.SAML2_STATUS.AUTHN_FAILED ],
                         statusMessage: "An error occurred."
                     }
                 }));
@@ -426,9 +428,9 @@ describe('Saml ECP Client', function() {
                 sinon.assert.notCalled(requestCallback);
                 sinon.assert.calledOnce(clientConfig.ecpError);
                 sinon.assert.alwaysCalledWith(clientConfig.ecpError, sinon.match({
-                    errorCode: -1,
+                    errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
                     idpStatus: {
-                        statusCode: ["urn:oasis:names:tc:SAML:2.0:status:Requester", "urn:oasis:names:tc:SAML:2.0:status:AuthnFailed"],
+                        statusCode: [ samlEcpJs.SAML2_STATUS.REQUESTER, samlEcpJs.SAML2_STATUS.AUTHN_FAILED ],
                         statusMessage: "An error occurred."
                     }
                 }));

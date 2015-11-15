@@ -3,13 +3,27 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		concat: {
-			options: {
-				separator: ';'
-			},
+		includereplace: {
+			dist : {
+				options: {
+					includesDir: "src",
+					prefix: "//@@"
+				},
+				// Files to perform replacements and includes with
+				src: 'src/**/*.js',
+				// Destination directory to copy files to
+				dest: 'obj/'
+			}
+		},
+		copy: {
 			dist: {
-				src: ['src/base64.js', 'src/constant.js', 'src/client.js', 'src/amd.js'],
-				dest: 'dist/<%= pkg.name %>.js'
+				files: [{
+					expand: true,
+					src: 'obj/src/amd.js',
+					rename: function(dest, src) {
+						return "dist/<%= pkg.name %>.js";
+					}
+				}]
 			}
 		},
 		uglify: {
@@ -50,14 +64,15 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-include-replace');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks("grunt-bower-install-simple");
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	
 	// Default task(s).
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
-	grunt.registerTask('compile', ['jshint', 'concat', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'includereplace', 'copy', 'uglify']);
+	grunt.registerTask('compile', ['jshint', 'includereplace', 'copy']);
 	grunt.registerTask('bower-install', ['bower-install-simple']);
 	grunt.registerTask('test', ['default', 'bower-install-simple', 'connect']);
 };
