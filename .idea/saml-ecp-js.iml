@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.externalToolBuilders" />
       <excludeFolder url="file://$MODULE_DIR$/bower_components" />
-      <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/obj" />
     </content>
     <orderEntry type="inheritedJdk" />

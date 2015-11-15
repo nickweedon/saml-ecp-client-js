@@ -1,10 +1,33 @@
 // Private functions
+
+function getObjectValueFromCaseInsensitiveKey(object, key) {
+    var lowerCaseKey = key.trim().toLowerCase();
+
+    for(var currentKey in object) {
+        if(object.hasOwnProperty(currentKey) && currentKey.trim().toLowerCase() == lowerCaseKey) {
+            return object[currentKey];
+        }
+    }
+
+    return null;
+}
+
 function applyConfig(target, source) {
     for(var key in source) {
         if(source.hasOwnProperty(key))
             target[key] = source[key];
     }
 }
+
+function serializeNodeChildren(node) {
+    var childNodes = node.childNodes;
+    var result = "";
+    for(var i = 0; i < childNodes.length; i++) {
+        result += serializeDocument(childNodes[i]);
+    }
+    return result;
+}
+
 
 // Serialize the document and remove the XML header in a browser safe way
 function serializeDocument(xmlDoc) {
@@ -102,6 +125,8 @@ function xpathQuery(xmlDoc, xpath, namespaces) {
 }
 
 //////// Constants ///////////
+
+var XML_HEADER = '<?xml version="1.0" encoding="UTF-8"?>';
 
 // HTTP headers
 var HEADER = {

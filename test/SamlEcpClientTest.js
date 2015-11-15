@@ -76,7 +76,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction" : TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -90,7 +91,8 @@ describe('Saml ECP Client', function() {
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledOnce(requestCallback);
-                sinon.assert.calledWith(requestCallback, sinon.match.any, TestData.createPAOSRequest());
+                // This checks that the request is forwarded to the IDP after removing the SOAP header element
+                sinon.assert.calledWith(requestCallback, sinon.match.any, TestData.PAOS_REQUEST_WITHOUT_HEADER);
 
                 // Ensure that we don't pass the PAOS HTTP headers to the IDP
                 sinon.assert.neverCalledWith(requestCallback, sinon.match({
@@ -112,7 +114,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.SP_RESOURCE
             ]);
@@ -134,7 +137,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -180,7 +184,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -230,7 +235,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -282,7 +288,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -314,7 +321,8 @@ describe('Saml ECP Client', function() {
                 requestCallback(fakeRequest.requestHeaders);
                 fakeRequest.respond(
                     200, {
-                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                        "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                     },
                     TestData.createPAOSRequest());
                 if(++count > 1) {
@@ -351,7 +359,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -372,7 +381,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
@@ -400,7 +410,8 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
                 },
                 TestData.createPAOSRequest()
             ]);
