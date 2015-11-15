@@ -10,10 +10,11 @@
     SamlTestConstant.PAOS_SOAP_ACTION = "http://www.oasis-open.org/committees/security";
 
     SamlTestConstant.PAOS_ATTRIBUTE = 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"';
-    SamlTestConstant.PAOS_ACCEPT_ATTRIBUTE = 'text/html; application/vnd.paos+xml';
+    SamlTestConstant.TEXT_PAOS_ACCEPT_ATTRIBUTE = 'text/html; application/vnd.paos+xml';
+    SamlTestConstant.PAOS_UTF8_CONTENT_TYPE = 'application/vnd.paos+xml;charset=utf-8';
     SamlTestConstant.PAOS_HTTP_HEADER = {
         PAOS: SamlTestConstant.PAOS_ATTRIBUTE,
-        Accept: SamlTestConstant.PAOS_ACCEPT_ATTRIBUTE
+        Accept: SamlTestConstant.TEXT_PAOS_ACCEPT_ATTRIBUTE
     };
 
     SamlTestConstant.PAOS_REQUEST =
