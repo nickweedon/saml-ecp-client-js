@@ -9,6 +9,12 @@ define('SamlTestData',
         SamlTestData.SP_NAME = "my-sp.fakedomain.int";
         SamlTestData.USERNAME = "bob";
 
+        SamlTestData.ECP_ERROR = {
+            IDP_RESPONSE_ERROR : -1,
+            CONSUMER_URL_MISMATCH : -2,
+            CLIENT_CONFIG_ERROR : -3
+        };
+
         SamlTestData.PAOS_SOAP_ACTION = "http://www.oasis-open.org/committees/security";
 
         SamlTestData.PAOS_ATTRIBUTE = 'ver="urn:liberty:paos:2003-08";"urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp"';
@@ -249,7 +255,7 @@ define('SamlTestData',
 
             var fields = _.defaults(fieldValues || {}, {
                 assertionConsumerServiceURL: SamlTestData.SP_RESOURCE_URL + '/saml/SSO',
-                responseDestination: SamlTestData.SP_RESOURCE_URL + '/saml/SSO',
+                responseDestination: SamlTestData.SP_RESOURCE_URL + '/saml/SSO'
             });
 
             return '<?xml version="1.0" encoding="UTF-8"?>\

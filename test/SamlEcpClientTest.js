@@ -79,7 +79,6 @@ describe('Saml ECP Client', function() {
                 TestData.createPAOSRequest()
             ]);
 
-
             server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders, fakeRequest.requestBody);
                 serverResponder.done();
@@ -171,6 +170,56 @@ describe('Saml ECP Client', function() {
             });
         });
 
+        it("posts back to correct SP consumer service URL on successful PAOS auth response from IDP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+            var SOME_CRAZY_URL = TestData.SP_RESOURCE_URL + "/somecrazy/SSOURL";
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSAuthSuccess({
+                    assertionConsumerServiceURL : SOME_CRAZY_URL
+                })
+            ]);
+
+            server.respondWith("POST", SOME_CRAZY_URL, function(fakeRequest) {
+                requestCallback(fakeRequest.requestHeaders, fakeRequest.requestBody);
+                fakeRequest.respond(
+                    302, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSRequest());
+                serverResponder.done();
+            });
+
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.notCalled(clientConfig.ecpAuth);
+                sinon.assert.calledOnce(requestCallback);
+                sinon.assert.calledWith(requestCallback, sinon.match({
+                        "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
+                    }),
+                    TestData.createPAOSAuthSuccess({
+                        assertionConsumerServiceURL : SOME_CRAZY_URL
+                    })
+                );
+                clientConfig.assertNoErrors();
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
         it("won't post back to SP on unsuccessful PAOS auth response from IDP", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
@@ -211,7 +260,14 @@ describe('Saml ECP Client', function() {
             serverResponder.waitUntilDone(function() {
                 sinon.assert.called(clientConfig.ecpAuth);
                 sinon.assert.notCalled(requestCallback);
-                clientConfig.assertNoErrors();
+                sinon.assert.calledTwice(clientConfig.ecpError);
+                sinon.assert.alwaysCalledWith(clientConfig.ecpError, sinon.match({
+                    errorCode: -1,
+                    idpStatus: {
+                        statusCode: ["urn:oasis:names:tc:SAML:2.0:status:Requester", "urn:oasis:names:tc:SAML:2.0:status:AuthnFailed"],
+                        statusMessage: "An error occurred."
+                    }
+                }));
                 clientConfig.assertSuccessNotCalled();
             });
         });
@@ -242,7 +298,6 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function () {
-                clientConfig.assertNoErrors();
                 clientConfig.assertSuccessNotCalled();
             });
         });
@@ -280,8 +335,8 @@ describe('Saml ECP Client', function() {
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(requestCallback);
+                sinon.assert.called(clientConfig.ecpAuth);
                 sinon.assert.alwaysCalledWith(requestCallback, sinon.match(TestData.PAOS_HTTP_HEADER));
-                clientConfig.assertNoErrors();
                 clientConfig.assertSuccessNotCalled();
             });
         });
@@ -329,7 +384,54 @@ describe('Saml ECP Client', function() {
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(requestCallback);
                 sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization"));
-                clientConfig.assertNoErrors();
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+    });
+
+    describe('Authentication Error Handling', function() {
+        it("reports errors on unsuccessful PAOS auth response from IDP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+            var callCount = 0;
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSAuthFailed()
+                );
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function () {
+                requestCallback();
+            });
+
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.called(clientConfig.ecpAuth);
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.ecpError);
+                sinon.assert.alwaysCalledWith(clientConfig.ecpError, sinon.match({
+                    errorCode: -1,
+                    idpStatus: {
+                        statusCode: ["urn:oasis:names:tc:SAML:2.0:status:Requester", "urn:oasis:names:tc:SAML:2.0:status:AuthnFailed"],
+                        statusMessage: "An error occurred."
+                    }
+                }));
                 clientConfig.assertSuccessNotCalled();
             });
         });

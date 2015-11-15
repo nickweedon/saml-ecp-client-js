@@ -239,7 +239,14 @@ samlEcpJs.client = function(config) {
 		    	if(statusObj.statusCode[0] == samlEcpJs.SAML2_STATUS.SUCCESS) {
 		    		this.onIdPAuthRequestRespone(callCtx, response);
 		    		return;
-		    	}
+		    	} else {
+					if(callCtx.ecpError !== undefined) {
+						callCtx.ecpError({
+							errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
+							idpStatus: statusObj
+						});
+					}
+				}
 		    	// Authentication failed so we can assume we are not 'signed on'
 		    	// Retry the same request but this time provide authentication
 		    	
