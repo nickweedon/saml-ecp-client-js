@@ -4,6 +4,6 @@
     "register" : "http://wyvern.weedon.int:8080"
   },
   "scripts": {
-    "postinstall": "bower-requirejs -c test/js/require-deps.js"
+    "postinstall": "bower-requirejs -c manualtest/js/require-deps.js"
   }
 } 

@@ -25,8 +25,9 @@ require.config({
         requirejs: "../bower_components/requirejs/require",
         "saml-ecp-js": "../dist/saml-ecp-js",
         "SinonTestExt" : "util/SinonTestExt",
-        "SamlTestConstant" : "data/SamlTestConstant",
-        "jquery-colorbox": "../bower_components/jquery-colorbox/jquery.colorbox"
+        "SamlTestData" : "data/SamlTestData",
+        "jquery-colorbox": "../bower_components/jquery-colorbox/jquery.colorbox",
+        underscore: '../bower_components/underscore/underscore'
     },
     packages: [
     ],

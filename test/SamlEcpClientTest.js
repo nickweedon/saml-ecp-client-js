@@ -3,7 +3,7 @@ describe('Saml ECP Client', function() {
     var clientConfig = null;
     var server = null;
     var STE = null; // SinonTestExt namespace
-    var Constant = null; // Test data constants
+    var TestData = null; // Test data constants
 
     function ClientConfig(username){
         this.username = username;
@@ -27,15 +27,15 @@ describe('Saml ECP Client', function() {
     };
 
     beforeEach(function(done) {
-        require(["saml-ecp-js", "SinonTestExt", "SamlTestConstant"], function(samlEcpJs, sinonTestExt, SamlTestConstant) {
-            Constant = SamlTestConstant;
+        require(["saml-ecp-js", "SinonTestExt", "SamlTestData"], function(samlEcpJs, sinonTestExt, SamlTestData) {
+            TestData = SamlTestData;
             server = sinon.fakeServer.create();
             server.autoRespondAfter = 50;
             client = new samlEcpJs.client({
-                idpEndpointUrl: Constant.IDP_ENDPOINT_URL
+                idpEndpointUrl: TestData.IDP_ENDPOINT_URL
             });
             STE = sinonTestExt;
-            clientConfig = new ClientConfig(Constant.USERNAME);
+            clientConfig = new ClientConfig(TestData.USERNAME);
             done();
         });
     });
@@ -50,16 +50,16 @@ describe('Saml ECP Client', function() {
             var requestCallback = sinon.spy();
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, function(fakeRequest) {
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders);
                 serverResponder.done();
             });
 
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledOnce(requestCallback);
-                sinon.assert.calledWith(requestCallback, sinon.match(Constant.PAOS_HTTP_HEADER));
+                sinon.assert.calledWith(requestCallback, sinon.match(TestData.PAOS_HTTP_HEADER));
                 clientConfig.assertNoErrors();
                 clientConfig.assertSuccessNotCalled();
             });
@@ -72,31 +72,31 @@ describe('Saml ECP Client', function() {
             var requestCallback = sinon.spy();
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_REQUEST
+                TestData.createPAOSRequest()
             ]);
 
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, function(fakeRequest) {
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders, fakeRequest.requestBody);
                 serverResponder.done();
             });
 
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledOnce(requestCallback);
-                sinon.assert.calledWith(requestCallback, sinon.match.any, Constant.PAOS_REQUEST);
+                sinon.assert.calledWith(requestCallback, sinon.match.any, TestData.createPAOSRequest());
 
                 // Ensure that we don't pass the PAOS HTTP headers to the IDP
                 sinon.assert.neverCalledWith(requestCallback, sinon.match({
-                    PAOS: Constant.PAOS_ATTRIBUTE
+                    PAOS: TestData.PAOS_ATTRIBUTE
                 }));
                 sinon.assert.neverCalledWith(requestCallback, sinon.match({
-                    Accept: Constant.TEXT_PAOS_ACCEPT_ATTRIBUTE
+                    Accept: TestData.TEXT_PAOS_ACCEPT_ATTRIBUTE
                 }));
                 sinon.assert.neverCalledWith(requestCallback, sinon.match.has("Authorization"));
                 clientConfig.assertNoErrors();
@@ -109,19 +109,19 @@ describe('Saml ECP Client', function() {
             server.respondImmediately = true;
             var requestCallback = sinon.spy();
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.SP_RESOURCE
+                TestData.SP_RESOURCE
             ]);
 
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, function(fakeRequest) {
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
                 requestCallback(fakeRequest);
             });
 
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             sinon.assert.notCalled(requestCallback);
         });
@@ -131,40 +131,40 @@ describe('Saml ECP Client', function() {
             var serverResponder = new STE.AsyncServerResponder(server, done);
             var requestCallback = sinon.spy();
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_REQUEST
+                TestData.createPAOSRequest()
             ]);
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, [
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_AUTH_SUCCESS
+                TestData.createPAOSAuthSuccess()
             ]);
 
-            server.respondWith("POST", Constant.SP_SSO_URL, function(fakeRequest) {
+            server.respondWith("POST", TestData.SP_SSO_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders, fakeRequest.requestBody);
                 fakeRequest.respond(
                     302, {
-                        "SOAPAction": Constant.PAOS_SOAP_ACTION
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
                     },
-                    Constant.PAOS_REQUEST);
+                    TestData.createPAOSRequest());
                 serverResponder.done();
             });
 
 
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.notCalled(clientConfig.ecpAuth);
                 sinon.assert.calledOnce(requestCallback);
                 sinon.assert.calledWith(requestCallback, sinon.match({
-                        "Content-Type": Constant.PAOS_UTF8_CONTENT_TYPE
+                        "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
                     }),
-                    Constant.PAOS_AUTH_SUCCESS
+                    TestData.createPAOSAuthSuccess()
                 );
                 clientConfig.assertNoErrors();
                 clientConfig.assertSuccessNotCalled();
@@ -177,27 +177,27 @@ describe('Saml ECP Client', function() {
             var requestCallback = sinon.spy();
             var callCount = 0;
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_REQUEST
+                TestData.createPAOSRequest()
             ]);
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, function(fakeRequest) {
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
 
                 fakeRequest.respond(
                     200, {
-                        "SOAPAction": Constant.PAOS_SOAP_ACTION
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
                     },
-                    Constant.PAOS_AUTH_FAILED
+                    TestData.createPAOSAuthFailed()
                 );
                 if(++callCount > 1) {
                     serverResponder.done();
                 }
             });
 
-            server.respondWith("POST", Constant.SP_SSO_URL, function() {
+            server.respondWith("POST", TestData.SP_SSO_URL, function() {
                 requestCallback();
             });
 
@@ -206,7 +206,7 @@ describe('Saml ECP Client', function() {
                 authCtx.setPassword('bob');
                 authCtx.retryAuth();
             });
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.called(clientConfig.ecpAuth);
@@ -222,24 +222,24 @@ describe('Saml ECP Client', function() {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_REQUEST
+                TestData.createPAOSRequest()
             ]);
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, [
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_AUTH_FAILED
+                TestData.createPAOSAuthFailed()
             ]);
 
             clientConfig.setEcpAuth(function () {
                 serverResponder.done();
             });
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function () {
                 clientConfig.assertNoErrors();
@@ -253,34 +253,34 @@ describe('Saml ECP Client', function() {
             var count = 0;
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, function(fakeRequest) {
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders);
                 fakeRequest.respond(
                     200, {
-                        "SOAPAction": Constant.PAOS_SOAP_ACTION
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
                     },
-                    Constant.PAOS_REQUEST);
+                    TestData.createPAOSRequest());
                 if(++count > 1) {
                     serverResponder.done();
                 }
             });
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, [
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_AUTH_FAILED
+                TestData.createPAOSAuthFailed()
             ]);
 
             clientConfig.setEcpAuth(function(authCtx) {
                 authCtx.setPassword('bob');
                 authCtx.retryAuth();
             });
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(requestCallback);
-                sinon.assert.alwaysCalledWith(requestCallback, sinon.match(Constant.PAOS_HTTP_HEADER));
+                sinon.assert.alwaysCalledWith(requestCallback, sinon.match(TestData.PAOS_HTTP_HEADER));
                 clientConfig.assertNoErrors();
                 clientConfig.assertSuccessNotCalled();
             });
@@ -292,20 +292,20 @@ describe('Saml ECP Client', function() {
             var callCount = 0;
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_REQUEST
+                TestData.createPAOSRequest()
             ]);
 
-            server.respondWith("POST", Constant.IDP_ENDPOINT_URL, function(fakeRequest) {
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders);
-                var responseData = ++callCount == 1 ? Constant.PAOS_AUTH_FAILED : Constant.PAOS_AUTH_SUCCESS;
+                var responseData = ++callCount == 1 ? TestData.createPAOSAuthFailed() : TestData.createPAOSAuthSuccess();
 
                 fakeRequest.respond(
                     200, {
-                        "SOAPAction": Constant.PAOS_SOAP_ACTION
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
                     },
                     responseData);
                 if(callCount > 1) {
@@ -313,18 +313,18 @@ describe('Saml ECP Client', function() {
                 }
             });
 
-            server.respondWith("GET", Constant.SP_RESOURCE_URL, [
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
-                    "SOAPAction": Constant.PAOS_SOAP_ACTION
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
-                Constant.PAOS_REQUEST
+                TestData.createPAOSRequest()
             ]);
 
             clientConfig.setEcpAuth(function(authCtx) {
                 authCtx.setPassword('bob');
                 authCtx.retryAuth();
             });
-            client.get(Constant.SP_RESOURCE_URL, clientConfig);
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(requestCallback);
