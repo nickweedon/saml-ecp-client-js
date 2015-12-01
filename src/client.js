@@ -132,8 +132,8 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 	};
 
 	// As per (http://docs.oasis-open.org/security/saml/Post2.0/saml-ecp/v2.0/cs01/saml-ecp-v2.0-cs01.html)
-	// (section "2.3.4 ECP Routes <samlp:AuthnRequest> to Identity Provider"), the SOAP header should not be forwarded to the IDP
-	// so strip it from the request
+	// (section "2.3.4 ECP Routes <samlp:AuthnRequest> to Identity Provider" -> "Any header blocks received from the service provider MUST be removed."),
+	// the SOAP header should NOT be forwarded to the IDP so strip it from the request
 	deleteElement(xmlDoc, NS.SOAP_ENV, "Header");
 	xmlHttp.send(XML_HEADER + serializeDocument(xmlDoc));
 }

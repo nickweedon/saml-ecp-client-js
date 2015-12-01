@@ -11,3 +11,13 @@ TODO
   the library again with the request.
 * Add lots more error checking unit tests to test for things like 404s and bad responses at various points in the
   communication.
+
+TODO ECP Functionality
+======================
+* Look into 'RelayState'
+* Provide support for additional client PAOS HTTP headers such as:
+** "urn:oasis:names:tc:SAML:2.0:profiles:SSO:ecp:2.0:WantAuthnRequestsSigned
+** Holder of key (what is it)?
+** Channel binding?? (maybe no support for this)
+* Possibly provide support for SP issuing a list of IDPs to choose from
+* Possibly provide support for the IDP returning HTML as a response

@@ -311,6 +311,43 @@ describe('Saml ECP Client', function() {
             });
         });
 
+        it("converts a XMLHttpRequest header to a javascript object", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            server.respondWith("GET", "/hello", function(fakeRequest) {
+                //requestCallback(fakeRequest.requestHeaders);
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                        "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                    },
+                    TestData.createPAOSRequest());
+            });
+
+            var request = new XMLHttpRequest();
+            var parsedHeaderObj = null;
+
+            request.open("GET", "/hello");
+            request.onreadystatechange = function() {
+                if(request.readyState == 4) {
+                    parsedHeaderObj = client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    serverResponder.done();
+                }
+            };
+
+            request.send();
+
+            serverResponder.waitUntilDone(function () {
+                //TODO: fix this, it is adding a space to the start of the header values
+                assert.deepEqual({
+                        "SOAPAction": 'http://www.oasis-open.org/committees/security',
+                        "Content-Type": 'application/vnd.paos+xml;charset=utf-8'
+                }, parsedHeaderObj);
+            });
+
+        });
+
         it("attempts to authenticate after password retry callback called", function (done) {
 
             var requestCallback = sinon.spy();
