@@ -39,13 +39,16 @@ samlEcpJs.client.prototype = {
 	},
 
 	parseResponseHeadersString : function(responseHeadersString) {
+
 		var responseHeaderArray = responseHeadersString.split("\r\n");
 		var result = {};
+
 		for(var i = 0; i < responseHeaderArray.length; i++) {
 			var tokens = /^(.+?):(.*)/.exec(responseHeaderArray[i]);
 			if(tokens === null) continue;
-			result[tokens[1]] = tokens[2];
+			result[tokens[1].trim()] = tokens[2].trim();
 		}
+
 		return result;
 	},
 	isResponseAnAuthRequest : function(responseHeaders, responseBody) {

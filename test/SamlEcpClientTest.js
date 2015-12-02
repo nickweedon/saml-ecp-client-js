@@ -316,7 +316,6 @@ describe('Saml ECP Client', function() {
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
             server.respondWith("GET", "/hello", function(fakeRequest) {
-                //requestCallback(fakeRequest.requestHeaders);
                 fakeRequest.respond(
                     200, {
                         "SOAPAction": TestData.PAOS_SOAP_ACTION,
@@ -339,13 +338,67 @@ describe('Saml ECP Client', function() {
             request.send();
 
             serverResponder.waitUntilDone(function () {
-                //TODO: fix this, it is adding a space to the start of the header values
                 assert.deepEqual({
                         "SOAPAction": 'http://www.oasis-open.org/committees/security',
                         "Content-Type": 'application/vnd.paos+xml;charset=utf-8'
                 }, parsedHeaderObj);
             });
 
+        });
+
+        it("detects an authentication request", function (done) {
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            var isAuthRequest = null;
+            var request = new XMLHttpRequest();
+
+            request.open("GET", TestData.SP_RESOURCE_URL);
+            request.onreadystatechange = function() {
+                if(request.readyState == 4) {
+                    var parsedHeaderObj = client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    isAuthRequest = client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
+                    serverResponder.done();
+                }
+            };
+            request.send();
+
+            serverResponder.waitUntilDone(function () {
+                assert.isTrue(isAuthRequest);
+            });
+        });
+
+        it("does not detects non-auth request as auth-request", function (done) {
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {},
+                TestData.createPAOSRequest()
+            ]);
+
+            var isAuthRequest = null;
+            var request = new XMLHttpRequest();
+
+            request.open("GET", TestData.SP_RESOURCE_URL);
+            request.onreadystatechange = function() {
+                if(request.readyState == 4) {
+                    var parsedHeaderObj = client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    isAuthRequest = client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
+                    serverResponder.done();
+                }
+            };
+            request.send();
+
+            serverResponder.waitUntilDone(function () {
+                assert.isFalse(isAuthRequest);
+            });
         });
 
         it("attempts to authenticate after password retry callback called", function (done) {
@@ -434,6 +487,45 @@ describe('Saml ECP Client', function() {
                 sinon.assert.calledTwice(requestCallback);
                 sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization"));
                 clientConfig.assertSuccessNotCalled();
+            });
+        });
+    });
+
+    describe('HTTP Basic Authentication', function() {
+        it("sends correct HTTP basic auth header", function (done) {
+
+            // TODO: Need to finish this (should be retrying with actual auth like the other unit tests)
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
+                requestCallback(fakeRequest.requestHeaders);
+
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSAuthSuccess()
+                );
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                clientConfig.assertNoErrors();
+                clientConfig.assertSuccessNotCalled();
+                sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization"));
             });
         });
     });
