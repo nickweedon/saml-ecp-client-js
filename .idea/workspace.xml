@@ -54,8 +54,8 @@
       <file leaf-file-name="SamlEcpClientTest.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37397036" vertical-offset="9833" max-vertical-offset="11720">
-              <caret line="503" column="60" selection-start-line="503" selection-start-column="60" selection-end-line="503" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.4398682" vertical-offset="7774" max-vertical-offset="9299">
+              <caret line="473" column="60" selection-start-line="473" selection-start-column="60" selection-end-line="473" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -64,8 +64,18 @@
       <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="4998">
-              <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+            <state vertical-scroll-proportion="-12.071428" vertical-offset="2182" max-vertical-offset="5880">
+              <caret line="126" column="22" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clientHelper.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/clientHelper.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="512" max-vertical-offset="2737">
+              <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -74,40 +84,40 @@
       <file leaf-file-name="SamlTestData.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4919" max-vertical-offset="6001">
-              <caret line="256" column="21" selection-start-line="256" selection-start-column="21" selection-end-line="256" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6035">
+              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
               <folding>
-                <marker date="1447581454156" expanded="true" signature="5629:5806" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="5937:6066" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="6024:6066" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="6538:9237" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="6567:7270" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="6818:7240" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="6847:7053" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="7303:7695" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="7721:9208" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="7748:9181" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="7782:9153" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="10277:10352" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="10449:10595" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="10660:10708" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="21834:21909" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="22006:22152" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="22217:22265" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="22611:22706" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="22784:25751" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="22817:23590" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="23089:23556" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="23122:23340" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="23627:24099" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="24129:25718" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="24160:25687" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="24198:25655" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="25784:26120" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="25874:26005" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="26293:26457" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="26313:26373" placeholder="..." />
-                <marker date="1447581454156" expanded="true" signature="26393:26436" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="5740:5917" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="6048:6177" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="6135:6177" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="6649:9348" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="6678:7381" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="6929:7351" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="6958:7164" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="7414:7806" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="7832:9319" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="7859:9292" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="7893:9264" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="10388:10463" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="10560:10706" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="10771:10819" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="21945:22020" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="22117:22263" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="22328:22376" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="22722:22817" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="22895:25862" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="22928:23701" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="23200:23667" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="23233:23451" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="23738:24210" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="24240:25829" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="24271:25798" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="24309:25766" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="25895:26231" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="25985:26116" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="26404:26568" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="26424:26484" placeholder="..." />
+                <marker date="1449265684357" expanded="true" signature="26504:26547" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -150,9 +160,9 @@
         <option value="$PROJECT_DIR$/dist/saml-ecp-js.js" />
         <option value="$PROJECT_DIR$/src/clientHelper.js" />
         <option value="$PROJECT_DIR$/test/data/crap1.xml" />
-        <option value="$PROJECT_DIR$/test/data/SamlTestData.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/client.js" />
+        <option value="$PROJECT_DIR$/test/data/SamlTestData.js" />
         <option value="$PROJECT_DIR$/test/SamlEcpClientTest.js" />
       </list>
     </option>
@@ -248,6 +258,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -314,7 +325,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -342,14 +352,10 @@
       <ConfigurationWrapper RunnerId="Basic" />
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <method />
-    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -357,6 +363,10 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="NodeunitConfigurationType" factoryName="Nodeunit">
@@ -467,11 +477,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1890625" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -527,7 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="765">
           <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -535,54 +544,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="8014" max-vertical-offset="10863">
           <caret line="477" column="6" selection-start-line="477" selection-start-column="6" selection-end-line="477" selection-end-column="6" />
-          <folding>
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2 - Forward the SP response to the IdP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2.5 - Check the response of the unauthenticated request ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{&quot;errorMsg&quot;: &quot;Authentication is requried and a ecpAuth callback was not provided.&quot;...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 3 - Return the IdP's response back to the SP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 4 (final step) - Process the authenticated (hopefully) resource data ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -597,54 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6756" max-vertical-offset="9673">
           <caret line="417" column="0" selection-start-line="417" selection-start-column="0" selection-end-line="417" selection-end-column="0" />
-          <folding>
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2 - Forward the SP response to the IdP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2.5 - Check the response of the unauthenticated request ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{&quot;errorMsg&quot;: &quot;Authentication is requried and a ecpAuth callback was not provided.&quot;...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 3 - Return the IdP's response back to the SP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 4 (final step) - Process the authenticated (hopefully) resource data ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -706,54 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5294" max-vertical-offset="9673">
           <caret line="335" column="21" selection-start-line="335" selection-start-column="20" selection-end-line="335" selection-end-column="20" />
-          <folding>
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2 - Forward the SP response to the IdP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2.5 - Check the response of the unauthenticated request ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{&quot;errorMsg&quot;: &quot;Authentication is requried and a ecpAuth callback was not provided.&quot;...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 3 - Return the IdP's response back to the SP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 4 (final step) - Process the authenticated (hopefully) resource data ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,7 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -837,54 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3774" max-vertical-offset="9639">
           <caret line="255" column="39" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
-          <folding>
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2 - Forward the SP response to the IdP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2.5 - Check the response of the unauthenticated request ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{&quot;errorMsg&quot;: &quot;Authentication is requried and a ecpAuth callback was not provided.&quot;...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 3 - Return the IdP's response back to the SP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 4 (final step) - Process the authenticated (hopefully) resource data ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -921,7 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,54 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3774" max-vertical-offset="9639">
           <caret line="255" column="39" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
-          <folding>
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2 - Forward the SP response to the IdP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2.5 - Check the response of the unauthenticated request ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{&quot;errorMsg&quot;: &quot;Authentication is requried and a ecpAuth callback was not provided.&quot;...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 3 - Return the IdP's response back to the SP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 4 (final step) - Process the authenticated (hopefully) resource data ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,7 +824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,15 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
           <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientHelper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="2737">
-          <caret line="128" column="14" selection-start-line="128" selection-start-column="4" selection-end-line="128" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1095,128 +852,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="8099" max-vertical-offset="10914">
           <caret line="482" column="0" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
-          <folding>
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2 - Forward the SP response to the IdP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 2.5 - Check the response of the unauthenticated request ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{&quot;errorMsg&quot;: &quot;Authentication is requried and a ecpAuth callback was not provided.&quot;...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="//..." />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 3 - Return the IdP's response back to the SP ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="/** Step 4 (final step) - Process the authenticated (hopefully) resource data ...*/" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1449092141181" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="476">
           <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/util/SinonTestExt.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="461" max-vertical-offset="1088">
           <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="512" max-vertical-offset="2737">
+          <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="4998">
-          <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+        <state vertical-scroll-proportion="-12.071428" vertical-offset="2182" max-vertical-offset="5880">
+          <caret line="126" column="22" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4154" max-vertical-offset="6001">
-          <caret line="256" column="21" selection-start-line="256" selection-start-column="21" selection-end-line="256" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6035">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
           <folding>
-            <marker date="1447581454156" expanded="true" signature="5629:5806" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="5937:6066" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="6024:6066" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="6538:9237" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="6567:7270" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="6818:7240" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="6847:7053" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="7303:7695" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="7721:9208" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="7748:9181" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="7782:9153" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="10277:10352" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="10449:10595" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="10660:10708" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="21834:21909" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="22006:22152" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="22217:22265" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="22611:22706" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="22784:25751" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="22817:23590" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="23089:23556" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="23122:23340" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="23627:24099" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="24129:25718" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="24160:25687" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="24198:25655" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="25784:26120" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="25874:26005" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="26293:26457" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="26313:26373" placeholder="..." />
-            <marker date="1447581454156" expanded="true" signature="26393:26436" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="5740:5917" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="6048:6177" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="6135:6177" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="6649:9348" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="6678:7381" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="6929:7351" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="6958:7164" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="7414:7806" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="7832:9319" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="7859:9292" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="7893:9264" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="10388:10463" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="10560:10706" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="10771:10819" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="21945:22020" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="22117:22263" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="22328:22376" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="22722:22817" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="22895:25862" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="22928:23701" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="23200:23667" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="23233:23451" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="23738:24210" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="24240:25829" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="24271:25798" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="24309:25766" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="25895:26231" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="25985:26116" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="26404:26568" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="26424:26484" placeholder="..." />
+            <marker date="1449265684357" expanded="true" signature="26504:26547" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37397036" vertical-offset="9833" max-vertical-offset="11720">
-          <caret line="503" column="60" selection-start-line="503" selection-start-column="60" selection-end-line="503" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.4398682" vertical-offset="7774" max-vertical-offset="9299">
+          <caret line="473" column="60" selection-start-line="473" selection-start-column="60" selection-end-line="473" selection-end-column="60" />
           <folding />
         </state>
       </provider>

@@ -478,54 +478,15 @@ describe('Saml ECP Client', function() {
             ]);
 
             clientConfig.setEcpAuth(function(authCtx) {
-                authCtx.setPassword('bob');
+                authCtx.setPassword(TestData.PASSWORD);
                 authCtx.retryAuth();
             });
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(requestCallback);
-                sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization"));
+                sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization", TestData.BASIC_AUTH_STRING));
                 clientConfig.assertSuccessNotCalled();
-            });
-        });
-    });
-
-    describe('HTTP Basic Authentication', function() {
-        it("sends correct HTTP basic auth header", function (done) {
-
-            // TODO: Need to finish this (should be retrying with actual auth like the other unit tests)
-
-            var serverResponder = new STE.AsyncServerResponder(server, done);
-            var requestCallback = sinon.spy();
-
-            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
-                200, {
-                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
-                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
-                },
-                TestData.createPAOSRequest()
-            ]);
-
-
-            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
-                requestCallback(fakeRequest.requestHeaders);
-
-                fakeRequest.respond(
-                    200, {
-                        "SOAPAction": TestData.PAOS_SOAP_ACTION
-                    },
-                    TestData.createPAOSAuthSuccess()
-                );
-                serverResponder.done();
-            });
-
-            client.get(TestData.SP_RESOURCE_URL, clientConfig);
-
-            serverResponder.waitUntilDone(function() {
-                clientConfig.assertNoErrors();
-                clientConfig.assertSuccessNotCalled();
-                sinon.assert.calledWith(requestCallback, sinon.match.has("Authorization"));
             });
         });
     });

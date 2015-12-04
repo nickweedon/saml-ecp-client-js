@@ -8,6 +8,8 @@ define('SamlTestData',
         SamlTestData.SP_SSO_URL = "http://my-sp.fakedomain.int/saml/SSO";
         SamlTestData.SP_NAME = "my-sp.fakedomain.int";
         SamlTestData.USERNAME = "bob";
+        SamlTestData.PASSWORD = "mysecret";
+        SamlTestData.BASIC_AUTH_STRING = "Basic Ym9iOm15c2VjcmV0";
 
         SamlTestData.ECP_ERROR = {
             IDP_RESPONSE_ERROR : -1,
