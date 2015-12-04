@@ -54,6 +54,15 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders);
+
+                fakeRequest.respond(
+                    200, {
+                    "SOAPAction" : TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                    TestData.createPAOSRequest()
+                );
+
                 serverResponder.done();
             });
 
@@ -84,6 +93,12 @@ describe('Saml ECP Client', function() {
 
             server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
                 requestCallback(fakeRequest.requestHeaders, fakeRequest.requestBody);
+
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    },
+                    TestData.createPAOSAuthSuccess());
                 serverResponder.done();
             });
 
@@ -496,7 +511,6 @@ describe('Saml ECP Client', function() {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
             var requestCallback = sinon.spy();
-            var callCount = 0;
 
             server.respondWith("GET", TestData.SP_RESOURCE_URL, [
                 200, {
@@ -536,6 +550,205 @@ describe('Saml ECP Client', function() {
                     }
                 }));
                 clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("reports SP HTTP errors on initial request", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+                fakeRequest.respond(403);
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+                requestCallback();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.error);
+                sinon.assert.alwaysCalledWith(clientConfig.error, sinon.match.has("status", 403));
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("reports IDP HTTP errors on initial POST", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+            var callCount = 0;
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+
+                fakeRequest.respond(403);
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function () {
+                requestCallback();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.error);
+                sinon.assert.alwaysCalledWith(clientConfig.error, sinon.match.has("status", 403));
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("reports HTTP errors on posting back IDP response to SP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSAuthSuccess()
+                );
+            });
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function (fakeRequest) {
+                fakeRequest.respond(403);
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.error);
+                sinon.assert.alwaysCalledWith(clientConfig.error, sinon.match.has("status", 403));
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("doesn't report HTTP errors on final resource access after authentication", function (done) {
+
+            //TODO: Finish this
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var count = 0;
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+
+                if(++count == 1) {
+                    fakeRequest.respond(
+                        200, {
+                            "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                            "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
+                        },
+                        TestData.createPAOSRequest()
+                    );
+                    return;
+                }
+                fakeRequest.respond(403);
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSAuthSuccess()
+            ]);
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function(fakeRequest) {
+                fakeRequest.respond(
+                    302, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSRequest());
+            });
+
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.notCalled(clientConfig.ecpAuth);
+                sinon.assert.calledOnce(clientConfig.success);
+                sinon.assert.calledWith(clientConfig.success, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
+    });
+
+    describe('Successful Authentication', function() {
+        it("returns the resource on successful authentication", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var count = 0;
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+
+                if(++count == 1) {
+                    fakeRequest.respond(
+                        200, {
+                            "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                            "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
+                        },
+                        TestData.createPAOSRequest()
+                    );
+                    return;
+                }
+                fakeRequest.respond(
+                    200, {
+                        "Content-Type" : TestData.TEXT_HTML_CONTENT_TYPE
+                    },
+                    TestData.SP_RESOURCE
+                );
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSAuthSuccess()
+            ]);
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function(fakeRequest) {
+                fakeRequest.respond(
+                    302, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSRequest());
+            });
+
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.notCalled(clientConfig.ecpAuth);
+                sinon.assert.calledOnce(clientConfig.success);
+                sinon.assert.calledWith(clientConfig.success, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
             });
         });
     });

@@ -29,10 +29,14 @@ samlEcpJs.client.prototype = {
 		xmlHttp.withCredentials = true;
 
 		xmlHttp.onreadystatechange = function () {
-			if (xmlHttp.readyState == 4) {
-				if (xmlHttp.status == 200)
-					onSPResourceRequestRespone.call(me, callCtx, xmlHttp);
+			if (xmlHttp.readyState != 4) return;
+			if (xmlHttp.status != 200) {
+				if(callCtx.error !== undefined) {
+					callCtx.error(xmlHttp, "Received invalid HTTP response while attempting to communicate with SP URL '" + url + "'");
+				}
+				return;
 			}
+			onSPResourceRequestRespone.call(me, callCtx, xmlHttp);
 		};
 
 		xmlHttp.send();
@@ -127,11 +131,14 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 			createBasicAuthString(callCtx.username, callCtx.password));
 	}
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4) {
-			if(xmlHttp.status == 200) {
-				onIdPUnauthRequestRespone.call(me, callCtx, xmlHttp.responseText);
+		if (xmlHttp.readyState != 4) return;
+		if(xmlHttp.status != 200) {
+			if(callCtx.error !== undefined) {
+				callCtx.error(xmlHttp, "Received invalid HTTP response while attempting to communicate with IdP URL '" + callCtx.idpEndpointUrl + "'");
 			}
+			return;
 		}
+		onIdPUnauthRequestRespone.call(me, callCtx, xmlHttp.responseText);
 	};
 
 	// As per (http://docs.oasis-open.org/security/saml/Post2.0/saml-ecp/v2.0/cs01/saml-ecp-v2.0-cs01.html)
@@ -246,14 +253,14 @@ function onIdPAuthRequestRespone(callCtx, response) {
 	xmlHttp.setRequestHeader(HEADER.CONTENT_TYPE.KEY, HEADER.CONTENT_TYPE.PAOS);
 	xmlHttp.withCredentials = true;
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4) {
-			if(xmlHttp.status == 200 || xmlHttp.status == 302) {
-				onRelayIdpResponseToSPResponse.call(me, callCtx, xmlHttp.responseText);
-			} else {
-				if(callCtx.error !== undefined)
-					callCtx.error(xmlHttp, "Error occurred while posting back IdP response");
+		if (xmlHttp.readyState != 4) return;
+		if(xmlHttp.status != 200 && xmlHttp.status != 302) {
+			if(callCtx.error !== undefined) {
+				callCtx.error(xmlHttp, "Error occurred while posting back IdP response");
 			}
+			return;
 		}
+		onRelayIdpResponseToSPResponse.call(me, callCtx, xmlHttp.responseText);
 	};
 	xmlHttp.send(response);
 }
