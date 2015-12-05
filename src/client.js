@@ -48,7 +48,6 @@ samlEcpJs.client.prototype = {
 			onSPResourceRequestRespone.call(me, callCtx, xmlHttp);
 		};
 
-
 		if(callCtx.resourceTimeout !== 0) {
 			callCtx.deadlineTimer =
 				setTimeout(function () {
@@ -56,18 +55,6 @@ samlEcpJs.client.prototype = {
 					callCtx.onResourceTimeout(xmlHttp);
 				}, callCtx.resourceTimeout);
 		}
-
-		//xmlHttp.ontimeout = callCtx.onResourceTimeout;
-		//xmlHttp.timeout = callCtx.resourceTimeout;
-		/*
-		if(callCtx.resourceTimeout !== 0) {
-			callCtx.deadlineTimer =
-				setTimeout(function() {
-					xmlHttp.abort();
-					callCtx.onResourceTimeout();
-				}, callCtx.resourceTimeout);
-		}
-		*/
 
 		xmlHttp.send();
 	},
@@ -162,6 +149,7 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 	}
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState != 4) return;
+		clearTimeout(callCtx.deadlineTimer);
 		if(xmlHttp.status != 200) {
 			if(callCtx.onError !== null) {
 				callCtx.onError(xmlHttp, "Received invalid HTTP response while attempting to communicate with IdP URL '" + callCtx.idpEndpointUrl + "'");
@@ -170,8 +158,14 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 		}
 		onIdPUnauthRequestRespone.call(me, callCtx, xmlHttp.responseText);
 	};
-	xmlHttp.ontimeout = callCtx.onSamlTimeout;
-	xmlHttp.timeout = callCtx.samlTimeout;
+
+	if(callCtx.samlTimeout !== 0) {
+		callCtx.deadlineTimer =
+			setTimeout(function () {
+				xmlHttp.abort();
+				callCtx.onSamlTimeout(xmlHttp);
+			}, callCtx.samlTimeout);
+	}
 
 	// As per (http://docs.oasis-open.org/security/saml/Post2.0/saml-ecp/v2.0/cs01/saml-ecp-v2.0-cs01.html)
 	// (section "2.3.4 ECP Routes <samlp:AuthnRequest> to Identity Provider" -> "Any header blocks received from the service provider MUST be removed."),
@@ -285,6 +279,7 @@ function onIdPAuthRequestRespone(callCtx, response) {
 	xmlHttp.withCredentials = true;
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState != 4) return;
+		clearTimeout(callCtx.deadlineTimer);
 		if(xmlHttp.status != 200 && xmlHttp.status != 302) {
 			if(callCtx.onError !== null) {
 				callCtx.onError(xmlHttp, "Error occurred while posting back IdP response");
@@ -293,8 +288,15 @@ function onIdPAuthRequestRespone(callCtx, response) {
 		}
 		onRelayIdpResponseToSPResponse.call(me, callCtx, xmlHttp.responseText);
 	};
-	xmlHttp.ontimeout = callCtx.onSamlTimeout;
-	xmlHttp.timeout = callCtx.samlTimeout;
+
+	if(callCtx.samlTimeout !== 0) {
+		callCtx.deadlineTimer =
+			setTimeout(function () {
+				xmlHttp.abort();
+				callCtx.onSamlTimeout(xmlHttp);
+			}, callCtx.samlTimeout);
+	}
+
 	xmlHttp.send(response);
 }
 
@@ -316,10 +318,20 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState == 4) {
+			clearTimeout(callCtx.deadlineTimer);
 			if(callCtx.onSuccess !== null)
 				callCtx.onSuccess(xmlHttp.responseText, xmlHttp.statusText, xmlHttp);
 		}
 	};
+
+	if(callCtx.resourceTimeout !== 0) {
+		callCtx.deadlineTimer =
+			setTimeout(function () {
+				xmlHttp.abort();
+				callCtx.onResourceTimeout(xmlHttp);
+			}, callCtx.resourceTimeout);
+	}
+
 	xmlHttp.send();
 
 }

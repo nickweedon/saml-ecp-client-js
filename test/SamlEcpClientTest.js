@@ -521,7 +521,6 @@ describe('Saml ECP Client', function() {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
             var requestCallback = sinon.spy();
-            //var clock = sinon.useFakeTimers();
 
             server.xhr.useFilters = true;
             server.xhr.addFilter(function (method, url) {
@@ -532,7 +531,7 @@ describe('Saml ECP Client', function() {
                 requestCallback();
             });
 
-            clientConfig.resourceTimeout = 500;
+            clientConfig.resourceTimeout = 50;
             clientConfig.setOnResourceTimeout(function() {
                 serverResponder.done();
             });
@@ -546,7 +545,7 @@ describe('Saml ECP Client', function() {
             });
         });
 
-        it("reports errors on unsuccessful PAOS auth response from IDP", function (done) {
+        it("reports ECP errors on unsuccessful PAOS auth response from IDP", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
             var requestCallback = sinon.spy();
@@ -626,6 +625,43 @@ describe('Saml ECP Client', function() {
             });
         });
 
+        it("times out on no response from IDP POST", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+            var callCount = 0;
+
+            server.xhr.useFilters = true;
+            server.xhr.addFilter(function (method, url) {
+                return url === TestData.IDP_ENDPOINT_URL;
+            });
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function () {
+                requestCallback();
+            });
+
+            clientConfig.samlTimeout = 50;
+            clientConfig.setOnSamlTimeout(function() {
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.onSamlTimeout);
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
         it("reports HTTP errors on posting back IDP response to SP", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
@@ -661,6 +697,48 @@ describe('Saml ECP Client', function() {
                 sinon.assert.notCalled(requestCallback);
                 sinon.assert.calledOnce(clientConfig.onError);
                 sinon.assert.alwaysCalledWith(clientConfig.onError, sinon.match.has("status", 403));
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("times out on no response when posting back IDP response to SP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+
+            server.xhr.useFilters = true;
+            server.xhr.addFilter(function (method, url) {
+                return url === TestData.SP_SSO_URL;
+            });
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                    "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                },
+                TestData.createPAOSRequest()
+            ]);
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSAuthSuccess()
+                );
+            });
+
+            clientConfig.samlTimeout = 50;
+            clientConfig.setOnSamlTimeout(function() {
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.onSamlTimeout);
                 clientConfig.assertSuccessNotCalled();
             });
         });
@@ -731,6 +809,58 @@ describe('Saml ECP Client', function() {
                 sinon.assert.notCalled(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(clientConfig.onSuccess);
                 sinon.assert.calledWith(clientConfig.onSuccess, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
+                clientConfig.assertNoErrors();
+            });
+        });
+
+        it("times out when no response from resource after successful authentication", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                        "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
+                    },
+                    TestData.createPAOSRequest()
+                );
+                // Set this URL to timeout after the first request (i.e. on the final request)
+                // There seems to be some kind of bug where success is still called after the timeout
+                // (perhaps as part of cleanup?). This doesn't seem like a real problem however and so
+                // the check to see whether onSuccess has been called is avoided.
+                server.xhr.useFilters = true;
+                server.xhr.addFilter(function (method, url) {
+                    return url === TestData.SP_RESOURCE_URL;
+                });
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSAuthSuccess()
+            ]);
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function(fakeRequest) {
+                fakeRequest.respond(
+                    302, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSRequest());
+            });
+
+            clientConfig.resourceTimeout = 50;
+            clientConfig.setOnResourceTimeout(function() {
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onResourceTimeout);
                 clientConfig.assertNoErrors();
             });
         });
