@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="699" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="129" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="517" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="52" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b1e5d3e-6ab5-4859-afe7-7bc808f6181d" name="Default" comment="">
@@ -58,8 +58,8 @@
       <file leaf-file-name="SamlEcpClientTest.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56335616" vertical-offset="10585" max-vertical-offset="12886">
-              <caret line="642" column="63" selection-start-line="642" selection-start-column="63" selection-end-line="642" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.9434931" vertical-offset="8680" max-vertical-offset="13549">
+              <caret line="543" column="56" selection-start-line="543" selection-start-column="56" selection-end-line="543" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -68,83 +68,9 @@
       <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.964286" vertical-offset="153" max-vertical-offset="4964">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="5627">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manualtest/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.846154" vertical-offset="456" max-vertical-offset="1445">
-              <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
-              <folding>
-                <marker date="1447461556677" expanded="true" signature="1633:1765" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constant.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/constant.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clientHelper.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/clientHelper.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="2737">
-              <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SamlTestData.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="6052">
-              <caret line="24" column="43" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="43" />
-              <folding>
-                <marker date="1449272155175" expanded="true" signature="5814:5991" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="6122:6251" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="6209:6251" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="6723:9422" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="6752:7455" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="7003:7425" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="7032:7238" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="7488:7880" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="7906:9393" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="7933:9366" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="7967:9338" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="10462:10537" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="10634:10780" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="10845:10893" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="22019:22094" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="22191:22337" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="22402:22450" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="22796:22891" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="22969:25936" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="23002:23775" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="23274:23741" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="23307:23525" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="23812:24284" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="24314:25903" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="24345:25872" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="24383:25840" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="25969:26305" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="26059:26190" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="26478:26642" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="26498:26558" placeholder="..." />
-                <marker date="1449272155175" expanded="true" signature="26578:26621" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -176,20 +102,20 @@
         <option value="$PROJECT_DIR$/test/data/Constant.js" />
         <option value="$PROJECT_DIR$/test/data/SamlTestConstant.js" />
         <option value="$PROJECT_DIR$/test/test-require-deps.js" />
-        <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/src/amd.js" />
         <option value="$PROJECT_DIR$/test/data/crap.xml" />
         <option value="$PROJECT_DIR$/test/data/crap2.xml" />
-        <option value="$PROJECT_DIR$/dist/saml-ecp-js.js" />
         <option value="$PROJECT_DIR$/src/clientHelper.js" />
         <option value="$PROJECT_DIR$/test/data/crap1.xml" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/constant.js" />
+        <option value="$PROJECT_DIR$/karma.conf.js" />
+        <option value="$PROJECT_DIR$/dist/saml-ecp-js.js" />
         <option value="$PROJECT_DIR$/test/data/SamlTestData.js" />
-        <option value="$PROJECT_DIR$/src/client.js" />
         <option value="$PROJECT_DIR$/test/SamlEcpClientTest.js" />
+        <option value="$PROJECT_DIR$/src/client.js" />
       </list>
     </option>
   </component>
@@ -509,22 +435,22 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3982684" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19083156" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="720" y="202" width="480" height="635" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21002132" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33766234" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33766234" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1890625" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -548,18 +474,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="75" />
+      <option name="time" value="91" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavaScriptTestRunnerKarma">
-        <watch expression="tokens" language="JavaScript" />
-        <watch expression="responseHeaderArray" language="JavaScript" />
-        <watch expression="result" language="JavaScript" />
-        <watch expression="serializeDocument(paosBody[0].childNodes[1])" language="JavaScript" />
-        <watch expression="paosBody[0].textContent" language="JavaScript" />
-        <watch expression="paosBody[0].childNodes" language="JavaScript" />
-        <watch expression="serializeDocument(paosBody[0].childNodes[0])" language="JavaScript" />
-        <watch expression="fakeRequest.requestBody" language="JavaScript" />
+        <watch expression="clientConfig" language="JavaScript" />
+        <watch expression="callCtx.onResourceTimeout" language="JavaScript" />
+        <watch expression="xmlHttp" language="JavaScript" />
+        <watch expression="server.xhr" language="JavaScript" />
       </configuration>
       <configuration name="mocha-javascript-test-runner">
         <watch expression="page" language="JavaScript" />
@@ -644,9 +566,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="583" max-vertical-offset="1207">
           <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -705,9 +625,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1462">
           <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -843,16 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/karma.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="56" max-vertical-offset="1360">
-          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.5" vertical-offset="303" max-vertical-offset="1003">
@@ -889,14 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8099" max-vertical-offset="10914">
-          <caret line="482" column="0" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="476">
@@ -911,23 +811,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="461" max-vertical-offset="1088">
           <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clientHelper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="2737">
-          <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="2737">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manualtest/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.846154" vertical-offset="456" max-vertical-offset="1445">
+        <state vertical-scroll-proportion="-11.884615" vertical-offset="507" max-vertical-offset="1445">
           <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
           <folding>
-            <marker date="1447461556677" expanded="true" signature="1633:1765" placeholder="..." />
+            <marker date="1447461556677" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -940,58 +841,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1343">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/saml-ecp-js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6255" max-vertical-offset="11560">
+          <caret line="390" column="12" selection-start-line="390" selection-start-column="12" selection-end-line="390" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="6052">
-          <caret line="24" column="43" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="43" />
+        <state vertical-scroll-proportion="-3.0357144" vertical-offset="0" max-vertical-offset="6052">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
           <folding>
-            <marker date="1449272155175" expanded="true" signature="5814:5991" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="6122:6251" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="6209:6251" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="6723:9422" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="6752:7455" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="7003:7425" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="7032:7238" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="7488:7880" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="7906:9393" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="7933:9366" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="7967:9338" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="10462:10537" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="10634:10780" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="10845:10893" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="22019:22094" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="22191:22337" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="22402:22450" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="22796:22891" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="22969:25936" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="23002:23775" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="23274:23741" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="23307:23525" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="23812:24284" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="24314:25903" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="24345:25872" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="24383:25840" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="25969:26305" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="26059:26190" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="26478:26642" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="26498:26558" placeholder="..." />
-            <marker date="1449272155175" expanded="true" signature="26578:26621" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1449288873630" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.964286" vertical-offset="153" max-vertical-offset="4964">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="5627">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56335616" vertical-offset="10585" max-vertical-offset="12886">
-          <caret line="642" column="63" selection-start-line="642" selection-start-column="63" selection-end-line="642" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.9434931" vertical-offset="8680" max-vertical-offset="13549">
+          <caret line="543" column="56" selection-start-line="543" selection-start-column="56" selection-end-line="543" selection-end-column="56" />
           <folding />
         </state>
       </provider>

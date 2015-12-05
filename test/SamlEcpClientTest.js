@@ -8,22 +8,30 @@ describe('Saml ECP Client', function() {
 
     function ClientConfig(username){
         this.username = username;
-        this.success = sinon.spy();
-        this.ecpError = sinon.spy();
-        this.error = sinon.spy();
-        this.ecpAuth = sinon.spy();
+        this.onSuccess = sinon.spy();
+        this.onEcpError = sinon.spy();
+        this.onError = sinon.spy();
+        this.onEcpAuth = sinon.spy();
+        this.onSamlTimeout = sinon.spy();
+        this.onResourceTimeout = sinon.spy();
     }
 
     ClientConfig.prototype = {
-        setEcpAuth : function(ecpAuth) {
-            this.ecpAuth = sinon.spy(ecpAuth);
+        setEcpAuth : function(onEcpAuth) {
+            this.onEcpAuth = sinon.spy(onEcpAuth);
+        },
+        setOnResourceTimeout : function(onResourceTimeout) {
+            this.onResourceTimeout = sinon.spy(onResourceTimeout);
+        },
+        setOnSamlTimeout : function(onSamlTimeout) {
+            this.onSamlTimeout = sinon.spy(onSamlTimeout);
         },
         assertNoErrors : function() {
-            sinon.assert.notCalled(this.error);
-            sinon.assert.notCalled(this.ecpError);
+            sinon.assert.notCalled(this.onError);
+            sinon.assert.notCalled(this.onEcpError);
         },
         assertSuccessNotCalled : function() {
-            sinon.assert.notCalled(this.success);
+            sinon.assert.notCalled(this.onSuccess);
         }
     };
 
@@ -44,6 +52,8 @@ describe('Saml ECP Client', function() {
 
     afterEach(function () {
         server.restore();
+        server.xhr.useFilters = false;
+        server.xhr.filters = [];
     });
 
     describe('SP Resource Request', function() {
@@ -179,7 +189,7 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
-                sinon.assert.notCalled(clientConfig.ecpAuth);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(requestCallback);
                 sinon.assert.calledWith(requestCallback, sinon.match({
                         "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
@@ -228,7 +238,7 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
-                sinon.assert.notCalled(clientConfig.ecpAuth);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(requestCallback);
                 sinon.assert.calledWith(requestCallback, sinon.match({
                         "Content-Type": TestData.PAOS_UTF8_CONTENT_TYPE
@@ -281,10 +291,10 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
-                sinon.assert.called(clientConfig.ecpAuth);
+                sinon.assert.called(clientConfig.onEcpAuth);
                 sinon.assert.notCalled(requestCallback);
-                sinon.assert.calledTwice(clientConfig.ecpError);
-                sinon.assert.alwaysCalledWith(clientConfig.ecpError, sinon.match({
+                sinon.assert.calledTwice(clientConfig.onEcpError);
+                sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
                     errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
                     idpStatus: {
                         statusCode: [ samlEcpJs.SAML2_STATUS.REQUESTER, samlEcpJs.SAML2_STATUS.AUTHN_FAILED ],
@@ -450,7 +460,7 @@ describe('Saml ECP Client', function() {
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(requestCallback);
-                sinon.assert.called(clientConfig.ecpAuth);
+                sinon.assert.called(clientConfig.onEcpAuth);
                 sinon.assert.alwaysCalledWith(requestCallback, sinon.match(TestData.PAOS_HTTP_HEADER));
                 clientConfig.assertSuccessNotCalled();
             });
@@ -505,8 +515,37 @@ describe('Saml ECP Client', function() {
             });
         });
     });
-
     describe('Authentication Error Handling', function() {
+
+        it("times out when no response on initial resource access", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+            //var clock = sinon.useFakeTimers();
+
+            server.xhr.useFilters = true;
+            server.xhr.addFilter(function (method, url) {
+                return url === TestData.SP_RESOURCE_URL;
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+                requestCallback();
+            });
+
+            clientConfig.resourceTimeout = 500;
+            clientConfig.setOnResourceTimeout(function() {
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.notCalled(requestCallback);
+                sinon.assert.calledOnce(clientConfig.onResourceTimeout);
+            });
+        });
+
         it("reports errors on unsuccessful PAOS auth response from IDP", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
@@ -539,10 +578,10 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function () {
-                sinon.assert.called(clientConfig.ecpAuth);
+                sinon.assert.called(clientConfig.onEcpAuth);
                 sinon.assert.notCalled(requestCallback);
-                sinon.assert.calledOnce(clientConfig.ecpError);
-                sinon.assert.alwaysCalledWith(clientConfig.ecpError, sinon.match({
+                sinon.assert.calledOnce(clientConfig.onEcpError);
+                sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
                     errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
                     idpStatus: {
                         statusCode: [ samlEcpJs.SAML2_STATUS.REQUESTER, samlEcpJs.SAML2_STATUS.AUTHN_FAILED ],
@@ -581,8 +620,8 @@ describe('Saml ECP Client', function() {
 
             serverResponder.waitUntilDone(function () {
                 sinon.assert.notCalled(requestCallback);
-                sinon.assert.calledOnce(clientConfig.error);
-                sinon.assert.alwaysCalledWith(clientConfig.error, sinon.match.has("status", 403));
+                sinon.assert.calledOnce(clientConfig.onError);
+                sinon.assert.alwaysCalledWith(clientConfig.onError, sinon.match.has("status", 403));
                 clientConfig.assertSuccessNotCalled();
             });
         });
@@ -620,8 +659,8 @@ describe('Saml ECP Client', function() {
 
             serverResponder.waitUntilDone(function () {
                 sinon.assert.notCalled(requestCallback);
-                sinon.assert.calledOnce(clientConfig.error);
-                sinon.assert.alwaysCalledWith(clientConfig.error, sinon.match.has("status", 403));
+                sinon.assert.calledOnce(clientConfig.onError);
+                sinon.assert.alwaysCalledWith(clientConfig.onError, sinon.match.has("status", 403));
                 clientConfig.assertSuccessNotCalled();
             });
         });
@@ -643,9 +682,9 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function () {
-                sinon.assert.notCalled(clientConfig.ecpAuth);
-                sinon.assert.calledOnce(clientConfig.success);
-                sinon.assert.calledWith(clientConfig.success, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
                 clientConfig.assertNoErrors();
             });
         });
@@ -689,9 +728,9 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
-                sinon.assert.notCalled(clientConfig.ecpAuth);
-                sinon.assert.calledOnce(clientConfig.success);
-                sinon.assert.calledWith(clientConfig.success, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
                 clientConfig.assertNoErrors();
             });
         });
@@ -743,9 +782,9 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
-                sinon.assert.notCalled(clientConfig.ecpAuth);
-                sinon.assert.calledOnce(clientConfig.success);
-                sinon.assert.calledWith(clientConfig.success, TestData.SP_RESOURCE);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
                 clientConfig.assertNoErrors();
             });
         });

@@ -3,7 +3,21 @@ var samlEcpJs = samlEcpJs || {};
 //@@include('clientHelper.js')
 
 samlEcpJs.client = function(config) {
-	this.config = config;
+
+	this.config = {
+		samlTimeout : 0,
+		resourceTimeout : 0,
+		onError : null,
+		onEcpError : null,
+		onEcpAuth : null,
+		onSuccess : null,
+		onSamlTimeout : null,
+		onResourceTimeout : null,
+		username : null,
+		password : null
+	};
+
+	applyConfig(this.config, config);
 	this.parser = new DOMParser();
 };
 
@@ -30,8 +44,30 @@ samlEcpJs.client.prototype = {
 
 		xmlHttp.onreadystatechange = function () {
 			if (xmlHttp.readyState != 4) return;
+			clearTimeout(callCtx.deadlineTimer);
 			onSPResourceRequestRespone.call(me, callCtx, xmlHttp);
 		};
+
+
+		if(callCtx.resourceTimeout !== 0) {
+			callCtx.deadlineTimer =
+				setTimeout(function () {
+					xmlHttp.abort();
+					callCtx.onResourceTimeout(xmlHttp);
+				}, callCtx.resourceTimeout);
+		}
+
+		//xmlHttp.ontimeout = callCtx.onResourceTimeout;
+		//xmlHttp.timeout = callCtx.resourceTimeout;
+		/*
+		if(callCtx.resourceTimeout !== 0) {
+			callCtx.deadlineTimer =
+				setTimeout(function() {
+					xmlHttp.abort();
+					callCtx.onResourceTimeout();
+				}, callCtx.resourceTimeout);
+		}
+		*/
 
 		xmlHttp.send();
 	},
@@ -98,7 +134,7 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 
 	// If the response is not an auth request then we are already authenticated
 	if(!this.isResponseAnAuthRequest(this.parseResponseHeadersString(reqXmlHttp.getAllResponseHeaders()), response)) {
-		callCtx.success(response, reqXmlHttp.statusText, reqXmlHttp);
+		callCtx.onSuccess(response, reqXmlHttp.statusText, reqXmlHttp);
 		return;
 	}
 
@@ -120,20 +156,22 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 	xmlHttp.open("POST", callCtx.idpEndpointUrl, true);
 	xmlHttp.setRequestHeader(HEADER.CONTENT_TYPE.KEY, HEADER.CONTENT_TYPE.XML);
 	xmlHttp.withCredentials = true;
-	if(callCtx.password !== undefined) {
+	if(callCtx.password !== null) {
 		xmlHttp.setRequestHeader("Authorization",
 			createBasicAuthString(callCtx.username, callCtx.password));
 	}
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState != 4) return;
 		if(xmlHttp.status != 200) {
-			if(callCtx.error !== undefined) {
-				callCtx.error(xmlHttp, "Received invalid HTTP response while attempting to communicate with IdP URL '" + callCtx.idpEndpointUrl + "'");
+			if(callCtx.onError !== null) {
+				callCtx.onError(xmlHttp, "Received invalid HTTP response while attempting to communicate with IdP URL '" + callCtx.idpEndpointUrl + "'");
 			}
 			return;
 		}
 		onIdPUnauthRequestRespone.call(me, callCtx, xmlHttp.responseText);
 	};
+	xmlHttp.ontimeout = callCtx.onSamlTimeout;
+	xmlHttp.timeout = callCtx.samlTimeout;
 
 	// As per (http://docs.oasis-open.org/security/saml/Post2.0/saml-ecp/v2.0/cs01/saml-ecp-v2.0-cs01.html)
 	// (section "2.3.4 ECP Routes <samlp:AuthnRequest> to Identity Provider" -> "Any header blocks received from the service provider MUST be removed."),
@@ -164,8 +202,8 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 		onIdPAuthRequestRespone.call(this, callCtx, response);
 		return;
 	} else {
-		if(callCtx.ecpError !== undefined) {
-			callCtx.ecpError({
+		if(callCtx.onEcpError !== null) {
+			callCtx.onEcpError({
 				errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
 				idpStatus: statusObj
 			});
@@ -174,21 +212,21 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 	// Authentication failed so we can assume we are not 'signed on'
 	// Retry the same request but this time provide authentication
 
-	// Ensure that the ecpAuth callback exists
-	if(callCtx.ecpAuth === undefined) {
-		if(callCtx.ecpError === undefined) {
+	// Ensure that the onEcpAuth callback exists
+	if(callCtx.onEcpAuth === null) {
+		if(callCtx.onEcpError === null) {
 			return;
 		}
-		callCtx.ecpError({
+		callCtx.onEcpError({
 			errorCode: samlEcpJs.ECP_ERROR.CLIENT_CONFIG_ERROR,
-			errorMsg: "Authentication is requried and a ecpAuth callback was not provided."
+			errorMsg: "Authentication is required and a onEcpAuth callback was not provided."
 		});
 		return;
 	}
 
-	// Invoke the ecpAuth callback and allow the caller to set the password and
+	// Invoke the onEcpAuth callback and allow the caller to set the password and
 	// retry/continue the authentication process.
-	callCtx.ecpAuth({
+	callCtx.onEcpAuth({
 		setPassword : function(password) {
 			callCtx.password = password;
 		},
@@ -214,11 +252,10 @@ function onIdPAuthRequestRespone(callCtx, response) {
 			NS);
 
 	var statusObj = getStatusObjFromSamlStatus(samlStatusNode[0]);
-	//console.debug("statusObj", statusObj);
 
 	if(statusObj.statusCode[0] != samlEcpJs.SAML2_STATUS.SUCCESS) {
-		if(callCtx.ecpError !== undefined) {
-			callCtx.ecpError({
+		if(callCtx.onEcpError !== null) {
+			callCtx.onEcpError({
 				errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
 				idpStatus: statusObj
 			});
@@ -249,13 +286,15 @@ function onIdPAuthRequestRespone(callCtx, response) {
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState != 4) return;
 		if(xmlHttp.status != 200 && xmlHttp.status != 302) {
-			if(callCtx.error !== undefined) {
-				callCtx.error(xmlHttp, "Error occurred while posting back IdP response");
+			if(callCtx.onError !== null) {
+				callCtx.onError(xmlHttp, "Error occurred while posting back IdP response");
 			}
 			return;
 		}
 		onRelayIdpResponseToSPResponse.call(me, callCtx, xmlHttp.responseText);
 	};
+	xmlHttp.ontimeout = callCtx.onSamlTimeout;
+	xmlHttp.timeout = callCtx.samlTimeout;
 	xmlHttp.send(response);
 }
 
@@ -277,8 +316,8 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState == 4) {
-			if(callCtx.success !== undefined)
-				callCtx.success(xmlHttp.responseText, xmlHttp.statusText, xmlHttp);
+			if(callCtx.onSuccess !== null)
+				callCtx.onSuccess(xmlHttp.responseText, xmlHttp.statusText, xmlHttp);
 		}
 	};
 	xmlHttp.send();
