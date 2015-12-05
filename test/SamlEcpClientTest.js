@@ -553,30 +553,6 @@ describe('Saml ECP Client', function() {
             });
         });
 
-        it("reports SP HTTP errors on initial request", function (done) {
-
-            var serverResponder = new STE.AsyncServerResponder(server, done);
-            var requestCallback = sinon.spy();
-
-            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
-                fakeRequest.respond(403);
-                serverResponder.done();
-            });
-
-            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
-                requestCallback();
-            });
-
-            client.get(TestData.SP_RESOURCE_URL, clientConfig);
-
-            serverResponder.waitUntilDone(function () {
-                sinon.assert.notCalled(requestCallback);
-                sinon.assert.calledOnce(clientConfig.error);
-                sinon.assert.alwaysCalledWith(clientConfig.error, sinon.match.has("status", 403));
-                clientConfig.assertSuccessNotCalled();
-            });
-        });
-
         it("reports IDP HTTP errors on initial POST", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
@@ -650,9 +626,32 @@ describe('Saml ECP Client', function() {
             });
         });
 
+        it("doesn't report HTTP errors on initial resource access", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var requestCallback = sinon.spy();
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+                fakeRequest.respond(403);
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function (fakeRequest) {
+                requestCallback();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(clientConfig.ecpAuth);
+                sinon.assert.calledOnce(clientConfig.success);
+                sinon.assert.calledWith(clientConfig.success, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
+                clientConfig.assertNoErrors();
+            });
+        });
+
         it("doesn't report HTTP errors on final resource access after authentication", function (done) {
 
-            //TODO: Finish this
             var serverResponder = new STE.AsyncServerResponder(server, done);
             var count = 0;
 
@@ -687,13 +686,12 @@ describe('Saml ECP Client', function() {
                     TestData.createPAOSRequest());
             });
 
-
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.notCalled(clientConfig.ecpAuth);
                 sinon.assert.calledOnce(clientConfig.success);
-                sinon.assert.calledWith(clientConfig.success, TestData.SP_RESOURCE);
+                sinon.assert.calledWith(clientConfig.success, sinon.match.any, sinon.match.any, sinon.match.has("status", 403));
                 clientConfig.assertNoErrors();
             });
         });

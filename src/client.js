@@ -30,12 +30,6 @@ samlEcpJs.client.prototype = {
 
 		xmlHttp.onreadystatechange = function () {
 			if (xmlHttp.readyState != 4) return;
-			if (xmlHttp.status != 200) {
-				if(callCtx.error !== undefined) {
-					callCtx.error(xmlHttp, "Received invalid HTTP response while attempting to communicate with SP URL '" + url + "'");
-				}
-				return;
-			}
 			onSPResourceRequestRespone.call(me, callCtx, xmlHttp);
 		};
 
@@ -283,11 +277,8 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState == 4) {
-			if(xmlHttp.status == 200) {
-				if(callCtx.success !== undefined)
-					callCtx.success(xmlHttp.responseText, xmlHttp.statusText, xmlHttp);
-			}
-
+			if(callCtx.success !== undefined)
+				callCtx.success(xmlHttp.responseText, xmlHttp.statusText, xmlHttp);
 		}
 	};
 	xmlHttp.send();
