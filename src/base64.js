@@ -1,6 +1,6 @@
-var samlEcpJs = samlEcpJs || {};
+var samlEcpClientJs = samlEcpClientJs || {};
 
-samlEcpJs.base64 = {
+samlEcpClientJs.base64 = {
 		//		private property
 		_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
 
@@ -10,7 +10,7 @@ samlEcpJs.base64 = {
 			var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
 			var i = 0;
 
-			input = samlEcpJs.base64._utf8_encode(input);
+			input = samlEcpClientJs.base64._utf8_encode(input);
 
 			while (i < input.length) {
 
@@ -30,8 +30,8 @@ samlEcpJs.base64 = {
 				}
 
 				output = output +
-				samlEcpJs.base64._keyStr.charAt(enc1) + samlEcpJs.base64._keyStr.charAt(enc2) +
-				samlEcpJs.base64._keyStr.charAt(enc3) + samlEcpJs.base64._keyStr.charAt(enc4);
+					samlEcpClientJs.base64._keyStr.charAt(enc1) + samlEcpClientJs.base64._keyStr.charAt(enc2) +
+					samlEcpClientJs.base64._keyStr.charAt(enc3) + samlEcpClientJs.base64._keyStr.charAt(enc4);
 
 			}
 
@@ -49,10 +49,10 @@ samlEcpJs.base64 = {
 
 			while (i < input.length) {
 
-				enc1 = samlEcpJs.base64._keyStr.indexOf(input.charAt(i++));
-				enc2 = samlEcpJs.base64._keyStr.indexOf(input.charAt(i++));
-				enc3 = samlEcpJs.base64._keyStr.indexOf(input.charAt(i++));
-				enc4 = samlEcpJs.base64._keyStr.indexOf(input.charAt(i++));
+				enc1 = samlEcpClientJs.base64._keyStr.indexOf(input.charAt(i++));
+				enc2 = samlEcpClientJs.base64._keyStr.indexOf(input.charAt(i++));
+				enc3 = samlEcpClientJs.base64._keyStr.indexOf(input.charAt(i++));
+				enc4 = samlEcpClientJs.base64._keyStr.indexOf(input.charAt(i++));
 
 				chr1 = (enc1 << 2) | (enc2 >> 4);
 				chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
@@ -69,7 +69,7 @@ samlEcpJs.base64 = {
 
 			}
 
-			output = samlEcpJs.base64._utf8_decode(output);
+			output = samlEcpClientJs.base64._utf8_decode(output);
 
 			return output;
 

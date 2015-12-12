@@ -20,11 +20,11 @@
 
 	function doLogin() {
 
-		require(["saml-ecp-js", "jquery", "jquery-colorbox"], function(samlEcpJs) {
+		require(["saml-ecp-client-js", "jquery", "jquery-colorbox"], function(samlEcpClientJs) {
 
 			var username = $("#username").val();
 			
-			var client = new samlEcpJs.client({
+			var client = new samlEcpClientJs.client({
 				idpEndpointUrl : "http://wyvern.weedon.int:8030/idp/profile/SAML2/SOAP/ECP" 
 			});
 
@@ -42,7 +42,7 @@
 					ecpError : function(ecpErrorObj) {
 						
 						console.debug("Got error");
-						if(ecpErrorObj.errorCode == samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR)
+						if(ecpErrorObj.errorCode == samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR)
 							console.debug("IdP Error:", ecpErrorObj.idpStatus);
 					},
 					error : function(xmlHttp, msg) {

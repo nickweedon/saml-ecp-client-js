@@ -15,15 +15,12 @@ require.config({
     shim: {
         'jquery-colorbox' : {
             deps : ['jquery']
-        },
-        'saml-ecp-js' : {
-            deps : ['jquery-colorbox']
         }
     },
     paths: {
         jquery: "../bower_components/jquery/dist/jquery",
         requirejs: "../bower_components/requirejs/require",
-        "saml-ecp-js": "../dist/saml-ecp-js",
+        "saml-ecp-client-js": "../dist/saml-ecp-client-js",
         "SinonTestExt" : "util/SinonTestExt",
         "SamlTestData" : "data/SamlTestData",
         "jquery-colorbox": "../bower_components/jquery-colorbox/jquery.colorbox",

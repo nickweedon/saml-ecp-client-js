@@ -1,5 +1,5 @@
 describe('Saml ECP Client', function() {
-    var samlEcpJs = null;
+    var samlEcpClientJs = null;
     var client = null;
     var clientConfig = null;
     var server = null;
@@ -36,12 +36,12 @@ describe('Saml ECP Client', function() {
     };
 
     beforeEach(function(done) {
-        require(["saml-ecp-js", "SinonTestExt", "SamlTestData"], function(samlEcpJsNS, sinonTestExt, SamlTestData) {
+        require(["saml-ecp-client-js", "SinonTestExt", "SamlTestData"], function(samlEcpClientJsNS, sinonTestExt, SamlTestData) {
             TestData = SamlTestData;
             server = sinon.fakeServer.create();
             server.autoRespondAfter = 50;
-            samlEcpJs = samlEcpJsNS;
-            client = new samlEcpJs.client({
+            samlEcpClientJs = samlEcpClientJsNS;
+            client = new samlEcpClientJs.client({
                 idpEndpointUrl: TestData.IDP_ENDPOINT_URL
             });
             STE = sinonTestExt;
@@ -295,9 +295,9 @@ describe('Saml ECP Client', function() {
                 sinon.assert.notCalled(requestCallback);
                 sinon.assert.calledTwice(clientConfig.onEcpError);
                 sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
-                    errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
+                    errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
                     idpStatus: {
-                        statusCode: [ samlEcpJs.SAML2_STATUS.REQUESTER, samlEcpJs.SAML2_STATUS.AUTHN_FAILED ],
+                        statusCode: [ samlEcpClientJs.SAML2_STATUS.REQUESTER, samlEcpClientJs.SAML2_STATUS.AUTHN_FAILED ],
                         statusMessage: "An error occurred."
                     }
                 }));
@@ -581,9 +581,9 @@ describe('Saml ECP Client', function() {
                 sinon.assert.notCalled(requestCallback);
                 sinon.assert.calledOnce(clientConfig.onEcpError);
                 sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
-                    errorCode: samlEcpJs.ECP_ERROR.IDP_RESPONSE_ERROR,
+                    errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
                     idpStatus: {
-                        statusCode: [ samlEcpJs.SAML2_STATUS.REQUESTER, samlEcpJs.SAML2_STATUS.AUTHN_FAILED ],
+                        statusCode: [ samlEcpClientJs.SAML2_STATUS.REQUESTER, samlEcpClientJs.SAML2_STATUS.AUTHN_FAILED ],
                         statusMessage: "An error occurred."
                     }
                 }));

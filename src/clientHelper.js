@@ -42,7 +42,7 @@ function serializeDocument(xmlDoc) {
 
 function createBasicAuthString(user, pass) {
     var tok = user + ':' + pass;
-    return "Basic " + samlEcpJs.base64.encode(tok);
+    return "Basic " + samlEcpClientJs.base64.encode(tok);
 }
 
 function deleteElement(xmlDoc, namespaceString, elementName) {

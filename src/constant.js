@@ -1,15 +1,15 @@
-var samlEcpJs = samlEcpJs || {};
+var samlEcpClientJs = samlEcpClientJs || {};
 
 /////////////////// Public constants ///////////////////////////
 
-samlEcpJs.ECP_ERROR = {
+samlEcpClientJs.ECP_ERROR = {
 	IDP_RESPONSE_ERROR : -1,
 	CONSUMER_URL_MISMATCH : -2,
 	CLIENT_CONFIG_ERROR : -3
 };
 
 // SAML 2 status codes (see https://msdn.microsoft.com/en-us/library/hh269642.aspx)
-samlEcpJs.SAML2_STATUS = {
+samlEcpClientJs.SAML2_STATUS = {
 	// Top-level status codes
 	SUCCESS : "urn:oasis:names:tc:SAML:2.0:status:Success",
 	REQUESTER : "urn:oasis:names:tc:SAML:2.0:status:Requester",

@@ -5,7 +5,7 @@ require.config({
         'jquery'
       ]
     },
-    'saml-ecp-js': {
+    'saml-ecp-client-js': {
       deps: [
         'jquery-colorbox'
       ]
@@ -14,7 +14,7 @@ require.config({
   paths: {
     jquery: '../../bower_components/jquery/dist/jquery',
     requirejs: '../../bower_components/requirejs/require',
-    'saml-ecp-js': '../../dist/saml-ecp-js',
+    'saml-ecp-client-js': '../../dist/saml-ecp-client-js',
     'jquery-colorbox': '../../bower_components/jquery-colorbox/jquery.colorbox',
     underscore: '../../bower_components/underscore/underscore'
   },
