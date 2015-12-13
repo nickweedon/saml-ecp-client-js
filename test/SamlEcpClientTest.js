@@ -41,7 +41,7 @@ describe('Saml ECP Client', function() {
             server = sinon.fakeServer.create();
             server.autoRespondAfter = 50;
             samlEcpClientJs = samlEcpClientJsNS;
-            client = new samlEcpClientJs.client({
+            client = new samlEcpClientJs.Client({
                 idpEndpointUrl: TestData.IDP_ENDPOINT_URL
             });
             STE = sinonTestExt;
@@ -355,7 +355,7 @@ describe('Saml ECP Client', function() {
             request.open("GET", "/hello");
             request.onreadystatechange = function() {
                 if(request.readyState == 4) {
-                    parsedHeaderObj = samlEcpClientJs.client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    parsedHeaderObj = samlEcpClientJs.Client.parseResponseHeadersString(request.getAllResponseHeaders());
                     serverResponder.done();
                 }
             };
@@ -388,8 +388,8 @@ describe('Saml ECP Client', function() {
             request.open("GET", TestData.SP_RESOURCE_URL);
             request.onreadystatechange = function() {
                 if(request.readyState == 4) {
-                    var parsedHeaderObj = samlEcpClientJs.client.parseResponseHeadersString(request.getAllResponseHeaders());
-                    isAuthRequest = samlEcpClientJs.client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
+                    var parsedHeaderObj = samlEcpClientJs.Client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    isAuthRequest = samlEcpClientJs.Client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
                     serverResponder.done();
                 }
             };
@@ -414,8 +414,8 @@ describe('Saml ECP Client', function() {
             request.open("GET", TestData.SP_RESOURCE_URL);
             request.onreadystatechange = function() {
                 if(request.readyState == 4) {
-                    var parsedHeaderObj = samlEcpClientJs.client.parseResponseHeadersString(request.getAllResponseHeaders());
-                    isAuthRequest = samlEcpClientJs.client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
+                    var parsedHeaderObj = samlEcpClientJs.Client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    isAuthRequest = samlEcpClientJs.Client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
                     serverResponder.done();
                 }
             };

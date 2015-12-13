@@ -2,7 +2,7 @@ var samlEcpClientJs = samlEcpClientJs || {};
 
 //@@include('clientHelper.js')
 
-samlEcpClientJs.client = function(config) {
+samlEcpClientJs.Client = function(config) {
 
 	this.config = {
 		samlTimeout : 0,
@@ -21,7 +21,7 @@ samlEcpClientJs.client = function(config) {
 	this.parser = new DOMParser();
 };
 
-samlEcpClientJs.client.prototype = {
+samlEcpClientJs.Client.prototype = {
 	/**
 	 * Step 1 - Initiate the initial resource request to the SP
 	 */
@@ -60,7 +60,7 @@ samlEcpClientJs.client.prototype = {
 	}
 };
 
-samlEcpClientJs.client.parseResponseHeadersString = function(responseHeadersString) {
+samlEcpClientJs.Client.parseResponseHeadersString = function(responseHeadersString) {
 
 	var responseHeaderArray = responseHeadersString.split("\r\n");
 	var result = {};
@@ -74,7 +74,7 @@ samlEcpClientJs.client.parseResponseHeadersString = function(responseHeadersStri
 	return result;
 };
 
-samlEcpClientJs.client.isResponseAnAuthRequest = function(responseHeaders, responseBody) {
+samlEcpClientJs.Client.isResponseAnAuthRequest = function(responseHeaders, responseBody) {
 
 	var contentType = getObjectValueFromCaseInsensitiveKey(responseHeaders, "content-type");
 
@@ -123,7 +123,7 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 	var response = reqXmlHttp.responseText;
 
 	// If the response is not an auth request then we are already authenticated
-	if(!samlEcpClientJs.client.isResponseAnAuthRequest(samlEcpClientJs.client.parseResponseHeadersString(reqXmlHttp.getAllResponseHeaders()), response)) {
+	if(!samlEcpClientJs.Client.isResponseAnAuthRequest(samlEcpClientJs.Client.parseResponseHeadersString(reqXmlHttp.getAllResponseHeaders()), response)) {
 		callCtx.onSuccess(response, reqXmlHttp.statusText, reqXmlHttp);
 		return;
 	}
