@@ -56,6 +56,23 @@ describe('Saml ECP Client', function() {
         server.xhr.filters = [];
     });
 
+    describe('Instantiation and configuration tests', function() {
+        it("Uses xhrFactory when supplied", function () {
+            var customXhrOpenSpy = null;
+
+            clientConfig.xhrFactory = function() {
+                var xhr = new XMLHttpRequest();
+                customXhrOpenSpy = sinon.spy(xhr, "open");
+                return xhr;
+            };
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            sinon.assert.calledOnce(customXhrOpenSpy);
+        });
+    });
+
+
     describe('SP Resource Request', function() {
         it("makes SP request with PAOS headers", function (done) {
 

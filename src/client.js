@@ -13,6 +13,7 @@ samlEcpClientJs.Client = function(config) {
 		onSuccess : null,
 		onSamlTimeout : null,
 		onResourceTimeout : null,
+		xhrFactory : null,
 		username : null,
 		password : null
 	};
@@ -36,7 +37,7 @@ samlEcpClientJs.Client.prototype = {
 		var me = this;
 
 		// Send the PAOS request to the SP
-		var xmlHttp = new XMLHttpRequest();
+		var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
 		xmlHttp.open("GET", url);
 		xmlHttp.setRequestHeader(HEADER.ACCEPT.KEY, HEADER.ACCEPT.PAOS);
 		xmlHttp.setRequestHeader(HEADER.PAOS.KEY, HEADER.PAOS.SAML2_ECP);
@@ -142,7 +143,7 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 	// (i.e. see if we are 'signed on' to the IdP already)
 	// Post the data to the IdP
 	var me = this;
-	var xmlHttp = new XMLHttpRequest();
+	var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
 	xmlHttp.open("POST", callCtx.idpEndpointUrl, true);
 	xmlHttp.setRequestHeader(HEADER.CONTENT_TYPE.KEY, HEADER.CONTENT_TYPE.XML);
 	xmlHttp.withCredentials = true;
@@ -276,7 +277,7 @@ function onIdPAuthRequestRespone(callCtx, response) {
 	var me = this;
 
 	// Post the data back to the SP
-	var xmlHttp = new XMLHttpRequest();
+	var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
 	xmlHttp.open("POST", assertionConsumerServiceURL, true);
 	xmlHttp.setRequestHeader(HEADER.CONTENT_TYPE.KEY, HEADER.CONTENT_TYPE.PAOS);
 	xmlHttp.withCredentials = true;
@@ -313,7 +314,7 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 
 
 	// Authentication succeeded, so now retrieve the original request
-	var xmlHttp = new XMLHttpRequest();
+	var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
 	xmlHttp.open("GET", callCtx.url, true);
 	xmlHttp.setRequestHeader(HEADER.ACCEPT.KEY, HEADER.ACCEPT.PAOS);
 	xmlHttp.setRequestHeader(HEADER.PAOS.KEY, HEADER.PAOS.SAML2_ECP);
