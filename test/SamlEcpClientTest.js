@@ -355,7 +355,7 @@ describe('Saml ECP Client', function() {
             request.open("GET", "/hello");
             request.onreadystatechange = function() {
                 if(request.readyState == 4) {
-                    parsedHeaderObj = client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    parsedHeaderObj = samlEcpClientJs.client.parseResponseHeadersString(request.getAllResponseHeaders());
                     serverResponder.done();
                 }
             };
@@ -388,8 +388,8 @@ describe('Saml ECP Client', function() {
             request.open("GET", TestData.SP_RESOURCE_URL);
             request.onreadystatechange = function() {
                 if(request.readyState == 4) {
-                    var parsedHeaderObj = client.parseResponseHeadersString(request.getAllResponseHeaders());
-                    isAuthRequest = client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
+                    var parsedHeaderObj = samlEcpClientJs.client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    isAuthRequest = samlEcpClientJs.client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
                     serverResponder.done();
                 }
             };
@@ -414,8 +414,8 @@ describe('Saml ECP Client', function() {
             request.open("GET", TestData.SP_RESOURCE_URL);
             request.onreadystatechange = function() {
                 if(request.readyState == 4) {
-                    var parsedHeaderObj = client.parseResponseHeadersString(request.getAllResponseHeaders());
-                    isAuthRequest = client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
+                    var parsedHeaderObj = samlEcpClientJs.client.parseResponseHeadersString(request.getAllResponseHeaders());
+                    isAuthRequest = samlEcpClientJs.client.isResponseAnAuthRequest(parsedHeaderObj, request.responseText);
                     serverResponder.done();
                 }
             };

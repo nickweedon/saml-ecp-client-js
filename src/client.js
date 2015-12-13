@@ -57,54 +57,57 @@ samlEcpClientJs.client.prototype = {
 		}
 
 		xmlHttp.send();
-	},
-
-	parseResponseHeadersString : function(responseHeadersString) {
-
-		var responseHeaderArray = responseHeadersString.split("\r\n");
-		var result = {};
-
-		for(var i = 0; i < responseHeaderArray.length; i++) {
-			var tokens = /^(.+?):(.*)/.exec(responseHeaderArray[i]);
-			if(tokens === null) continue;
-			result[tokens[1].trim()] = tokens[2].trim();
-		}
-
-		return result;
-	},
-	isResponseAnAuthRequest : function(responseHeaders, responseBody) {
-
-		var contentType = getObjectValueFromCaseInsensitiveKey(responseHeaders, "content-type");
-
-		if(contentType === null)
-			return false;
-
-		//var isPAOSContentType = false;
-		var isAuthRequest = false;
-		var xmlDoc = null;
-		var paosRequestNode = null;
-
-		if(!contentType.split(";").some(function(element) {
-			return element.trim().toLowerCase() == HEADER.CONTENT_TYPE.PAOS;
-		})) {
-			return false;
-		}
-
-		xmlDoc = this.parser.parseFromString(responseBody, "text/xml");
-
-		// If we are not authenticated then we should be greeted with a SOAP message
-		// that we should forward to the IdP, otherwise we simply retrieve the actual resource
-		paosRequestNode = xpathQuery(	xmlDoc,
-			"//SOAP_ENV:Envelope/SOAP_ENV:Header/PAOS:Request",
-			NS);
-
-		// The most reliable method of determining if this is a PAOS request or not to simply
-		// check if the PAOS:Request xpath expression was able to evaluate properly.
-		// We cannot rely on content-type headers or other such things as the actual resource
-		// may in fact be an XML document.
-		return paosRequestNode.length !== 0;
 	}
 };
+
+samlEcpClientJs.client.parseResponseHeadersString = function(responseHeadersString) {
+
+	var responseHeaderArray = responseHeadersString.split("\r\n");
+	var result = {};
+
+	for(var i = 0; i < responseHeaderArray.length; i++) {
+		var tokens = /^(.+?):(.*)/.exec(responseHeaderArray[i]);
+		if(tokens === null) continue;
+		result[tokens[1].trim()] = tokens[2].trim();
+	}
+
+	return result;
+};
+
+samlEcpClientJs.client.isResponseAnAuthRequest = function(responseHeaders, responseBody) {
+
+	var contentType = getObjectValueFromCaseInsensitiveKey(responseHeaders, "content-type");
+
+	if(contentType === null)
+		return false;
+
+	var isAuthRequest = false;
+	var xmlDoc = null;
+	var paosRequestNode = null;
+
+	if(!contentType.split(";").some(function(element) {
+			return element.trim().toLowerCase() == HEADER.CONTENT_TYPE.PAOS;
+		})) {
+		return false;
+	}
+
+	var parser = new DOMParser();
+
+	xmlDoc = parser.parseFromString(responseBody, "text/xml");
+
+	// If we are not authenticated then we should be greeted with a SOAP message
+	// that we should forward to the IdP, otherwise we simply retrieve the actual resource
+	paosRequestNode = xpathQuery(	xmlDoc,
+		"//SOAP_ENV:Envelope/SOAP_ENV:Header/PAOS:Request",
+		NS);
+
+	// The most reliable method of determining if this is a PAOS request or not to simply
+	// check if the PAOS:Request xpath expression was able to evaluate properly.
+	// We cannot rely on content-type headers or other such things as the actual resource
+	// may in fact be an XML document.
+	return paosRequestNode.length !== 0;
+};
+
 
 /////////////////////////////// Private methods ///////////////////////////////////////////
 
@@ -120,7 +123,7 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 	var response = reqXmlHttp.responseText;
 
 	// If the response is not an auth request then we are already authenticated
-	if(!this.isResponseAnAuthRequest(this.parseResponseHeadersString(reqXmlHttp.getAllResponseHeaders()), response)) {
+	if(!samlEcpClientJs.client.isResponseAnAuthRequest(samlEcpClientJs.client.parseResponseHeadersString(reqXmlHttp.getAllResponseHeaders()), response)) {
 		callCtx.onSuccess(response, reqXmlHttp.statusText, reqXmlHttp);
 		return;
 	}
