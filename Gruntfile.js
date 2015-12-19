@@ -60,7 +60,12 @@ module.exports = function(grunt) {
 	    	        port: 8020
 	    	      }
 	    	}	    	
-	    }
+	    },
+		karma: {
+			unit: {
+				configFile: 'karma.conf.js'
+			}
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -69,7 +74,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks("grunt-bower-install-simple");
 	grunt.loadNpmTasks('grunt-contrib-connect');
-	
+	grunt.loadNpmTasks('grunt-karma');
+
 	// Default task(s).
 	grunt.registerTask('default', ['jshint', 'includereplace', 'copy', 'uglify']);
 	grunt.registerTask('dist', ['jshint', 'includereplace', 'copy', 'uglify']);
