@@ -370,7 +370,7 @@ samlEcpClientJs.Client.prototype = {
 	/**
 	 * Step 1 - Initiate the initial resource request to the SP
 	 */
-	get: function (url, config) {
+	get : function (url, config) {
 
 		// Construct the call context
 		var callCtx = {};
@@ -402,6 +402,16 @@ samlEcpClientJs.Client.prototype = {
 		}
 
 		xmlHttp.send();
+	},
+	auth : function (PAOSRequest, url, config) {
+
+		// Construct the call context
+		var callCtx = {};
+		applyConfig(callCtx, this.config);
+		applyConfig(callCtx, config);
+		callCtx.url = url;
+
+		processPAOSRequest.call(this, callCtx, PAOSRequest);
 	}
 };
 
@@ -473,7 +483,12 @@ function onSPResourceRequestRespone(callCtx, reqXmlHttp) {
 		return;
 	}
 
-	var xmlDoc = this.parser.parseFromString(response,"text/xml");
+	processPAOSRequest.call(this, callCtx, reqXmlHttp.responseText);
+}
+
+function processPAOSRequest(callCtx, PAOSRequest) {
+
+	var xmlDoc = this.parser.parseFromString(PAOSRequest,"text/xml");
 
 	// If we are not authenticated then we should be greeted with a SOAP message
 	// that we should forward to the IdP, otherwise we simply retrieve the actual resource

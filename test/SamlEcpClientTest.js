@@ -123,7 +123,7 @@ describe('Saml ECP Client', function() {
 
                 fakeRequest.respond(
                     200, {
-                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
                     },
                     TestData.createPAOSAuthSuccess());
                 serverResponder.done();
@@ -927,6 +927,46 @@ describe('Saml ECP Client', function() {
 
 
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
+
+        it("returns the resource on direct authentication with IDP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+
+                fakeRequest.respond(
+                    200, {
+                        "Content-Type" : TestData.TEXT_HTML_CONTENT_TYPE
+                    },
+                    TestData.SP_RESOURCE
+                );
+                serverResponder.done();
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, [
+                200, {
+                    "SOAPAction": TestData.PAOS_SOAP_ACTION
+                },
+                TestData.createPAOSAuthSuccess()
+            ]);
+
+            server.respondWith("POST", TestData.SP_SSO_URL, function(fakeRequest) {
+                fakeRequest.respond(
+                    302, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSRequest());
+            });
+
+            client.auth(TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.notCalled(clientConfig.onEcpAuth);
