@@ -36,6 +36,13 @@ samlEcpClientJs.Client.prototype = {
 
 		var me = this;
 
+        if(callCtx.username === null) {
+            callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
+                me.auth(PAOSRequest, callCtx.url, callCtx);
+            }));
+            return;
+        }
+
 		// Send the PAOS request to the SP
 		var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
 		xmlHttp.open("GET", url);
@@ -61,13 +68,23 @@ samlEcpClientJs.Client.prototype = {
 	},
 	auth : function (PAOSRequest, url, config) {
 
+        var me = this;
+
 		// Construct the call context
 		var callCtx = {};
 		applyConfig(callCtx, this.config);
 		applyConfig(callCtx, config);
 		callCtx.url = url;
 
-		processPAOSRequest.call(this, callCtx, PAOSRequest);
+        // Unsure the username is set before proceeding
+        if(callCtx.username === null) {
+            callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
+                me.auth(PAOSRequest, callCtx.url, callCtx);
+            }));
+            return;
+        }
+
+        processPAOSRequest.call(this, callCtx, PAOSRequest);
 	}
 };
 
@@ -239,18 +256,30 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 
 	// Invoke the onEcpAuth callback and allow the caller to set the password and
 	// retry/continue the authentication process.
-	callCtx.onEcpAuth({
-		setUsername : function(username) {
-			callCtx.username = username;
-		},
-		setPassword : function(password) {
-			callCtx.password = password;
-		},
-		retryAuth : function() {
-			me.get(callCtx.url, callCtx);
-		}
-	});
+    callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
+        me.get(callCtx.url, callCtx);
+    }));
 }
+
+function AuthCallback(callCtx, retryFunction) {
+
+    this.callCtx = callCtx;
+    this.retryFunction = retryFunction;
+}
+
+AuthCallback.prototype = {
+    setUsername : function(username) {
+        this.callCtx.username = username;
+    },
+    setPassword : function(password) {
+        this.callCtx.password = password;
+    },
+    retryAuth : function() {
+        this.retryFunction();
+    }
+};
+
+
 
 /**
  * Step 3 - Return the IdP's response back to the SP

@@ -323,7 +323,7 @@ describe('Saml ECP Client', function() {
         });
     });
 
-    describe('Authentication Required Detection and Header Handling', function() {
+    describe('Authentication Required/Failed Detection and Header Handling', function() {
         it("invokes password callback when IDP PAOS response returns auth failed and no password set", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
@@ -349,6 +349,46 @@ describe('Saml ECP Client', function() {
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function () {
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("Invokes password callback when no username set and before authentication attempt", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var spRequestSpy = sinon.spy();
+            var idpRequestSpy = sinon.spy();
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+                spRequestSpy();
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                        "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                    },
+                    TestData.createPAOSRequest()
+                );
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
+                idpRequestSpy();
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION
+                    },
+                    TestData.createPAOSAuthFailed()
+                );
+            });
+
+            delete clientConfig.username;
+            clientConfig.setEcpAuth(function () {
+                serverResponder.done();
+            });
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(spRequestSpy);
+                sinon.assert.notCalled(idpRequestSpy);
                 clientConfig.assertSuccessNotCalled();
             });
         });
