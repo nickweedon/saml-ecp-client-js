@@ -79,9 +79,13 @@ samlEcpClientJs.Client.prototype = {
         // Unsure the username is set before proceeding
         if(callCtx.username === null) {
             callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
-                // TODO: if the username has now been set then set it globally so that
-                // it is re-used for all authentication attempts
-                me.auth(PAOSRequest, callCtx.url, callCtx);
+                //TODO: It would be good to actually just callback 'auth' instead of 'get' to save on an extra server round trip
+                // To do this though, you would need to respond to a 'stale' SOAP error and fallback to 'get' as by the time the user enters their
+                // credentials, the request may have gone 'stale'.
+                //me.auth(PAOSRequest, callCtx.url, callCtx);
+
+                // Get a new PAOS SAML assertion and try again...
+                me.get(callCtx.url, callCtx);
             }));
             return;
         }
