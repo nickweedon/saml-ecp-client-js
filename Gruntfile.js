@@ -81,5 +81,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist', ['jshint', 'includereplace', 'copy', 'uglify']);
 	grunt.registerTask('compile', ['jshint', 'includereplace', 'copy']);
 	grunt.registerTask('bower-install', ['bower-install-simple']);
+	grunt.registerTask('manualtest', ['bower-install-simple', 'connect']);
 	grunt.registerTask('test', ['bower-install-simple', 'karma']);
 };

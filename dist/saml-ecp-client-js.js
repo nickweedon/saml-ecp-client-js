@@ -584,6 +584,9 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 	// Invoke the onEcpAuth callback and allow the caller to set the password and
 	// retry/continue the authentication process.
 	callCtx.onEcpAuth({
+		setUsername : function(username) {
+			callCtx.username = username;
+		},
 		setPassword : function(password) {
 			callCtx.password = password;
 		},

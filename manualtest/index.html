@@ -35,20 +35,20 @@
 	
 			client.get(url, {
 					username : username,
-					success : function(data, status) {
+					onSuccess : function(data, status) {
 						console.debug("Status: ", status);
 						$("#output").html(data);
 					},
-					ecpError : function(ecpErrorObj) {
+					onEcpError : function(ecpErrorObj) {
 						
 						console.debug("Got error");
 						if(ecpErrorObj.errorCode == samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR)
 							console.debug("IdP Error:", ecpErrorObj.idpStatus);
 					},
-					error : function(xmlHttp, msg) {
+					onError : function(xmlHttp, msg) {
 						console.error(msg);
 					},
-					ecpAuth : function(authCtx) {
+					onEcpAuth : function(authCtx) {
 						
 			            $.colorbox({
 			                html: "\
