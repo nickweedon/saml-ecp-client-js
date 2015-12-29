@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="361" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="831" mnemonic="2" />
-    <bookmark url="file://$PROJECT_DIR$/src/client.js" line="263" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/src/client.js" line="265" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="395" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/test/SamlEcpClientTest.js" line="564" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b1e5d3e-6ab5-4859-afe7-7bc808f6181d" name="Default" comment="">
@@ -63,9 +63,23 @@
       <file leaf-file-name="SamlEcpClientTest.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46635368">
-              <caret line="348" column="63" selection-start-line="348" selection-start-column="63" selection-end-line="348" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.599374">
+              <caret line="405" column="64" selection-start-line="405" selection-start-column="64" selection-end-line="405" selection-end-column="64" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SamlTestData.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+              <folding>
+                <marker date="1449900434330" expanded="true" signature="26429:26593" placeholder="..." />
+                <marker date="1449900434330" expanded="true" signature="26449:26509" placeholder="..." />
+                <marker date="1449900434330" expanded="true" signature="26529:26572" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/src/client.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+              <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -104,10 +118,8 @@
         <entry file="file://$PROJECT_DIR$/dist/saml-ecp-client-js.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-              <folding>
-                <marker date="1451377912009" expanded="true" signature="12021:12198" placeholder="{...}" />
-              </folding>
+              <caret line="385" column="16" selection-start-line="385" selection-start-column="16" selection-end-line="385" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -571,21 +583,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_Tests - 2015.12.29 at 18h 05m 49s.xml">
-      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
-    </history-entry>
-    <history-entry file="All_Tests - 2015.12.29 at 18h 06m 37s.xml">
-      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
-    </history-entry>
-    <history-entry file="All_Tests - 2015.12.29 at 18h 07m 08s.xml">
-      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
-    </history-entry>
-    <history-entry file="All_Tests - 2015.12.29 at 18h 11m 28s.xml">
-      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
-    </history-entry>
-    <history-entry file="All_Tests - 2015.12.29 at 18h 20m 32s.xml">
-      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
-    </history-entry>
     <history-entry file="All_Tests - 2015.12.29 at 18h 21m 09s.xml">
       <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
     </history-entry>
@@ -599,6 +596,21 @@
       <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
     </history-entry>
     <history-entry file="All_Tests - 2015.12.29 at 18h 31m 54s.xml">
+      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="All_Tests - 2015.12.29 at 19h 00m 44s.xml">
+      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="All_Tests - 2015.12.29 at 19h 01m 41s.xml">
+      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="All_Tests - 2015.12.29 at 19h 02m 04s.xml">
+      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="All_Tests - 2015.12.29 at 19h 03m 27s.xml">
+      <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="All_Tests - 2015.12.29 at 19h 03m 47s.xml">
       <configuration name="All Tests" configurationId="JavaScriptTestRunnerKarma" />
     </history-entry>
   </component>
@@ -645,7 +657,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/dist/saml-ecp-client-js.js</url>
-          <line>507</line>
+          <line>512</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -974,18 +986,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17075893">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <marker date="1449900434330" expanded="true" signature="26429:26593" placeholder="..." />
-            <marker date="1449900434330" expanded="true" signature="26449:26509" placeholder="..." />
-            <marker date="1449900434330" expanded="true" signature="26529:26572" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/karma.conf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1020,28 +1020,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/data/SamlTestData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding>
+            <marker date="1449900434330" expanded="true" signature="26429:26593" placeholder="..." />
+            <marker date="1449900434330" expanded="true" signature="26449:26509" placeholder="..." />
+            <marker date="1449900434330" expanded="true" signature="26529:26572" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dist/saml-ecp-client-js.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding>
-            <marker date="1451377912009" expanded="true" signature="12021:12198" placeholder="{...}" />
-          </folding>
+          <caret line="385" column="16" selection-start-line="385" selection-start-column="16" selection-end-line="385" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/SamlEcpClientTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46635368">
-          <caret line="348" column="63" selection-start-line="348" selection-start-column="63" selection-end-line="348" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.599374">
+          <caret line="405" column="64" selection-start-line="405" selection-start-column="64" selection-end-line="405" selection-end-column="64" />
           <folding />
         </state>
       </provider>

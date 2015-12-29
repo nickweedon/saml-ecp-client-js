@@ -393,6 +393,45 @@ describe('Saml ECP Client', function() {
             });
         });
 
+        it("Can authenticate when username is set through authentication callback", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var spRequestSpy = sinon.spy();
+            var idpRequestSpy = sinon.spy();
+
+            server.respondWith("GET", TestData.SP_RESOURCE_URL, function(fakeRequest) {
+                spRequestSpy();
+                fakeRequest.respond(
+                    200, {
+                        "SOAPAction": TestData.PAOS_SOAP_ACTION,
+                        "Content-Type" : TestData.PAOS_UTF8_CONTENT_TYPE
+                    },
+                    TestData.createPAOSRequest()
+                );
+            });
+
+            server.respondWith("POST", TestData.IDP_ENDPOINT_URL, function(fakeRequest) {
+                idpRequestSpy(fakeRequest.requestHeaders);
+                serverResponder.done();
+            });
+
+            delete clientConfig.username;
+            clientConfig.setEcpAuth(function(authCtx) {
+                authCtx.setUsername(TestData.USERNAME);
+                authCtx.setPassword(TestData.PASSWORD);
+                authCtx.retryAuth();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.calledOnce(spRequestSpy);
+                sinon.assert.calledOnce(idpRequestSpy);
+                sinon.assert.calledWith(idpRequestSpy, sinon.match.has("Authorization", TestData.BASIC_AUTH_STRING));
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
         it("converts a XMLHttpRequest header to a javascript object", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);

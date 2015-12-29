@@ -38,7 +38,7 @@ samlEcpClientJs.Client.prototype = {
 
         if(callCtx.username === null) {
             callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
-                me.auth(PAOSRequest, callCtx.url, callCtx);
+                me.get(callCtx.url, callCtx);
             }));
             return;
         }
@@ -79,6 +79,8 @@ samlEcpClientJs.Client.prototype = {
         // Unsure the username is set before proceeding
         if(callCtx.username === null) {
             callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
+                // TODO: if the username has now been set then set it globally so that
+                // it is re-used for all authentication attempts
                 me.auth(PAOSRequest, callCtx.url, callCtx);
             }));
             return;
@@ -270,6 +272,9 @@ function AuthCallback(callCtx, retryFunction) {
 AuthCallback.prototype = {
     setUsername : function(username) {
         this.callCtx.username = username;
+    },
+    getUsername : function() {
+        return this.callCtx.username;
     },
     setPassword : function(password) {
         this.callCtx.password = password;
