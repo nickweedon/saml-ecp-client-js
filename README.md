@@ -21,3 +21,5 @@ TODO ECP Functionality
 ** Channel binding?? (maybe no support for this)
 * Possibly provide support for SP issuing a list of IDPs to choose from
 * Possibly provide support for the IDP returning HTML as a response
+* Report SOAP errors returned by the IdP. Easiest way to reproduce this is to do a 'replace' on something in the PAOS
+ AuthnRequest XML block which will cause signature validation to fail. Then use the resulting SOAP error in unit tests.
