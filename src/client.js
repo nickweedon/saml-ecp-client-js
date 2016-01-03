@@ -27,25 +27,33 @@ samlEcpClientJs.Client.prototype = {
 	 * Step 1 - Initiate the initial resource request to the SP
 	 */
 	get : function (url, config) {
+		this.ajax("GET", url, undefined, config);
+	},
+	post : function (url, data, config) {
+		this.ajax("POST", url, data, config);
+	},
+	ajax : function (method, url, data, config) {
 
 		// Construct the call context
 		var callCtx = {};
 		applyConfig(callCtx, this.config);
 		applyConfig(callCtx, config);
 		callCtx.url = url;
+		callCtx.method = method;
+		callCtx.data = data;
 
 		var me = this;
 
         if(callCtx.username === null) {
             callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
-                me.get(callCtx.url, callCtx);
+                me.ajax(callCtx.method, callCtx.url, callCtx.data, callCtx);
             }));
             return;
         }
 
 		// Send the PAOS request to the SP
 		var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
-		xmlHttp.open("GET", url);
+		xmlHttp.open(method, url);
 		xmlHttp.setRequestHeader(HEADER.ACCEPT.KEY, HEADER.ACCEPT.PAOS);
 		xmlHttp.setRequestHeader(HEADER.PAOS.KEY, HEADER.PAOS.SAML2_ECP);
 		xmlHttp.withCredentials = true;
@@ -64,9 +72,9 @@ samlEcpClientJs.Client.prototype = {
 				}, callCtx.resourceTimeout);
 		}
 
-		xmlHttp.send();
+		xmlHttp.send(callCtx.data);
 	},
-	auth : function (PAOSRequest, url, config) {
+	auth : function (method, PAOSRequest, url, data, config) {
 
         var me = this;
 
@@ -75,6 +83,8 @@ samlEcpClientJs.Client.prototype = {
 		applyConfig(callCtx, this.config);
 		applyConfig(callCtx, config);
 		callCtx.url = url;
+		callCtx.method = method;
+		callCtx.data = data;
 
         // Unsure the username is set before proceeding
         if(callCtx.username === null) {
@@ -85,7 +95,7 @@ samlEcpClientJs.Client.prototype = {
                 //me.auth(PAOSRequest, callCtx.url, callCtx);
 
                 // Get a new PAOS SAML assertion and try again...
-                me.get(callCtx.url, callCtx);
+                me.ajax(method, callCtx.url, callCtx.data, callCtx);
             }));
             return;
         }
@@ -263,7 +273,7 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 	// Invoke the onEcpAuth callback and allow the caller to set the password and
 	// retry/continue the authentication process.
     callCtx.onEcpAuth(new AuthCallback(callCtx, function() {
-        me.get(callCtx.url, callCtx);
+        me.ajax(callCtx.method, callCtx.url, callCtx.data, callCtx);
     }));
 }
 
@@ -371,7 +381,7 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 
 	// Authentication succeeded, so now retrieve the original request
 	var xmlHttp = callCtx.xhrFactory !== null ? callCtx.xhrFactory() : new XMLHttpRequest();
-	xmlHttp.open("GET", callCtx.url, true);
+	xmlHttp.open(callCtx.method, callCtx.url, true);
 	xmlHttp.setRequestHeader(HEADER.ACCEPT.KEY, HEADER.ACCEPT.PAOS);
 	xmlHttp.setRequestHeader(HEADER.PAOS.KEY, HEADER.PAOS.SAML2_ECP);
 	xmlHttp.withCredentials = true;

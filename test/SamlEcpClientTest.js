@@ -801,6 +801,26 @@ describe('Saml ECP Client', function() {
             });
         });
 
+        it("posts the resource on successful authentication", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            setupSpRespondWithPaosRequest("POST", 1, true, serverResponder);
+            setupIdPRespondWithAuthSuccess();
+            setupSpSSORespondWithOK();
+
+            client.post(TestData.SP_RESOURCE_URL, TestData.POST_DATA, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledTwice(spResourceRequestSpy);
+                sinon.assert.calledWith(spResourceRequestSpy, sinon.match.any, TestData.POST_DATA);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
+
         it("returns the resource on direct authentication with IDP", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
@@ -809,7 +829,7 @@ describe('Saml ECP Client', function() {
             setupIdPRespondWithAuthSuccess();
             setupSpSSORespondWithOK();
 
-            client.auth(TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, clientConfig);
+            client.auth("GET", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, undefined, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.notCalled(clientConfig.onEcpAuth);

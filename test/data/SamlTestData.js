@@ -345,6 +345,10 @@ define('SamlTestData',
             </BODY>\
             </HTML>';
 
+        SamlTestData.POST_DATA =
+            "Hello hello " +
+            "This is a test message...";
+
         return SamlTestData;
     }
 );
