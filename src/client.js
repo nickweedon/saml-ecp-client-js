@@ -32,6 +32,15 @@ samlEcpClientJs.Client.prototype = {
 	post : function (url, data, config) {
 		this.ajax("POST", url, data, config);
 	},
+	put : function (url, data, config) {
+		this.ajax("PUT", url, data, config);
+	},
+	patch : function (url, data, config) {
+		this.ajax("PATCH", url, data, config);
+	},
+	delete : function (url, data, config) {
+		this.ajax("DELETE", url, data, config);
+	},
 	ajax : function (method, url, data, config) {
 
 		// Construct the call context

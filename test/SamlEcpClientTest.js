@@ -529,6 +529,24 @@ describe('Saml ECP Client', function() {
                 clientConfig.assertSuccessNotCalled();
             });
         });
+
+        it("returns the resource on direct authentication with IDP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            setupSpRespondWithPaosRequest("GET", 0, true, serverResponder);
+            setupIdPRespondWithAuthSuccess();
+            setupSpSSORespondWithOK();
+
+            client.auth("GET", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, undefined, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
     });
     describe('Authentication Error Handling', function() {
 
@@ -781,7 +799,7 @@ describe('Saml ECP Client', function() {
         });
     });
 
-    describe('Successful Authentication', function() {
+    describe('Successful authentication using REST methods', function() {
 
         it("gets the resource on successful authentication", function (done) {
 
@@ -821,17 +839,59 @@ describe('Saml ECP Client', function() {
             });
         });
 
-        it("returns the resource on direct authentication with IDP", function (done) {
+        it("puts the resource on successful authentication", function (done) {
 
             var serverResponder = new STE.AsyncServerResponder(server, done);
 
-            setupSpRespondWithPaosRequest("GET", 0, true, serverResponder);
+            setupSpRespondWithPaosRequest("PUT", 1, true, serverResponder);
             setupIdPRespondWithAuthSuccess();
             setupSpSSORespondWithOK();
 
-            client.auth("GET", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, undefined, clientConfig);
+            client.put(TestData.SP_RESOURCE_URL, TestData.PUT_DATA, clientConfig);
 
             serverResponder.waitUntilDone(function() {
+                sinon.assert.calledTwice(spResourceRequestSpy);
+                sinon.assert.calledWith(spResourceRequestSpy, sinon.match.any, TestData.PUT_DATA);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
+
+        it("patches the resource on successful authentication", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            setupSpRespondWithPaosRequest("PATCH", 1, true, serverResponder);
+            setupIdPRespondWithAuthSuccess();
+            setupSpSSORespondWithOK();
+
+            client.patch(TestData.SP_RESOURCE_URL, TestData.PATCH_DATA, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledTwice(spResourceRequestSpy);
+                sinon.assert.calledWith(spResourceRequestSpy, sinon.match.any, TestData.PATCH_DATA);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
+
+        it("deletes the resource on successful authentication", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            setupSpRespondWithPaosRequest("DELETE", 1, true, serverResponder);
+            setupIdPRespondWithAuthSuccess();
+            setupSpSSORespondWithOK();
+
+            client.delete(TestData.SP_RESOURCE_URL, TestData.DELETE_DATA, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledTwice(spResourceRequestSpy);
+                sinon.assert.calledWith(spResourceRequestSpy, sinon.match.any, TestData.DELETE_DATA);
                 sinon.assert.notCalled(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(clientConfig.onSuccess);
                 sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);

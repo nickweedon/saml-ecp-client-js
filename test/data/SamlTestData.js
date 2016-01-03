@@ -349,6 +349,18 @@ define('SamlTestData',
             "Hello hello " +
             "This is a test message...";
 
+        SamlTestData.PUT_DATA =
+            "Here is some silly " +
+            "put data that forms a test message...";
+
+        SamlTestData.PATCH_DATA =
+            "And now I am wondering " +
+            "why i am creating separate data for each method...";
+
+        SamlTestData.DELETE_DATA =
+            "Apparently " +
+            "it is OK to include a body in a DELETE request...";
+
         return SamlTestData;
     }
 );
