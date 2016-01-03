@@ -561,12 +561,45 @@ describe('Saml ECP Client', function() {
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledOnce(spResourceRequestSpy);
                 sinon.assert.calledWith(spResourceRequestSpy, sinon.match.any, TestData.POST_DATA);
+                //assert(TestData.POST_DATA == spResourceRequestSpy.args[0][1]);
                 sinon.assert.notCalled(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(clientConfig.onSuccess);
                 sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
                 clientConfig.assertNoErrors();
             });
         });
+
+        it("returns the resource and posts data on direct authentication with IDP after failed auth", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var callCount = 0;
+
+            setupSpRespondWithPaosRequest("POST", 1, true, serverResponder);
+            //setupIdPRespondWithAuthFailed();
+            setupIdPRespondWithAuth(undefined, 2, undefined, function(fieldValues) {
+                return ++callCount == 1 ? TestData.createPAOSAuthFailed(fieldValues) : TestData.createPAOSAuthSuccess(fieldValues);
+            });
+
+            setupSpSSORespondWithOK();
+
+            clientConfig.setEcpAuth(function(authCtx) {
+                authCtx.setPassword('bob');
+                authCtx.retryAuth();
+            });
+
+            client.auth("POST", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, TestData.POST_DATA, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledTwice(spResourceRequestSpy);
+                assert.equal(TestData.POST_DATA, spResourceRequestSpy.args[0][1], "Expected first SP call to contain post data");
+                assert.equal(TestData.POST_DATA, spResourceRequestSpy.args[1][1], "Expected second SP call to contain post data");
+                sinon.assert.calledOnce(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                //clientConfig.assertNoErrors();
+            });
+        });
+
     });
     describe('Authentication Error Handling', function() {
 
