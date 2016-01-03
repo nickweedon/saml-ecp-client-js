@@ -411,6 +411,5 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 			}, callCtx.resourceTimeout);
 	}
 
-	xmlHttp.send();
-
+	xmlHttp.send(callCtx.data);
 }

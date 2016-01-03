@@ -547,6 +547,26 @@ describe('Saml ECP Client', function() {
                 clientConfig.assertNoErrors();
             });
         });
+
+        it("returns the resource and posts data on direct authentication with IDP", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            setupSpRespondWithPaosRequest("POST", 0, true, serverResponder);
+            setupIdPRespondWithAuthSuccess();
+            setupSpSSORespondWithOK();
+
+            client.auth("POST", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, TestData.POST_DATA, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledOnce(spResourceRequestSpy);
+                sinon.assert.calledWith(spResourceRequestSpy, sinon.match.any, TestData.POST_DATA);
+                sinon.assert.notCalled(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                clientConfig.assertNoErrors();
+            });
+        });
     });
     describe('Authentication Error Handling', function() {
 
