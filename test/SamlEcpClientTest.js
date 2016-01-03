@@ -591,8 +591,41 @@ describe('Saml ECP Client', function() {
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.calledTwice(spResourceRequestSpy);
-                assert.equal(TestData.POST_DATA, spResourceRequestSpy.args[0][1], "Expected first SP call to contain post data");
-                assert.equal(TestData.POST_DATA, spResourceRequestSpy.args[1][1], "Expected second SP call to contain post data");
+                sinon.assert.alwaysCalledWith(spResourceRequestSpy, sinon.match.any, TestData.POST_DATA);
+                sinon.assert.calledOnce(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
+                //clientConfig.assertNoErrors();
+            });
+        });
+
+        it("returns the resource and sets user headers on direct authentication with IDP after failed auth", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var callCount = 0;
+
+            setupSpRespondWithPaosRequest("POST", 1, true, serverResponder);
+            setupIdPRespondWithAuth(undefined, 2, undefined, function(fieldValues) {
+                return ++callCount == 1 ? TestData.createPAOSAuthFailed(fieldValues) : TestData.createPAOSAuthSuccess(fieldValues);
+            });
+
+            setupSpSSORespondWithOK();
+
+            clientConfig.setEcpAuth(function(authCtx) {
+                authCtx.setPassword('bob');
+                authCtx.retryAuth();
+            });
+
+            var customHeaders = {
+                "crazy-header" : ["value one"]
+            };
+
+            client.auth("POST", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, TestData.POST_DATA, clientConfig, customHeaders);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledTwice(spResourceRequestSpy);
+                sinon.assert.alwaysCalledWith(spResourceRequestSpy, sinon.match.has("crazy-header"), sinon.match.any);
+                sinon.assert.alwaysCalledWith(spResourceRequestSpy, sinon.match.any, TestData.POST_DATA);
                 sinon.assert.calledOnce(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(clientConfig.onSuccess);
                 sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);

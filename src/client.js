@@ -23,25 +23,25 @@ samlEcpClientJs.Client = function(config) {
 };
 
 samlEcpClientJs.Client.prototype = {
+	get : function (url, config, requestHeaders) {
+		this.ajax("GET", url, undefined, config, requestHeaders);
+	},
+	post : function (url, data, config, requestHeaders) {
+		this.ajax("POST", url, data, config, requestHeaders);
+	},
+	put : function (url, data, config, requestHeaders) {
+		this.ajax("PUT", url, data, config, requestHeaders);
+	},
+	patch : function (url, data, config, requestHeaders) {
+		this.ajax("PATCH", url, data, config, requestHeaders);
+	},
+	delete : function (url, data, config, requestHeaders) {
+		this.ajax("DELETE", url, data, config, requestHeaders);
+	},
 	/**
 	 * Step 1 - Initiate the initial resource request to the SP
 	 */
-	get : function (url, config) {
-		this.ajax("GET", url, undefined, config);
-	},
-	post : function (url, data, config) {
-		this.ajax("POST", url, data, config);
-	},
-	put : function (url, data, config) {
-		this.ajax("PUT", url, data, config);
-	},
-	patch : function (url, data, config) {
-		this.ajax("PATCH", url, data, config);
-	},
-	delete : function (url, data, config) {
-		this.ajax("DELETE", url, data, config);
-	},
-	ajax : function (method, url, data, config) {
+	ajax : function (method, url, data, config, requestHeaders) {
 
 		// Construct the call context
 		var callCtx = {};
@@ -50,6 +50,9 @@ samlEcpClientJs.Client.prototype = {
 		callCtx.url = url;
 		callCtx.method = method;
 		callCtx.data = data;
+		if(callCtx.requestHeaders === undefined) {
+			callCtx.requestHeaders = requestHeaders === undefined ? {} : requestHeaders;
+		}
 
 		var me = this;
 
@@ -81,9 +84,10 @@ samlEcpClientJs.Client.prototype = {
 				}, callCtx.resourceTimeout);
 		}
 
+		addRequestHeadersToXhr(callCtx.requestHeaders, xmlHttp);
 		xmlHttp.send(callCtx.data);
 	},
-	auth : function (method, PAOSRequest, url, data, config) {
+	auth : function (method, PAOSRequest, url, data, config, requestHeaders) {
 
         var me = this;
 
@@ -94,6 +98,9 @@ samlEcpClientJs.Client.prototype = {
 		callCtx.url = url;
 		callCtx.method = method;
 		callCtx.data = data;
+		if(callCtx.requestHeaders === undefined) {
+			callCtx.requestHeaders = requestHeaders === undefined ? {} : requestHeaders;
+		}
 
         // Unsure the username is set before proceeding
         if(callCtx.username === null) {
@@ -163,6 +170,26 @@ samlEcpClientJs.Client.isResponseAnAuthRequest = function(responseHeaders, respo
 
 
 /////////////////////////////// Private methods ///////////////////////////////////////////
+
+function addRequestHeadersToXhr(requestHeaders, xhr) {
+
+	if(requestHeaders === null) {
+		return;
+	}
+
+	for(var requestHeaderKey in requestHeaders) {
+
+		if(!requestHeaders.hasOwnProperty(requestHeaderKey)) {
+			continue;
+		}
+
+		var valueArray = requestHeaders[requestHeaderKey];
+
+		for(var i = 0; i < valueArray.length; i++) {
+			xhr.setRequestHeader(requestHeaderKey, valueArray[i]);
+		}
+	}
+}
 
 /**
  * Step 2 - Forward the SP response to the IdP
@@ -411,5 +438,6 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 			}, callCtx.resourceTimeout);
 	}
 
+	addRequestHeadersToXhr(callCtx.requestHeaders, xmlHttp);
 	xmlHttp.send(callCtx.data);
 }
