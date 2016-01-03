@@ -359,7 +359,8 @@ samlEcpClientJs.Client = function(config) {
 		onResourceTimeout : null,
 		xhrFactory : null,
 		username : null,
-		password : null
+		password : null,
+		retrieveResource : true
 	};
 
 	applyConfig(this.config, config);
@@ -741,7 +742,12 @@ function onIdPAuthRequestRespone(callCtx, response) {
 			}
 			return;
 		}
-		onRelayIdpResponseToSPResponse.call(me, callCtx, xmlHttp.responseText);
+		if(callCtx.retrieveResource) {
+			onRelayIdpResponseToSPResponse.call(me, callCtx, xmlHttp.responseText);
+		} else {
+			if(callCtx.onSuccess !== null)
+				callCtx.onSuccess(null, null, xmlHttp);
+		}
 	};
 
 	if(callCtx.samlTimeout !== 0) {

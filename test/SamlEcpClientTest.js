@@ -27,6 +27,9 @@ describe('Saml ECP Client', function() {
     }
 
     ClientConfig.prototype = {
+        setOnSuccess : function(onSuccess) {
+            this.onSuccess = sinon.spy(onSuccess);
+        },
         setEcpAuth : function(onEcpAuth) {
             this.onEcpAuth = sinon.spy(onEcpAuth);
         },
@@ -604,7 +607,7 @@ describe('Saml ECP Client', function() {
             var serverResponder = new STE.AsyncServerResponder(server, done);
             var callCount = 0;
 
-            setupSpRespondWithPaosRequest("POST", 1, true, serverResponder);
+            setupSpRespondWithPaosRequest("POST", 1, true);
             setupIdPRespondWithAuth(undefined, 2, undefined, function(fieldValues) {
                 return ++callCount == 1 ? TestData.createPAOSAuthFailed(fieldValues) : TestData.createPAOSAuthSuccess(fieldValues);
             });
@@ -620,6 +623,10 @@ describe('Saml ECP Client', function() {
                 "crazy-header" : ["value one"]
             };
 
+            clientConfig.setOnSuccess(function() {
+                serverResponder.done();
+            });
+
             client.auth("POST", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, TestData.POST_DATA, clientConfig, customHeaders);
 
             serverResponder.waitUntilDone(function() {
@@ -629,10 +636,41 @@ describe('Saml ECP Client', function() {
                 sinon.assert.calledOnce(clientConfig.onEcpAuth);
                 sinon.assert.calledOnce(clientConfig.onSuccess);
                 sinon.assert.calledWith(clientConfig.onSuccess, TestData.SP_RESOURCE);
-                //clientConfig.assertNoErrors();
             });
         });
 
+        it("won't return the resource when 'retrieveResource' set to false", function (done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+            var callCount = 0;
+
+            setupSpRespondWithPaosRequest("GET", 1, true);
+            setupIdPRespondWithAuth(undefined, 2, undefined, function(fieldValues) {
+                return ++callCount == 1 ? TestData.createPAOSAuthFailed(fieldValues) : TestData.createPAOSAuthSuccess(fieldValues);
+            });
+
+            setupSpSSORespondWithOK();
+
+            clientConfig.setEcpAuth(function(authCtx) {
+                authCtx.setPassword('bob');
+                authCtx.retryAuth();
+            });
+
+            clientConfig.setOnSuccess(function() {
+                serverResponder.done();
+            });
+
+            clientConfig.retrieveResource = false;
+
+            client.auth("GET", TestData.createPAOSRequest(), TestData.SP_RESOURCE_URL, undefined, clientConfig);
+
+            serverResponder.waitUntilDone(function() {
+                sinon.assert.calledOnce(spResourceRequestSpy);
+                sinon.assert.calledOnce(clientConfig.onEcpAuth);
+                sinon.assert.calledOnce(clientConfig.onSuccess);
+                sinon.assert.calledWith(clientConfig.onSuccess, null);
+            });
+        });
     });
     describe('Authentication Error Handling', function() {
 
