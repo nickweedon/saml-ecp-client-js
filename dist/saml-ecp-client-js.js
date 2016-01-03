@@ -527,6 +527,11 @@ function addRequestHeadersToXhr(requestHeaders, xhr) {
 			continue;
 		}
 
+		// Make sure we don't accidentally set the paos header twice
+		if(requestHeaderKey.toLowerCase() == "paos") {
+			continue;
+		}
+
 		var valueArray = requestHeaders[requestHeaderKey];
 
 		for(var i = 0; i < valueArray.length; i++) {
