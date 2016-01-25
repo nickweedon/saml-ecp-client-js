@@ -86,6 +86,25 @@ function getStatusObjFromSamlStatus(statusNode) {
     return statusObj;
 }
 
+function getFaultObjFromSoapFault(faultNode) {
+
+    var faultObj = {};
+
+    var children = faultNode.childNodes;
+    if(children === undefined) {
+        return faultObj;
+    }
+    for(var i = 0; i < children.length; i++) {
+        var child = children[i];
+        // We don't care about the namespace
+        var nameTokens = child.nodeName.split(":");
+        var childName = nameTokens.length == 1 ? nameTokens[0] : nameTokens[1];
+        faultObj[childName.toLowerCase()] = child.textContent;
+    }
+    return faultObj;
+}
+
+
 function isIE() {
 
     var ms_ie = false;

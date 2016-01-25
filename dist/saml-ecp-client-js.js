@@ -153,8 +153,9 @@ samlEcpClientJs.base64 = {
 
 samlEcpClientJs.ECP_ERROR = {
 	IDP_RESPONSE_ERROR : -1,
-	CONSUMER_URL_MISMATCH : -2,
-	CLIENT_CONFIG_ERROR : -3
+	IDP_SOAP_FAULT : -2,
+	CONSUMER_URL_MISMATCH : -3,
+	CLIENT_CONFIG_ERROR : -4
 };
 
 // SAML 2 status codes (see https://msdn.microsoft.com/en-us/library/hh269642.aspx)
@@ -164,7 +165,7 @@ samlEcpClientJs.SAML2_STATUS = {
 	REQUESTER : "urn:oasis:names:tc:SAML:2.0:status:Requester",
 	RESPONDER : "urn:oasis:names:tc:SAML:2.0:status:Responder",
 	VERSION_MISMATCH : "urn:oasis:names:tc:SAML:2.0:status:VersionMismatch",
-		
+
 	// Second-level status codes
 	AUTHN_FAILED : "urn:oasis:names:tc:SAML:2.0:status:AuthnFailed",
 	INVALID_ATTR_NAME_OR_VALUE : "urn:oasis:names:tc:SAML:2.0:status:InvalidAttrNameOrValue",
@@ -187,6 +188,12 @@ samlEcpClientJs.SAML2_STATUS = {
 	UNSUPPORTED_BINDING : "urn:oasis:names:tc:SAML:2.0:status:UnsupportedBinding"
 };
 
+samlEcpClientJs.SOAP_FAULT_CODE = {
+	SOAP_VERSION_MISMATCH : "soap11:VersionMismatch", // Found an invalid namespace for the SOAP Envelope element
+	SOAP_MUST_UNDERSTAND : "soap11:MustUnderstand", // An immediate child element of the Header element, with the mustUnderstand attribute set to "1", was not understood
+	SOAP_CLIENT : "soap11:Client", // The message was incorrectly formed, contained incorrect information or there was an error communicating with the server.
+	SOAP_SERVER : "soap11:Server" // There was a problem with the server so the message could not proceed
+};
         var samlEcpClientJs = samlEcpClientJs || {};
 
 // Private functions
@@ -276,6 +283,25 @@ function getStatusObjFromSamlStatus(statusNode) {
     }
     return statusObj;
 }
+
+function getFaultObjFromSoapFault(faultNode) {
+
+    var faultObj = {};
+
+    var children = faultNode.childNodes;
+    if(children === undefined) {
+        return faultObj;
+    }
+    for(var i = 0; i < children.length; i++) {
+        var child = children[i];
+        // We don't care about the namespace
+        var nameTokens = child.nodeName.split(":");
+        var childName = nameTokens.length == 1 ? nameTokens[0] : nameTokens[1];
+        faultObj[childName.toLowerCase()] = child.textContent;
+    }
+    return faultObj;
+}
+
 
 function isIE() {
 
@@ -589,6 +615,25 @@ function processPAOSRequest(callCtx, PAOSRequest) {
 		if (xmlHttp.readyState != 4) return;
 		clearTimeout(callCtx.deadlineTimer);
 		if(xmlHttp.status != 200) {
+
+			if(callCtx.onEcpError !== null) {
+
+				// Some kind of error occurred, check to see if it was a SOAP error
+				var xmlDoc = me.parser.parseFromString(xmlHttp.responseText,"text/xml");
+
+				var soapErrorNode =
+					xpathQuery(xmlDoc,
+						"//SOAP_ENV:Envelope/SOAP_ENV:Body/SOAP_ENV:Fault",
+						NS);
+
+				if (soapErrorNode.length > 0) {
+					callCtx.onEcpError({
+						errorCode: samlEcpClientJs.ECP_ERROR.IDP_SOAP_FAULT,
+						status: getFaultObjFromSoapFault(soapErrorNode[0])
+					});
+					return;
+				}
+			}
 			if(callCtx.onError !== null) {
 				callCtx.onError(xmlHttp, "Received invalid HTTP response while attempting to communicate with IdP URL '" + callCtx.idpEndpointUrl + "'");
 			}
@@ -637,7 +682,7 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 		if(callCtx.onEcpError !== null) {
 			callCtx.onEcpError({
 				errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
-				idpStatus: statusObj
+				status: statusObj
 			});
 		}
 	}
@@ -707,7 +752,7 @@ function onIdPAuthRequestRespone(callCtx, response) {
 		if(callCtx.onEcpError !== null) {
 			callCtx.onEcpError({
 				errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
-				idpStatus: statusObj
+				status: statusObj
 			});
 		}
 		return;

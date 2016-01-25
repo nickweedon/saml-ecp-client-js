@@ -4,8 +4,9 @@ var samlEcpClientJs = samlEcpClientJs || {};
 
 samlEcpClientJs.ECP_ERROR = {
 	IDP_RESPONSE_ERROR : -1,
-	CONSUMER_URL_MISMATCH : -2,
-	CLIENT_CONFIG_ERROR : -3
+	IDP_SOAP_FAULT : -2,
+	CONSUMER_URL_MISMATCH : -3,
+	CLIENT_CONFIG_ERROR : -4
 };
 
 // SAML 2 status codes (see https://msdn.microsoft.com/en-us/library/hh269642.aspx)
@@ -15,7 +16,7 @@ samlEcpClientJs.SAML2_STATUS = {
 	REQUESTER : "urn:oasis:names:tc:SAML:2.0:status:Requester",
 	RESPONDER : "urn:oasis:names:tc:SAML:2.0:status:Responder",
 	VERSION_MISMATCH : "urn:oasis:names:tc:SAML:2.0:status:VersionMismatch",
-		
+
 	// Second-level status codes
 	AUTHN_FAILED : "urn:oasis:names:tc:SAML:2.0:status:AuthnFailed",
 	INVALID_ATTR_NAME_OR_VALUE : "urn:oasis:names:tc:SAML:2.0:status:InvalidAttrNameOrValue",
@@ -36,4 +37,11 @@ samlEcpClientJs.SAML2_STATUS = {
 	UNKNOWN_ATTR_PROFILE : "urn:oasis:names:tc:SAML:2.0:status:UnknownAttrProfile",
 	UNKNOWN_PRINCIPAL : "urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal",
 	UNSUPPORTED_BINDING : "urn:oasis:names:tc:SAML:2.0:status:UnsupportedBinding"
+};
+
+samlEcpClientJs.SOAP_FAULT_CODE = {
+	SOAP_VERSION_MISMATCH : "soap11:VersionMismatch", // Found an invalid namespace for the SOAP Envelope element
+	SOAP_MUST_UNDERSTAND : "soap11:MustUnderstand", // An immediate child element of the Header element, with the mustUnderstand attribute set to "1", was not understood
+	SOAP_CLIENT : "soap11:Client", // The message was incorrectly formed, contained incorrect information or there was an error communicating with the server.
+	SOAP_SERVER : "soap11:Server" // There was a problem with the server so the message could not proceed
 };

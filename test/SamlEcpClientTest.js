@@ -33,6 +33,9 @@ describe('Saml ECP Client', function() {
         setEcpAuth : function(onEcpAuth) {
             this.onEcpAuth = sinon.spy(onEcpAuth);
         },
+        setEcpError : function(onEcpError) {
+            this.onEcpError = sinon.spy(onEcpError);
+        },
         setOnResourceTimeout : function(onResourceTimeout) {
             this.onResourceTimeout = sinon.spy(onResourceTimeout);
         },
@@ -89,7 +92,7 @@ describe('Saml ECP Client', function() {
         });
     }
 
-    function setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, responseMethod) {
+    function setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, responseMethod, statusCode) {
 
         if(responseBeforeDoneCount === undefined) {
             responseBeforeDoneCount = 0;
@@ -100,7 +103,7 @@ describe('Saml ECP Client', function() {
             idpAuthRequestSpy(fakeRequest.requestHeaders, fakeRequest.requestBody);
 
             fakeRequest.respond(
-                200, {
+                statusCode, {
                     "SOAPAction": TestData.PAOS_SOAP_ACTION
                 },
                 responseMethod(fieldValues)
@@ -114,11 +117,15 @@ describe('Saml ECP Client', function() {
     }
 
     function setupIdPRespondWithAuthSuccess(fieldValues, responseBeforeDoneCount, serverResponder) {
-        setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, TestData.createPAOSAuthSuccess);
+        setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, TestData.createPAOSAuthSuccess, 200);
     }
 
     function setupIdPRespondWithAuthFailed(fieldValues, responseBeforeDoneCount, serverResponder) {
-        setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, TestData.createPAOSAuthFailed);
+        setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, TestData.createPAOSAuthFailed, 200);
+    }
+
+    function setupIdPRespondWithSoapError(fieldValues, responseBeforeDoneCount, serverResponder) {
+        setupIdPRespondWithAuth(fieldValues, responseBeforeDoneCount, serverResponder, TestData.createPAOSAuthSOAPError, 500);
     }
 
     function setupSpSSORespondWithOK(serverResponder) {
@@ -330,7 +337,7 @@ describe('Saml ECP Client', function() {
                 sinon.assert.calledTwice(clientConfig.onEcpError);
                 sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
                     errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
-                    idpStatus: {
+                    status: {
                         statusCode: [ samlEcpClientJs.SAML2_STATUS.REQUESTER, samlEcpClientJs.SAML2_STATUS.AUTHN_FAILED ],
                         statusMessage: "An error occurred."
                     }
@@ -718,9 +725,37 @@ describe('Saml ECP Client', function() {
                 sinon.assert.calledOnce(clientConfig.onEcpError);
                 sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
                     errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
-                    idpStatus: {
+                    status: {
                         statusCode: [ samlEcpClientJs.SAML2_STATUS.REQUESTER, samlEcpClientJs.SAML2_STATUS.AUTHN_FAILED ],
                         statusMessage: "An error occurred."
+                    }
+                }));
+                clientConfig.assertSuccessNotCalled();
+            });
+        });
+
+        it("reports SOAP errors on unsuccessful AuthnRequest", function(done) {
+
+            var serverResponder = new STE.AsyncServerResponder(server, done);
+
+            setupSpRespondWithPaosRequest("GET");
+            setupIdPRespondWithSoapError();
+            setupSpSSORespondWithOK();
+
+            clientConfig.setEcpError(function() {
+                serverResponder.done();
+            });
+
+            client.get(TestData.SP_RESOURCE_URL, clientConfig);
+
+            serverResponder.waitUntilDone(function () {
+                sinon.assert.notCalled(spSSORequestSpy);
+                sinon.assert.calledOnce(clientConfig.onEcpError);
+                sinon.assert.alwaysCalledWith(clientConfig.onEcpError, sinon.match({
+                    errorCode: samlEcpClientJs.ECP_ERROR.IDP_SOAP_FAULT,
+                    status: {
+                        faultcode: "soap11:Server",
+                        faultstring: "relying-party"
                     }
                 }));
                 clientConfig.assertSuccessNotCalled();

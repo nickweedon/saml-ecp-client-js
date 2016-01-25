@@ -245,6 +245,25 @@ function processPAOSRequest(callCtx, PAOSRequest) {
 		if (xmlHttp.readyState != 4) return;
 		clearTimeout(callCtx.deadlineTimer);
 		if(xmlHttp.status != 200) {
+
+			if(callCtx.onEcpError !== null) {
+
+				// Some kind of error occurred, check to see if it was a SOAP error
+				var xmlDoc = me.parser.parseFromString(xmlHttp.responseText,"text/xml");
+
+				var soapErrorNode =
+					xpathQuery(xmlDoc,
+						"//SOAP_ENV:Envelope/SOAP_ENV:Body/SOAP_ENV:Fault",
+						NS);
+
+				if (soapErrorNode.length > 0) {
+					callCtx.onEcpError({
+						errorCode: samlEcpClientJs.ECP_ERROR.IDP_SOAP_FAULT,
+						status: getFaultObjFromSoapFault(soapErrorNode[0])
+					});
+					return;
+				}
+			}
 			if(callCtx.onError !== null) {
 				callCtx.onError(xmlHttp, "Received invalid HTTP response while attempting to communicate with IdP URL '" + callCtx.idpEndpointUrl + "'");
 			}
@@ -293,7 +312,7 @@ function onIdPUnauthRequestRespone(callCtx, response) {
 		if(callCtx.onEcpError !== null) {
 			callCtx.onEcpError({
 				errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
-				idpStatus: statusObj
+				status: statusObj
 			});
 		}
 	}
@@ -363,7 +382,7 @@ function onIdPAuthRequestRespone(callCtx, response) {
 		if(callCtx.onEcpError !== null) {
 			callCtx.onEcpError({
 				errorCode: samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR,
-				idpStatus: statusObj
+				status: statusObj
 			});
 		}
 		return;

@@ -335,6 +335,26 @@ define('SamlTestData',
                 </soap11:Envelope>';
         };
 
+        SamlTestData.createPAOSAuthSOAPError = function (fieldValues) {
+
+            var fields = _.defaults(fieldValues || {}, {
+                soapFault: 'soap11:Server',
+                faultString: 'relying-party'
+            });
+
+            var soapError = '<?xml version="1.0" encoding="UTF-8"?>' +
+                '<soap11:Envelope xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/">' +
+                '   <soap11:Body>' +
+                '       <soap11:Fault>' +
+                '           <faultcode>' + fields.soapFault + '</faultcode>' +
+                '           <faultstring>' + fields.faultString + '</faultstring>' +
+                '       </soap11:Fault>' +
+                '   </soap11:Body>' +
+                '</soap11:Envelope>';
+
+            return soapError;
+        };
+
         SamlTestData.SP_RESOURCE =
             '<HTML>\
             <HEAD>\

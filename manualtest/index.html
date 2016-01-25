@@ -43,7 +43,7 @@
 						
 						console.debug("Got error");
 						if(ecpErrorObj.errorCode == samlEcpClientJs.ECP_ERROR.IDP_RESPONSE_ERROR)
-							console.debug("IdP Error:", ecpErrorObj.idpStatus);
+							console.debug("IdP Error:", ecpErrorObj.status);
 					},
 					onError : function(xmlHttp, msg) {
 						console.error(msg);
