@@ -833,13 +833,13 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState === 4) {
+			clearTimeout(callCtx.deadlineTimer);
 			if (xmlHttp.status === 0) {
 				console.warn("HTTP request to " + callCtx.url + " failed with status 0 (possible cross-domain request failure?)");
 				if(callCtx.onError !== null) {
 					callCtx.onError(xmlHttp, "Received invalid HTTP response while attempting to communicate with SP URL '" + callCtx.url + "'");
 				}
  			} else {
-				clearTimeout(callCtx.deadlineTimer);
 				if(callCtx.onSuccess !== null)
 					callCtx.onSuccess(xmlHttp.responseText, xmlHttp.statusText, xmlHttp);
 			}
