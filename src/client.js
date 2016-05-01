@@ -74,8 +74,7 @@ samlEcpClientJs.Client.prototype = {
 		xmlHttp.onreadystatechange = function () {
 			if (xmlHttp.readyState != 4) return;
 			if (xmlHttp.status === 0) {
-				console.error("HTTP request to " + url + " failed with status 0 (possible cross-domain request failure?)");
-				return;
+				console.warn("HTTP request to " + url + " failed with status 0 (possible cross-domain request failure?)");
 			}
 			clearTimeout(callCtx.deadlineTimer);
 			onSPResourceRequestRespone.call(me, callCtx, xmlHttp);
@@ -248,8 +247,7 @@ function processPAOSRequest(callCtx, PAOSRequest) {
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState != 4) return;
 		if (xmlHttp.status === 0) {
-			console.error("HTTP request to " + callCtx.idpEndpointUrl + " failed with status 0 (possible cross-domain request failure?)");
-			return;
+			console.warn("HTTP request to " + callCtx.idpEndpointUrl + " failed with status 0 (possible cross-domain request failure?)");
 		}
 		clearTimeout(callCtx.deadlineTimer);
 		if(xmlHttp.status != 200) {
@@ -419,8 +417,7 @@ function onIdPAuthRequestRespone(callCtx, response) {
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState != 4) return;
 		if (xmlHttp.status === 0) {
-			console.error("HTTP request to " + assertionConsumerServiceURL + " failed with status 0 (possible cross-domain request failure?)");
-			return;
+			console.warn("HTTP request to " + assertionConsumerServiceURL + " failed with status 0 (possible cross-domain request failure?)");
 		}
 		clearTimeout(callCtx.deadlineTimer);
 		if(xmlHttp.status != 200 && xmlHttp.status != 302) {
@@ -467,7 +464,10 @@ function onRelayIdpResponseToSPResponse(callCtx, response) {
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState === 4) {
 			if (xmlHttp.status === 0) {
-				console.error("HTTP request to " + callCtx.url + " failed with status 0 (possible cross-domain request failure?)");
+				console.warn("HTTP request to " + callCtx.url + " failed with status 0 (possible cross-domain request failure?)");
+				if(callCtx.onError !== null) {
+					callCtx.onError(xmlHttp, "Received invalid HTTP response while attempting to communicate with SP URL '" + callCtx.url + "'");
+				}
  			} else {
 				clearTimeout(callCtx.deadlineTimer);
 				if(callCtx.onSuccess !== null)

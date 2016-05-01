@@ -36,6 +36,9 @@ describe('Saml ECP Client', function() {
         setEcpError : function(onEcpError) {
             this.onEcpError = sinon.spy(onEcpError);
         },
+        setOnError : function(onError) {
+            this.onError = sinon.spy(onError);
+        },
         setOnResourceTimeout : function(onResourceTimeout) {
             this.onResourceTimeout = sinon.spy(onResourceTimeout);
         },
@@ -930,10 +933,11 @@ describe('Saml ECP Client', function() {
                     },
                     TestData.createPAOSRequest()
                 );
-                // Set this URL to timeout after the first request (i.e. on the final request)
-                // There seems to be some kind of bug where success is still called after the timeout
-                // (perhaps as part of cleanup?). This doesn't seem like a real problem however and so
-                // the check to see whether onSuccess has been called is avoided.
+                // The filter will cause the request to not be faked and therefore become a real request.
+                // This in turn will often be caught by the browser (depending on the implementation) as a
+                // disallowed cross-domain request before the timeout can occur. We therefore also expect that an error
+                // to may occur in this case instead of a timeout (and in fact failed cross-domain requests are the
+                // ONLY type of error that is captured at the stage where the resource is being downloaded).
                 server.xhr.useFilters = true;
                 server.xhr.addFilter(function (method, url) {
                     return url === TestData.SP_RESOURCE_URL;
@@ -944,16 +948,17 @@ describe('Saml ECP Client', function() {
             setupSpSSORespondWithOK();
 
             clientConfig.resourceTimeout = 50;
-            clientConfig.setOnResourceTimeout(function() {
+            var errorOrTimeout = function() {
                 serverResponder.done();
-            });
+            };
+
+            clientConfig.setOnResourceTimeout(errorOrTimeout);
+            clientConfig.setOnError(errorOrTimeout);
 
             client.get(TestData.SP_RESOURCE_URL, clientConfig);
 
             serverResponder.waitUntilDone(function() {
                 sinon.assert.notCalled(clientConfig.onEcpAuth);
-                sinon.assert.calledOnce(clientConfig.onResourceTimeout);
-                clientConfig.assertNoErrors();
             });
         });
     });
