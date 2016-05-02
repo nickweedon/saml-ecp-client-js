@@ -19,7 +19,11 @@
     "javascript"
   ],
   "license": "MIT",
-  "homepage": "saml-ecp-client-js.weedon.org.au",
+  "homepage": "http://git.redwyvern.com/SAML/saml-ecp-client-js",
+  "repository": {
+    "type": "git",
+    "url": "git://git.redwyvern.com/SAML/saml-ecp-client-js"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
