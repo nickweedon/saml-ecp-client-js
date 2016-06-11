@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.weedon.org.au:red-wyvern/saml-ecp-client-js.git"
+    "url": "git://github.com/nickweedon/saml-ecp-client-js.git"
   },
   "keywords": [
     "saml",
